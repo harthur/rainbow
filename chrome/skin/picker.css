@@ -1,0 +1,126 @@
+#container {
+  margin: 18px;
+}
+
+#color-navigator {
+  margin-bottom: 26px;
+}
+
+#values-display {
+  margin-left: 24px;
+}
+
+#history-buttons {
+  margin-left: 16px;
+}
+
+#display-string {
+  min-width: 216px;
+  max-width: 216px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#rainbow-picker-window[rainbow-platform="Windows"] #display-string {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+#bookmark-button .toolbarbutton-text,
+#copy-button .toolbarbutton-text {
+  margin-left: 4px !important;
+  margin-right: 4px !important;
+}
+
+#rainbow-picker-window[rainbow-platform="Windows"] #bookmark-button .toolbarbutton-text,
+#rainbow-picker-window[rainbow-platform="Windows"] #copy-button .toolbarbutton-text {
+  margin-left: 6px !important;
+  margin-right: 6px !important;
+}
+
+#selector-button {
+  margin-left: 10px;
+  margin-right: 4px;
+}
+
+#rainbow-picker-window[rainbow-platform="Windows"] #selector-button{
+  margin-right: 5px;
+}
+
+#selector-icon {
+  border: black dashed 1px;
+  width: 14px;
+  height: 14px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+#inspector-button {
+  list-style-image : url("chrome://rainbows/skin/plus.png");
+}
+
+#inspector-button .toolbarbutton-icon {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+/*********************************** 
+ *    Values display
+ ***********************************/
+
+#display-color {
+  margin-left: 4px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  height: 90px;
+  border: 1px solid #555555;
+}
+
+#values-box {
+  -moz-user-focus: normal;
+  margin-top: 4px;
+}
+
+#values-box label {
+  -moz-user-focus: normal;
+  margin-top: 22px;
+}
+
+#values-box textbox {
+  margin-left: 3px !important;
+}
+
+radio .radio-label-box  {
+  display: none;
+}
+
+/*********************************** 
+ *    Gradients and Picker boxes
+ ***********************************/
+#left-display {
+ padding-bottom: 36px;
+}
+
+#picker-display {
+  margin-left: 10px;
+  margin-bottom: 30px;
+}
+
+#bar-display {
+  margin-left: 18px;
+  margin-right: 18px;
+}
+
+#bar, #top-bar {
+  border: 1px solid #555555;
+  margin-left: 6px;
+}
+
+#bottom-gradient, #top-gradient {
+  border: 1px solid #555555;
+}
+
+#bar-sel {
+  list-style-image: url("chrome://rainbows/skin/arrows.png");
+}
+

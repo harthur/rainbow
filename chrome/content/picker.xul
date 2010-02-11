@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+  -   Version: MPL 1.1/GPL 2.0/LGPL 2.1
+  -
+  - The contents of this file are subject to the Mozilla Public License Version
+  - 1.1 (the "License"); you may not use this file except in compliance with
+  - the License. You may obtain a copy of the License at
+  - http://www.mozilla.org/MPL/
+  - 
+  - Software distributed under the License is distributed on an "AS IS" basis,
+  - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+  - for the specific language governing rights and limitations under the
+  - License.
+  -
+  - The Original Code is Rainbow.
+  -
+  - The Initial Developer of the Original Code is
+  - Heather Arthur.
+  - Portions created by the Initial Developer are Copyright (C) 2009
+  - the Initial Developer. All Rights Reserved.
+  -
+  - Contributor(s):
+  -
+  - Alternatively, the contents of this file may be used under the terms of
+  - either the GNU General Public License Version 2 or later (the "GPL"), or
+  - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+  - in which case the provisions of the GPL or the LGPL are applicable instead
+  - of those above. If you wish to allow use of your version of this file only
+  - under the terms of either the GPL or the LGPL, and not to allow others to
+  - use your version of this file under the terms of the MPL, indicate your
+  - decision by deleting the provisions above and replace them with the notice
+  - and other provisions required by the GPL or the LGPL. If you do not delete
+  - the provisions above, a recipient may use your version of this file under
+  - the terms of any one of the MPL, the GPL or the LGPL.
+  - 
+  - ***** t END LICENSE BLOCK ***** -->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://rainbows/skin/picker.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://rainbows/locale/picker.dtd">
+
+<window id="rainbow-picker-window" 
+        title="&picker.title;"
+        windowtype="rainbow:picker"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        persist="width height screenX screenY"
+        onload="picker.init();"
+        onunload="picker.unload();">
+
+ <script type="application/x-javascript" src="chrome://rainbows/content/colorCommon.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/common.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/picker.js"/>
+
+ <stringbundleset id="stringbundleset">
+   <stringbundle id="rainbow-strings" src="chrome://rainbows/locale/rainbow.properties"/>
+ </stringbundleset>
+
+ <menupopup id="picker-context">
+      <menu label="&picker.context.format;"
+            accesskey="&picker.context.format.accesskey;"> 
+      <menupopup>
+        <menuitem id="rainbow-context-hex" label="#&picker.context.format.hex;"
+                  oncommand="picker.changeFormat('hex')"/>
+        <menuitem id="rainbow-context-plain" label="&picker.context.format.hex;"
+                  accesskey="&picker.context.format.hex.accesskey;"
+                  oncommand="picker.changeFormat('plain')"/>
+        <menuitem id="rainbow-context-rgb" label="&picker.context.format.rgb;"
+                  accesskey="&picker.context.format.rgb.accesskey;"
+                  oncommand="picker.changeFormat('rgb')"/>
+        <menuitem id="rainbow-context-per" label="&picker.context.format.rgb; %"
+                  accesskey="&picker.context.format.per.accesskey;"
+                  oncommand="picker.changeFormat('per')"/>
+        <menuitem id="rainbow-context-hsl" label="&picker.context.format.hsl;"
+                  accesskey="&picker.context.format.hsl.accesskey;"
+                  oncommand="picker.changeFormat('hsl')" />
+       </menupopup>
+      </menu>
+    </menupopup>  
+
+<vbox context="picker-context">
+<toolbar id="color-navigator">
+    <hbox id="history-buttons">
+      <toolbarbutton id="back-button" label=" &lt; "
+                     disabled="true" onclick="picker.back();"/>
+      <toolbarbutton id="forward-button" label=" &gt; "
+                     disabled="true" onclick="picker.forward();"/>
+    </hbox>
+
+    <textbox id="display-string"
+             tabindex="1"
+             onchange="picker.stringChanged();"
+             onpaste="setTimeout(function() { picker.stringChanged(); }, 20);"/>
+    <toolbarbutton id="copy-button" label="&picker.copy.label;"
+                   accesskey="&picker.copy.accesskey;"
+                   oncommand="picker.copy();"/>
+    <toolbarbutton id="bookmark-button" label="&picker.bookmark.label;"
+                   accesskey="&picker.bookmark.accesskey;"
+                   oncommand="picker.bookmark();"/>
+    <toolbarbutton id="selector-button" tooltiptext="&picker.select.tooltip;"
+                   type="checkbox"
+                   oncommand="selector.start();">
+         <div id="selector-icon"/>
+    </toolbarbutton>
+    <toolbarbutton id="inspector-button" tooltiptext="&picker.inspect.tooltip;"
+                   oncommand="inspector.start();"/>
+  </toolbar>
+<vbox id="container">
+  
+  <hbox>
+  <vbox id="left-box">
+    <hbox id="picker-display">
+      <vbox align="center">
+        <box id="gradient-display">
+          <html:div id="picker-box" style="position: relative;">
+            <html:div id="gradients-box">
+              <html:img id="bottom-gradient" onclick="picker.gradientClick(event);"
+                        src="chrome://rainbows/skin/sat-bottom.png"/>
+              <html:img id="top-gradient" onclick="picker.gradientClick(event);"
+                        style="position: absolute; top: 0px; left: 0px; z-index: 2;"/>
+              <html:img id="pix-sel" src="chrome://rainbows/skin/box_thin.png"
+                        style="position: absolute; top: 0px; left: 0px; z-index: 3;"
+                        onclick="picker.gradientClick(event);"/>
+            </html:div>
+          </html:div>
+        </box>
+      </vbox>
+      <box id="bar-display">
+        <html:div id="bar-box" style="position: relative;">
+          <html:img id="bar" onclick="picker.barClick(event);"
+                    src="chrome://rainbows/skin/hue-bar.png"/>
+          <html:img id="top-bar" onclick="picker.barClick(event);"
+                    src="chrome://rainbows/skin/sat-bar-top.png"
+                    style="position: absolute; top: 0px; left: 0px; z-index: 2; opacity: 0;"/>
+          <html:img id="bar-sel" src="chrome://rainbows/skin/arrows.png"
+                    style="position: absolute; top: 0px; left: 0px; z-index: 3"
+                    onclick="picker.barClick(event);"/>
+        </html:div>
+      </box>
+    </hbox>
+  </vbox>
+
+  <vbox id="selection-display" align="center">
+    <vbox id="values-display">
+    <vbox id="display-color"
+          ondragstart="picker.dragStart(event);"/>
+    <vbox id="values-box">
+      <hbox align="center">
+        <vbox align="center">     
+	        <label value="R" onclick="picker.selectField('r');"/>
+	        <textbox id="r" integer="true" maximum="255" size="2" tabindex="2"
+                   onchange="picker.fieldChange(this, 255);"
+                   onkeypress="picker.keyPressed(event, this);"/>
+        </vbox>
+        <vbox align="center">     
+          <label value="G"  onclick="picker.selectField('g');"/>
+	        <textbox id="g" integer="true" maximum="255" size="2" tabindex="3"
+                   onchange="picker.fieldChange(this);"
+                   onkeypress="picker.keyPressed(event, this);"/>
+        </vbox>
+        <vbox align="center">     
+          <label value="B"  onclick="picker.selectField('b');"/>
+	        <textbox id="b" integer="true" maximum="255" size="2" tabindex="4"
+                   onchange="picker.fieldChange(this);"
+                   onkeypress="picker.keyPressed(event, this);"/>
+        </vbox>
+      </hbox>
+      <hbox align="center" id="hsl-row">
+        <vbox align="center">
+	        <label value="H"  onclick="picker.selectField('h');"/>
+	        <textbox id="h" integer="true" maximum="360" size="2" tabindex="8"
+                   onchange="picker.fieldChange(this);"
+                   onkeypress="picker.keyPressed(event, this);"/>
+        </vbox>
+        <vbox align="center">      
+          <label value="S"  onclick="picker.selectField('s');"/>
+	        <textbox id="s" maximum="100" size="2" tabindex="9"
+                   onchange="picker.fieldChange(this);"
+                   onkeypress="picker.keyPressed(event, this);"/>
+        </vbox>
+        <vbox align="center">          
+          <label value="L"  onclick="picker.selectField('l');"/>
+	        <textbox id="l" maximum="100" size="2" tabindex="10"
+                   onchange="picker.fieldChange(this);"
+                   onkeypress="picker.keyPressed(event, this);"/>
+        </vbox>
+      </hbox>
+      <hbox align="center" id="hsv-row">
+        <radiogroup orient="horizontal">
+        <vbox align="center">
+	        <label value="H"  onclick="picker.selectField('hv');"/>
+	        <textbox id="hv" integer="true" maximum="360" size="2" tabindex="5"
+                   onchange="picker.fieldChange(this);"
+                   onkeypress="picker.keyPressed(event, this);"/>
+            <radio id="radio-h" oncommand="picker.changeMode('hue');"/>
+        </vbox>
+        <vbox align="center">     
+          <label value="S"  onclick="picker.selectField('sv');"/>
+	      <textbox id="sv" maximum="100" size="2" tabindex="6"
+                   onchange="picker.fieldChange(this);"
+                   onkeypress="picker.keyPressed(event, this);"/>
+          <radio id="radio-s" oncommand="picker.changeMode('sat');"/>
+        </vbox>
+        <vbox align="center">            
+          <label value="V"  onclick="picker.selectField('v');"/>
+	      <textbox id="v" maximum="100" size="2" tabindex="7"
+                   onchange="picker.fieldChange(this);"
+                   onkeypress="picker.keyPressed(event, this);"/>
+          <radio id="radio-v" oncommand="picker.changeMode('val');"/>
+        </vbox>
+        </radiogroup>
+      </hbox> 
+    </vbox>
+    </vbox>
+  </vbox>
+</hbox>
+</vbox>
+</vbox>
+</window>

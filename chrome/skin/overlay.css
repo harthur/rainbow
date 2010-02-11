@@ -1,0 +1,158 @@
+#rainbow-statusbar {
+  list-style-image: url('chrome://rainbows/skin/favicon.png');
+}
+
+.rainbow-swatch {
+  height : 100px;
+  width : 100px;
+  max-width : 128px;
+}
+
+#rainbow-analyzer-container {
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-bottom: 8px;
+}
+
+#rainbow-analyzer-footer {
+  margin-bottom: 6px;
+  margin-right: 16px;
+}
+
+#rainbow-analyzer-expand {
+  margin-top: 6px;
+  opacity: .8;
+  cursor: pointer;
+}
+
+#rainbow-analyzer-expand:hover {
+  opacity: .9;
+}
+
+#rainbow-analyzer-expand:active {
+  opacity: 1;
+}
+
+#rainbow-analyzer-progress {
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-right: 18px;
+  margin-bottom: 10px;
+  color: #444444;
+  height: 40px;
+}
+
+#rainbow-analyzer-panel {
+  border : 1px solid grey;
+  background-color: white;
+  -moz-user-focus: normal;
+  -moz-appearance : none;
+}
+
+#rainbow-analyzer-progress-url {
+  color: black;
+  width: 260px;
+}
+
+.rainbow-swatch .rainbow-analyzer-color {
+  margin-top: 4px;
+}
+
+.rainbow-analyzer-label {
+  color: #707070;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#rainbow-analyzer-analyze {
+  margin-left: 16px;
+}
+
+.rainbow-analyzer-label:hover {
+  color: #555;
+}
+
+.rainbow-analyzer-label:active {
+  color: #444;
+  background-color: #EEEEEE;
+}
+
+.rainbow-swatch .rainbow-analyzer-prop {
+  margin-top: 5px;
+  margin-left: 4px;
+  height: 1em;
+}
+
+#rainbow-analyzer-panel[rainbow-platform="Mac"] .rainbow-analyzer-prop {
+  height: 1.6em;
+}
+
+.rainbow-analyzer-button {
+  cursor: pointer;
+  max-height : 22px !important;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  margin-left : 6px;
+  margin-right : 6px;
+  opacity : 0.9;
+}
+
+#rainbow-swatch {
+  height : 122px;
+  width : 126px;
+  max-width : 128px;
+  min-width : 128px;
+  border : 1px solid grey;
+  -moz-user-focus: normal;
+  -moz-appearance : none;
+}
+
+#rainbow-swatch:focus {
+  border : 1px solid black;
+}
+
+#rainbow-swatch[rainbow-platform="Mac"],
+#rainbow-swatch[rainbow-platform="Windows"] {
+  font-size: 12px;
+}
+
+#rainbow-analyzer-panel[rainbow-platform="Mac"],
+#rainbow-analyzer-panel[rainbow-platform="Windows"] {
+  font-size: 12px;
+}
+
+#rainbow-swatch-colorval {
+ margin-top : 5px;
+ max-width: 70px;
+ overflow: hidden;
+}
+
+.rainbow-top-button {
+  opacity: .86;
+  margin: 2px;
+}
+
+.rainbow-top-button:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+#rainbow-swatch-stats {
+  margin-top: 4px;
+  margin-bottom: 2px;
+  margin-left: 4px;
+  height: 2.4em;
+}
+
+#rainbow-swatch [rainbow-platform="Mac"] #rainbow-swatch-stats{
+  height: 3em;
+}
+
+#rainbow-swatch button {
+  max-height : 22px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  margin-left : 6px;
+  margin-right : 6px;
+  opacity : 0.9;
+}

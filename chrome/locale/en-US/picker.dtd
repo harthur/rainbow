@@ -1,0 +1,24 @@
+<!ENTITY picker.title "Color Picker">
+
+<!ENTITY picker.copy.label "Copy">
+<!ENTITY picker.copy.accesskey "C">
+<!ENTITY picker.bookmark.label "Bookmark">
+<!ENTITY picker.bookmark.accesskey "B">
+<!ENTITY picker.select.tooltip "Preview this color on an element">
+<!ENTITY picker.inspect.tooltip "Inspect pixel on browser">
+
+<!ENTITY picker.context.format "CSS Format">
+<!ENTITY picker.context.format.accesskey "f">
+<!ENTITY picker.context.format.hex "Hex">
+<!ENTITY picker.context.format.hex.accesskey "H">
+<!ENTITY picker.context.format.rgb "Rgb">
+<!ENTITY picker.context.format.rgb.accesskey "R">
+<!ENTITY picker.context.format.per.accesskey "g">
+<!ENTITY picker.context.format.hsl "Hsl">
+<!ENTITY picker.context.format.hsl.accesskey "l">
+
+
+<!ENTITY picker.hue.label "Hue">
+<!ENTITY picker.val.label "Val">
+<!ENTITY picker.sat.label "Sat">
+<!ENTITY picker.mode.label "Mode:">

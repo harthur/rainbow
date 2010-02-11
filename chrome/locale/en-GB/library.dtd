@@ -1,0 +1,50 @@
+<!ENTITY library.title "Colour Library">
+
+<!ENTITY filter.emptytext "Search By Tag or Url">
+
+<!ENTITY columns.color.label "Colour">
+<!ENTITY columns.hex.label "Hex">
+<!ENTITY columns.red.label "Red">
+<!ENTITY columns.green.label "Green">
+<!ENTITY columns.blue.label "Blue">
+<!ENTITY columns.hue.label "Hue">
+<!ENTITY columns.hue.tooltip "Hue (hsl and hsv)">
+<!ENTITY columns.satv.label "Sat">
+<!ENTITY columns.satv.tooltip "Saturation (hsv)">
+<!ENTITY columns.val.label "Val">
+<!ENTITY columns.val.tooltip "Value (hsv)">
+<!ENTITY columns.sat.label "Satl">
+<!ENTITY columns.sat.tooltip "Saturation (hsl)">
+<!ENTITY columns.light.label "Light">
+<!ENTITY columns.light.tooltip "Lightness (hsl)">
+<!ENTITY columns.white.label "White Cont">
+<!ENTITY columns.white.tooltip "WCAG Contrast ratio with white, 4.5 is minimum for text">
+<!ENTITY columns.black.label "Black Cont">
+<!ENTITY columns.black.tooltip "WCAG Contrast ratio with black, 4.5 is minimum for text">
+<!ENTITY columns.lum.label "Luminosity">
+<!ENTITY columns.lum.tooltip "WCAG Luminosity - 1 is white, 0 is black">
+<!ENTITY columns.tags.label "Tags">
+<!ENTITY columns.url.label "Url">
+<!ENTITY columns.url.tooltip "Website found on">
+<!ENTITY columns.date.label "Date">
+<!ENTITY columns.date.tooltip "Last changed">
+
+<!ENTITY context.edit.label "Edit">
+<!ENTITY context.edit.accesskey "E">
+<!ENTITY context.delete.label "Delete">
+<!ENTITY context.delete.accesskey "D">
+<!ENTITY context.open.label "Open in colour picker">
+<!ENTITY context.open.accesskey "O">
+<!ENTITY context.tags.label "Tag with">
+<!ENTITY context.tags.accesskey "T">
+<!ENTITY context.copy.label "Copy">
+<!ENTITY context.copy.accesskey "C">
+<!ENTITY context.add.label "Add New">
+<!ENTITY context.add.accesskey "A">
+<!ENTITY context.merge.label "Create Hybrid">
+<!ENTITY context.merge.accesskey "H">
+<!ENTITY context.copy.hex "#Hex">
+<!ENTITY context.copy.plain "Hex">
+<!ENTITY context.copy.rgb "Rgb">
+<!ENTITY context.copy.per "Rgb">
+<!ENTITY context.copy.hsl "Hsl">

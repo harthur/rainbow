@@ -1,0 +1,9 @@
+<!ENTITY editcolor.title "Bookmark Color">
+
+<!ENTITY color.label "Color:">
+<!ENTITY value.label "Value:">
+<!ENTITY url.label "Url:">
+<!ENTITY tags.label "Tags:">
+
+<!ENTITY save.label "Save">
+<!ENTITY cancel.label "Cancel">
