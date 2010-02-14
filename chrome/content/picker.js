@@ -231,52 +231,6 @@ var picker = {
     }
   },
 
-  selectDisplay : function(display) {
-    picker.displayElem.className = "";
-    picker.displayElem = display;
-    picker.displayElem.className = "highlight";
-    
-    var color = display.style.backgroundColor;
-    picker.visitColor(color, true, false);
-    picker.inspectColor(color);
-  },
-
-  comparisonDisplay : function() {
-    var d1 = document.getElementById("display-color-1");
-    var d2 = document.getElementById("display-color-2");
-    d2.style.backgroundColor = d1.style.backgroundColor;
-    d2.hidden = false;
-    picker.displayElem = d1;
-    picker.selectDisplay(d1);
-
-    d1.ondblclick = picker.singleDisplay;
-    d2.ondblclick = picker.singleDisplay;
-  },
-
-  singleDisplay : function() {
-    var d1 = document.getElementById("display-color-1");
-    var d2 = document.getElementById("display-color-2");
-
-    d1.style.backgroundColor = picker.displayElem.style.backgroundColor;
-    picker.selectDisplay(d1);
-    d2.hidden = true;
-
-    d1.ondblclick = picker.comparisonDisplay;
-    d2.ondblclick = picker.comparisonDisplay;
-  },
-
-  cloneDisplay : function(event) {
-    var display = event.target;
-    var color = event.dataTransfer.getData("text/rainbow-color");
-    if(colorCommon.isValid(color)) {
-      display.style.backgroundColor = color;
-      if(picker.displayElem == display) {
-        picker.visitColor(color, true, false);
-        picker.inspectColor(color);
-      }
-    }
-  },
-
   selectColor : function(color, changeString, fromInput) {
     if(!colorCommon.isValid(color))
       return;
@@ -521,6 +475,52 @@ var picker = {
     var s = Math.min(100, Math.max(0, s));
     var v = Math.min(100, Math.max(0, v));
     return colorCommon.hsvString(h, s, v);
+  },
+
+  selectDisplay : function(display) {
+    picker.displayElem.className = "";
+    picker.displayElem = display;
+    picker.displayElem.className = "highlight";
+    
+    var color = display.style.backgroundColor;
+    picker.visitColor(color, true, false);
+    picker.inspectColor(color);
+  },
+
+  comparisonDisplay : function() {
+    var d1 = document.getElementById("display-color-1");
+    var d2 = document.getElementById("display-color-2");
+    d2.style.backgroundColor = d1.style.backgroundColor;
+    d2.hidden = false;
+    picker.displayElem = d1;
+    picker.selectDisplay(d1);
+
+    d1.ondblclick = picker.singleDisplay;
+    d2.ondblclick = picker.singleDisplay;
+  },
+
+  singleDisplay : function() {
+    var d1 = document.getElementById("display-color-1");
+    var d2 = document.getElementById("display-color-2");
+
+    d1.style.backgroundColor = picker.displayElem.style.backgroundColor;
+    picker.selectDisplay(d1);
+    d2.hidden = true;
+
+    d1.ondblclick = picker.comparisonDisplay;
+    d2.ondblclick = picker.comparisonDisplay;
+  },
+
+  cloneDisplay : function(event) {
+    var display = event.target;
+    var color = event.dataTransfer.getData("text/rainbow-color");
+    if(colorCommon.isValid(color)) {
+      display.style.backgroundColor = color;
+      if(picker.displayElem == display) {
+        picker.visitColor(color, true, false);
+        picker.inspectColor(color);
+      }
+    }
   },
   
   copy : function() {
