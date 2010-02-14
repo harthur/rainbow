@@ -68,12 +68,15 @@
  *    Values display
  ***********************************/
 
-#display-color {
+#display-color-1, #display-color-2 {
   margin-left: 4px;
   margin-right: 5px;
   margin-bottom: 10px;
   height: 90px;
-  border: 1px solid #555555;
+}
+
+.highlight {
+  border: 1px solid #555;
 }
 
 #values-box {

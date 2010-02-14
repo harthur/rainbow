@@ -104,8 +104,8 @@
     <toolbarbutton id="inspector-button" tooltiptext="&picker.inspect.tooltip;"
                    oncommand="inspector.start();"/>
   </toolbar>
+
 <vbox id="container">
-  
   <hbox>
   <vbox id="left-box">
     <hbox id="picker-display">
@@ -141,8 +141,22 @@
 
   <vbox id="selection-display" align="center">
     <vbox id="values-display">
-    <vbox id="display-color"
-          ondragstart="picker.dragStart(event);"/>
+    <hbox flex="1">
+      <vbox id="display-color-1"
+            ondragstart="picker.dragStart(event);" flex="1"
+            onclick="picker.selectDisplay(this)"
+            ondblclick="picker.comparisonDisplay()"
+            ondrop="picker.cloneDisplay(event)"
+            ondragover="return false;"
+            class="highlight"/>
+      <vbox id="display-color-2"
+            ondragstart="picker.dragStart(event);" flex="1"
+            onclick="picker.selectDisplay(this)"
+            ondblclick="picker.comparisonDisplay()"
+            ondrop="picker.cloneDisplay(event)"
+            ondragover="return false;"
+            hidden="true"/>
+    </hbox>
     <vbox id="values-box">
       <hbox align="center">
         <vbox align="center">     

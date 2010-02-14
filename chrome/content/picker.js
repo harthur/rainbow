@@ -53,8 +53,12 @@ var picker = {
     else
       document.getElementById("hsl-row").hidden = true;
 
+    picker.displayElem = document.getElementById("display-color-1");
+
     picker.selectColor(color, true);
     picker.changeMode(mode);
+    
+    // picker.comparisonDisplay();
  
     /* for platform-specific styles */
     var platform = rainbowc.getPlatform();
@@ -101,7 +105,7 @@ var picker = {
     selector.style.border = " white dashed 1px";
 
     var inspector = document.getElementById("inspector-button");
-    inspector.style.listStyleImage = "url('chrome://rainbows/skin/plus-white.png')"
+    inspector.style.listStyleImage = "url('chrome://rainbows/skin/plus-white.png')";
   },
 
   unload : function() {
@@ -119,10 +123,14 @@ var picker = {
     var back = document.getElementById("back-button");
     var forward = document.getElementById("forward-button");
 
-    picker.backStack.push(picker.color);
-    back.disabled = false;
-    picker.forwardStack = [];
-    forward.disabled = true;
+    var stack = picker.backStack;
+    if(!stack.length || stack[stack.length - 1] != picker.color) { 
+      // don't visit same color twice in a row
+      stack.push(picker.color);
+      back.disabled = false;
+      picker.forwardStack = [];
+      forward.disabled = true;
+    }
 
     picker.selectColor(color, changeString, fromInput);
     picker.url = "";
@@ -223,6 +231,52 @@ var picker = {
     }
   },
 
+  selectDisplay : function(display) {
+    picker.displayElem.className = "";
+    picker.displayElem = display;
+    picker.displayElem.className = "highlight";
+    
+    var color = display.style.backgroundColor;
+    picker.visitColor(color, true, false);
+    picker.inspectColor(color);
+  },
+
+  comparisonDisplay : function() {
+    var d1 = document.getElementById("display-color-1");
+    var d2 = document.getElementById("display-color-2");
+    d2.style.backgroundColor = d1.style.backgroundColor;
+    d2.hidden = false;
+    picker.displayElem = d1;
+    picker.selectDisplay(d1);
+
+    d1.ondblclick = picker.singleDisplay;
+    d2.ondblclick = picker.singleDisplay;
+  },
+
+  singleDisplay : function() {
+    var d1 = document.getElementById("display-color-1");
+    var d2 = document.getElementById("display-color-2");
+
+    d1.style.backgroundColor = picker.displayElem.style.backgroundColor;
+    picker.selectDisplay(d1);
+    d2.hidden = true;
+
+    d1.ondblclick = picker.comparisonDisplay;
+    d2.ondblclick = picker.comparisonDisplay;
+  },
+
+  cloneDisplay : function(event) {
+    var display = event.target;
+    var color = event.dataTransfer.getData("text/rainbow-color");
+    if(colorCommon.isValid(color)) {
+      display.style.backgroundColor = color;
+      if(picker.displayElem == display) {
+        picker.visitColor(color, true, false);
+        picker.inspectColor(color);
+      }
+    }
+  },
+
   selectColor : function(color, changeString, fromInput) {
     if(!colorCommon.isValid(color))
       return;
@@ -234,7 +288,7 @@ var picker = {
     var hslVals = colorCommon.hslValues(color, wholeNumbers);
     var hsvVals = colorCommon.hsvValues(color, wholeNumbers);
     
-    document.getElementById("display-color").style.background = hexVal;
+    picker.displayElem.style.backgroundColor = hexVal;
     document.getElementById("r").value = rgbVals['red'];
     document.getElementById("g").value = rgbVals['green'];
     document.getElementById("b").value = rgbVals['blue'];
@@ -503,7 +557,7 @@ var picker = {
   },
 
   dragStart : function(event) {
-    event.dataTransfer.setData("text/rainbow-color", picker.color);
+    event.dataTransfer.setData("text/rainbow-color", event.target.style.backgroundColor);
     event.dataTransfer.setData("text/rainbow-source", "picker");
   },
 };
@@ -560,7 +614,7 @@ var selector = {
     // for drop indicator styling of webpage content
     rainbowc.registerSheet("chrome://rainbows/skin/selector.css", null, null);
     var button = document.getElementById("selector-button");
-    button.oncommand = function() {selector.stop();};
+    button.oncommand = selector.stop;
 
     if(rainbowc.getPlatform() == "Mac")
       rainbowc.wm.getMostRecentWindow("navigator:browser").focus();
@@ -568,13 +622,14 @@ var selector = {
 
   stop : function() {
     selector.pause();
-    if(selector.selectedElement.removeAttribute)
-      selector.selectedElement.removeAttribute("rainbowselector");
-    else
-      selector.selectedElement.parentNode.removeAttribute("rainbowselector");
+    var sel = selector.selectedElement;
+    if(sel && sel.removeAttribute)
+      sel.removeAttribute("rainbowselector");
+    else if (sel && sel.parentNode.removeAttribute)
+      sel.parentNode.removeAttribute("rainbowselector");
     selector.selectedElement = "";
     var button = document.getElementById("selector-button");
-    button.oncommand = function() {selector.start();};
+    button.oncommand = selector.start;
   }, 
 
   pause : function() {
