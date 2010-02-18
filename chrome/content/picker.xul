@@ -141,6 +141,7 @@
 
   <vbox id="selection-display" align="center">
     <vbox id="values-display">
+    <label id="contrast"/>
     <hbox flex="1">
       <vbox id="display-color-1"
             ondragstart="picker.dragStart(event);" flex="1"
@@ -148,7 +149,10 @@
             ondblclick="picker.comparisonDisplay()"
             ondrop="picker.cloneDisplay(event)"
             ondragover="return false;"
-            class="highlight"/>
+            class="highlight" pack="end" align="center">
+        <label id="display-text" value="Text"
+            onclick="picker.selectDisplay(this, event)" hidden="true"/>
+      </vbox>
       <vbox id="display-color-2"
             ondragstart="picker.dragStart(event);" flex="1"
             onclick="picker.selectDisplay(this)"

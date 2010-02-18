@@ -121,6 +121,17 @@ var rainbowCommon = {
     return "rgb(" + data[0] + "," + data[1] + "," + data[2] + ")";
   },
 
+  getBgColor : function(element) {
+    do {
+      var win = element.ownerDocument.defaultView;
+      var style = win.getComputedStyle(element, null);
+      if(style.backgroundColor != "transparent")
+        return style.backgroundColor;
+      element = element.parentNode;
+    } while(element.parentNode != element)
+   return "transparent";
+  },
+
   preventEvents : function (win, events) {
     for(var i = 0; i < events.length; i++)
       win.addEventListener(events[i], rainbowCommon.prevent, true); 

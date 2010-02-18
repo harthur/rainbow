@@ -242,7 +242,10 @@ var picker = {
     var hslVals = colorCommon.hslValues(color, wholeNumbers);
     var hsvVals = colorCommon.hsvValues(color, wholeNumbers);
     
-    picker.displayElem.style.backgroundColor = hexVal;
+    if(picker.displayElem.id == "display-text")
+      picker.displayElem.style.color = hexVal;
+    else
+      picker.displayElem.style.backgroundColor = hexVal;
     document.getElementById("r").value = rgbVals['red'];
     document.getElementById("g").value = rgbVals['green'];
     document.getElementById("b").value = rgbVals['blue'];
@@ -270,8 +273,22 @@ var picker = {
       button.setAttribute("oncommand", "picker.bookmark();");
     }
     picker.color = hexVal;
-    if(selector.selectedElement)
-      selector.selectedElement.style.background = hexVal;
+
+    if(selector.selectedElement) {
+      if(picker.displayElem.id == "display-text")
+        selector.selectedElement.style.color = hexVal + "";
+      else
+        selector.selectedElement.style.backgroundColor = hexVal + "";
+   
+      picker.displayContrast();
+    }
+  },
+
+  displayContrast : function() {
+    var c1 = document.getElementById("display-text").style.color;
+    var c2 = document.getElementById("display-color-1").style.backgroundColor;
+    var contrast = Math.round(colorCommon.contrast(c1, c2));
+    document.getElementById("contrast").value = "contrast: " + contrast;
   },
 
   changeString : function(color) {
@@ -477,20 +494,49 @@ var picker = {
     return colorCommon.hsvString(h, s, v);
   },
 
-  selectDisplay : function(display) {
+  selectDisplay : function(display, event) {
     picker.displayElem.className = "";
     picker.displayElem = display;
     picker.displayElem.className = "highlight";
     
-    var color = display.style.backgroundColor;
+    if(picker.displayElem.id == "display-text")
+      var color = display.style.color;
+    else
+      var color = display.style.backgroundColor;
     picker.visitColor(color, true, false);
     picker.inspectColor(color);
+
+    if(event)
+      event.stopPropagation();
   },
 
-  comparisonDisplay : function() {
+  elementDisplay : function(color1, color2) {
     var d1 = document.getElementById("display-color-1");
     var d2 = document.getElementById("display-color-2");
-    d2.style.backgroundColor = d1.style.backgroundColor;
+    var text = document.getElementById("display-text");
+
+    d2.hidden = true;
+    d1.style.backgroundColor = color1;      
+    if(color2) {
+      text.style.color = color2;
+      text.hidden = false;
+    }
+
+    picker.displayElem = d1;
+    picker.selectDisplay(d1);
+  },
+
+  comparisonDisplay : function(color1, color2) {
+    var d1 = document.getElementById("display-color-1");
+    var d2 = document.getElementById("display-color-2");
+
+    if(color1 && color2) {
+      d1.style.backgroundColor = color1;
+      d2.style.backgroundColor = color2;
+    }
+    else
+      d2.style.backgroundColor = d1.style.backgroundColor;
+
     d2.hidden = false;
     picker.displayElem = d1;
     picker.selectDisplay(d1);
@@ -502,10 +548,16 @@ var picker = {
   singleDisplay : function() {
     var d1 = document.getElementById("display-color-1");
     var d2 = document.getElementById("display-color-2");
+    var text = document.getElementById("display-text");
 
-    d1.style.backgroundColor = picker.displayElem.style.backgroundColor;
+    if(picker.displayElem.id == "display-text")
+      d1.style.backgroundColor = picker.displayElem.style.color;
+    else
+      d1.style.backgroundColor = picker.displayElem.style.backgroundColor;
+
     picker.selectDisplay(d1);
     d2.hidden = true;
+    text.hidden = true;
 
     d1.ondblclick = picker.comparisonDisplay;
     d2.ondblclick = picker.comparisonDisplay;
@@ -630,6 +682,8 @@ var selector = {
     selector.selectedElement = "";
     var button = document.getElementById("selector-button");
     button.oncommand = selector.start;
+    
+    picker.singleDisplay();
   }, 
 
   pause : function() {
@@ -668,7 +722,10 @@ var selector = {
     picker.visitColor(color, true, false);
     picker.inspectColor(color); */
 
-    event.target.style.background = picker.color;
+    var win = event.target.ownerDocument.defaultView;
+    var style = win.getComputedStyle(event.target, null);
+    picker.elementDisplay(rainbowc.getBgColor(event.target), style.color);
+    
     selector.selectedElement = event.target;
 
     window.focus(); // for Windows
