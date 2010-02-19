@@ -4,10 +4,15 @@
 <!ENTITY picker.copy.accesskey "C">
 <!ENTITY picker.bookmark.label "Bookmark">
 <!ENTITY picker.bookmark.accesskey "B">
-<!ENTITY picker.select.tooltip "Preview this colour on an element">
+<!ENTITY picker.select.tooltip "Select element to preview">
 <!ENTITY picker.inspect.tooltip "Inspect pixel on browser">
 
-<!ENTITY picker.context.format "CSS Format">
+<!ENTITY picker.contrast.wcag "WCAG contrast ratio">
+<!ENTITY picker.contrast.minimum "recommended minimum:">
+<!ENTITY picker.contrast.small "small text:">
+<!ENTITY picker.contrast.large "large text:">
+
+<!ENTITY picker.context.format "Format">
 <!ENTITY picker.context.format.accesskey "f">
 <!ENTITY picker.context.format.hex "Hex">
 <!ENTITY picker.context.format.hex.accesskey "H">
@@ -21,4 +26,3 @@
 <!ENTITY picker.hue.label "Hue">
 <!ENTITY picker.val.label "Val">
 <!ENTITY picker.sat.label "Sat">
-<!ENTITY picker.mode.label "Mode:">

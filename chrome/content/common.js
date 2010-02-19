@@ -141,20 +141,29 @@ var rainbowCommon = {
   },
 
   textColorAffects : function(element) {
-    if((element.nodeType == Node.TEXT_NODE || 
-       element.nodeName == "A"))
+    if(element.nodeType == Node.TEXT_NODE || 
+       element.nodeName == "A")
       return true;
 
     var affects = false;
-    for(var i = 0; i < element.children.length; i++) {
-      var child = element.children[i];
+    var win = element.ownerDocument.defaultView;
+    if(element.nodeType == Node.ELEMENT_NODE)
+      var parentColor = win.getComputedStyle(element, null).color;
+
+    for(var i = 0; i < element.childNodes.length; i++) {
+      var child = element.childNodes[i];
+
+      let childColor;
+      if(child.nodeType == Node.ELEMENT_NODE)
+        childColor = win.getComputedStyle(child, null).color;
+      // if the color is different than the parent then it defined it's own color
+      // child.style.color only checks that the inline style was changed
       if(rainbowc.textColorAffects(child)
-         && !child.style.color)
+         && (!childColor || !parentColor || (childColor == parentColor)))
         affects = true;
     }
     return affects;
   },
-
 
   preventEvents : function (win, events) {
     for(var i = 0; i < events.length; i++)

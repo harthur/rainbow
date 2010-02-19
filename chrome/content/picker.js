@@ -526,6 +526,8 @@ var picker = {
       text.style.color = color2;
       text.hidden = false;
     }
+    else
+      text.style.color = "";
 
     picker.displayElem = d1;
     picker.selectDisplay(d1);
@@ -733,7 +735,6 @@ var selector = {
       var win = element.ownerDocument.defaultView;
       var txt = win.getComputedStyle(element, null).color;
     }
-    alert(txt);
     picker.elementDisplay(bg, txt);
 
     picker.url = element.ownerDocument.location.href;

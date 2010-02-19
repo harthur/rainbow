@@ -89,7 +89,7 @@
     <rows>
      <row>
        <label value="&picker.contrast.small;"/>
-       <label value="4.5"/>
+       <label value="5"/>
      </row>
      <row>
        <label value="&picker.contrast.large;"/>
