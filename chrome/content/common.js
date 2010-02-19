@@ -24,6 +24,13 @@ var rainbowCommon = {
       return result[2];
   },
 
+  getString : function(string, variable) {
+    var strings = document.getElementById("rainbow-strings");
+    if(variable)
+      return strings.getFormattedString(string, [variable]);
+    return strings.getString(string);
+  },
+
   getFormattedColors : function(colors) {
     var format = rainbowCommon.prefs.getCharPref("format");
     var whole = rainbowCommon.prefs.getBoolPref("wholeNumbers");
@@ -128,9 +135,26 @@ var rainbowCommon = {
       if(style.backgroundColor != "transparent")
         return style.backgroundColor;
       element = element.parentNode;
-    } while(element.parentNode != element)
-   return "transparent";
+    } while(element.parentNode != element
+           && element.nodeType == Node.ELEMENT_NODE)
+   return "#FFFFFF";
   },
+
+  textColorAffects : function(element) {
+    if((element.nodeType == Node.TEXT_NODE || 
+       element.nodeName == "A"))
+      return true;
+
+    var affects = false;
+    for(var i = 0; i < element.children.length; i++) {
+      var child = element.children[i];
+      if(rainbowc.textColorAffects(child)
+         && !child.style.color)
+        affects = true;
+    }
+    return affects;
+  },
+
 
   preventEvents : function (win, events) {
     for(var i = 0; i < events.length; i++)

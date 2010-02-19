@@ -286,9 +286,14 @@ var picker = {
 
   displayContrast : function() {
     var c1 = document.getElementById("display-text").style.color;
+    if(!colorCommon.isValid(c1)) {
+      document.getElementById("contrast").value = "   ";
+      return;
+    }
     var c2 = document.getElementById("display-color-1").style.backgroundColor;
     var contrast = Math.round(colorCommon.contrast(c1, c2));
-    document.getElementById("contrast").value = "contrast: " + contrast;
+    cstring = rainbowc.getString("rainbow.picker.contrast", contrast);
+    document.getElementById("contrast").value = cstring;
   },
 
   changeString : function(color) {
@@ -524,6 +529,8 @@ var picker = {
 
     picker.displayElem = d1;
     picker.selectDisplay(d1);
+
+    picker.displayContrast();
   },
 
   comparisonDisplay : function(color1, color2) {
@@ -561,6 +568,8 @@ var picker = {
 
     d1.ondblclick = picker.comparisonDisplay;
     d2.ondblclick = picker.comparisonDisplay;
+
+    document.getElementById("contrast").value = "";
   },
 
   cloneDisplay : function(event) {
@@ -716,17 +725,19 @@ var selector = {
 
   selectElement : function(event) {
     selector.pause();
-   
-  /* // Should we change the color immediately?
-    var color = rainbowCommon.getPixel(event);
-    picker.visitColor(color, true, false);
-    picker.inspectColor(color); */
 
-    var win = event.target.ownerDocument.defaultView;
-    var style = win.getComputedStyle(event.target, null);
-    picker.elementDisplay(rainbowc.getBgColor(event.target), style.color);
-    
-    selector.selectedElement = event.target;
+    var element = event.target;
+    var bg = rainbowc.getBgColor(element);
+
+    if(rainbowc.textColorAffects(element)) {
+      var win = element.ownerDocument.defaultView;
+      var txt = win.getComputedStyle(element, null).color;
+    }
+    alert(txt);
+    picker.elementDisplay(bg, txt);
+
+    picker.url = element.ownerDocument.location.href;
+    selector.selectedElement = element;
 
     window.focus(); // for Windows
     event.preventDefault();

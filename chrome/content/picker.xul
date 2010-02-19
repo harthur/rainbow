@@ -75,7 +75,30 @@
                   oncommand="picker.changeFormat('hsl')" />
        </menupopup>
       </menu>
-    </menupopup>  
+  </menupopup>
+
+<tooltip id="contrast-tooltip">
+  <vbox>
+   <label value="&picker.contrast.wcag;"/>
+   <label id="contrast-minimum" value="&picker.contrast.minimum;"/>
+  <grid>
+    <columns>
+      <column/>
+      <column/>
+    </columns>
+    <rows>
+     <row>
+       <label value="&picker.contrast.small;"/>
+       <label value="4.5"/>
+     </row>
+     <row>
+       <label value="&picker.contrast.large;"/>
+       <label value="3"/>
+     </row>
+    </rows>
+  </grid>
+  </vbox>
+</tooltip>
 
 <vbox context="picker-context">
 <toolbar id="color-navigator">
@@ -141,7 +164,6 @@
 
   <vbox id="selection-display" align="center">
     <vbox id="values-display">
-    <label id="contrast"/>
     <hbox flex="1">
       <vbox id="display-color-1"
             ondragstart="picker.dragStart(event);" flex="1"
@@ -161,8 +183,10 @@
             ondragover="return false;"
             hidden="true"/>
     </hbox>
+    <vbox align="end" flex="1">
+    <label id="contrast" value="   " tooltip="contrast-tooltip"/></vbox>
     <vbox id="values-box">
-      <hbox align="center">
+      <hbox align="center" class="values-row">
         <vbox align="center">     
 	        <label value="R" onclick="picker.selectField('r');"/>
 	        <textbox id="r" integer="true" maximum="255" size="2" tabindex="2"
@@ -182,7 +206,7 @@
                    onkeypress="picker.keyPressed(event, this);"/>
         </vbox>
       </hbox>
-      <hbox align="center" id="hsl-row">
+      <hbox align="center" id="hsl-row" class="values-row">
         <vbox align="center">
 	        <label value="H"  onclick="picker.selectField('h');"/>
 	        <textbox id="h" integer="true" maximum="360" size="2" tabindex="8"
@@ -202,28 +226,28 @@
                    onkeypress="picker.keyPressed(event, this);"/>
         </vbox>
       </hbox>
-      <hbox align="center" id="hsv-row">
+      <hbox align="center" id="hsv-row" class="values-row">
         <radiogroup orient="horizontal">
         <vbox align="center">
 	        <label value="H"  onclick="picker.selectField('hv');"/>
 	        <textbox id="hv" integer="true" maximum="360" size="2" tabindex="5"
                    onchange="picker.fieldChange(this);"
                    onkeypress="picker.keyPressed(event, this);"/>
-            <radio id="radio-h" oncommand="picker.changeMode('hue');"/>
+            <radio id="radio-h" oncommand="picker.changeMode('hue');" hidden="true"/>
         </vbox>
         <vbox align="center">     
           <label value="S"  onclick="picker.selectField('sv');"/>
 	      <textbox id="sv" maximum="100" size="2" tabindex="6"
                    onchange="picker.fieldChange(this);"
                    onkeypress="picker.keyPressed(event, this);"/>
-          <radio id="radio-s" oncommand="picker.changeMode('sat');"/>
+          <radio id="radio-s" oncommand="picker.changeMode('sat');" hidden="true"/>
         </vbox>
         <vbox align="center">            
           <label value="V"  onclick="picker.selectField('v');"/>
 	      <textbox id="v" maximum="100" size="2" tabindex="7"
                    onchange="picker.fieldChange(this);"
                    onkeypress="picker.keyPressed(event, this);"/>
-          <radio id="radio-v" oncommand="picker.changeMode('val');"/>
+          <radio id="radio-v" oncommand="picker.changeMode('val');" hidden="true"/>
         </vbox>
         </radiogroup>
       </hbox> 

@@ -143,12 +143,6 @@
       </menu>
     </menupopup>  
     <menupopup id="rainbow-analyzer-context">
-      <menuitem label="&rainbow.analyzer.copyall;"
-                accesskey="&rainbow.analyzer.copy.accesskey;"
-                oncommand="rainbowAnalyzer.copyAll()" />
-       <menuitem label="&rainbow.analyzer.bookmarkall;"
-                accesskey="&rainbow.analyzer.bookmark.accesskey;"
-                oncommand="rainbowAnalyzer.bookmarkAll()" />
       <menu label="&rainbow.analyzer.limit;"
             accesskey="&rainbow.analyzer.limit.accesskey;"> 
       <menupopup>
