@@ -51,10 +51,9 @@ var library = {
     contrast.setAttribute("rainbow-platform", rainbowc.getPlatform());
  
     var filterBox = document.getElementById("filterBox");
-    var strings = document.getElementById("rainbow-strings");
     var urlHidden = document.getElementById("col-url").hidden;
     if(urlHidden)
-      filterBox.emptyText = strings.getString("rainbow.library.bytag");
+      filterBox.emptyText = rainbowc.getString("rainbow.library.bytag");
     filterBox.focus();
 
     if(window.arguments && window.arguments[0]) {
@@ -141,22 +140,21 @@ var library = {
         dist94.hidden = true; // TAKE OUT
         dist.hidden = true; // TAKE OUT
 
-        var strings = document.getElementById("rainbow-strings");
         var contrast = library.contrastSelection();
         var contLabel =  document.getElementById("context-contrast-value");
-        contLabel.value = strings.getFormattedString("rainbow.library.contrast", [contrast]);
+        contLabel.value = rainbowc.getString("rainbow.library.contrast", contrast);
         var meter = document.getElementById("context-contrast-meter");
 
         if(contrast < 4.5) {
-          meter.value = strings.getString("rainbow.library.low");
+          meter.value = rainbowc.getString("rainbow.library.low");
           meter.className = "low-contrast";
         }
         else if(contrast < 8) {
-          meter.value = strings.getString("rainbow.library.okay");
+          meter.value = rainbowc.getString("rainbow.library.okay");
           meter.className = "medium-contrast";
         }
         else {
-          meter.value = strings.getString("rainbow.library.high");
+          meter.value = rainbowc.getString("rainbow.library.high");
           meter.className = "high-contrast";
         }
 

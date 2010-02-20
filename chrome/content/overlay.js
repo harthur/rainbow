@@ -213,15 +213,13 @@ var rainbowInspector = {
 
     var button = document.getElementById("rainbow-swatch-bookmark");
     var color = colorCommon.toHex(swatch.style.backgroundColor);
-    var strings = document.getElementById("rainbow-strings");
-
     if(rainbowc.storage.isSaved(color)) {
-      button.label = strings.getString("rainbow.view");
+      button.label = rainbowc.getString("rainbow.view");
       button.removeAttribute('oncommand');
       button.setAttribute("oncommand", "colorPlay.openLibrary('" + color + "');");
     }
     else {
-      button.label = strings.getString("rainbow.bookmark");
+      button.label = rainbowc.getString("rainbow.bookmark");
       button.removeAttribute('oncommand');
       button.setAttribute("oncommand", "rainbowInspector.bookmarkColor();");
     }

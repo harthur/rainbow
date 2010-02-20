@@ -41,16 +41,15 @@ var rainbowAnalyzer = {
     var content = document.getElementById("content");
     panel.url = content.contentDocument.location.href;
 
-    var strings = document.getElementById("rainbow-strings");
     var progress = document.getElementById("rainbow-analyzer-progress");
     progress.hidden = false;
     var progressUrl = document.getElementById("rainbow-analyzer-progress-url");
-    progressUrl.value = strings.getFormattedString("rainbow.analyzer.progress", [panel.url]);
+    progressUrl.value = rainbowc.getString("rainbow.analyzer.progress", panel.url);
     var progressMsg = document.getElementById("rainbow-analyzer-progress-msg");
-    progressMsg.value = strings.getString("rainbow.analyzer.extracting");
+    progressMsg.value = rainbowc.getString("rainbow.analyzer.extracting");
 
     var close = document.getElementById("rainbow-analyzer-close");
-    close.tooltipText = strings.getString("rainbow.cancel");
+    close.tooltipText = rainbowc.getString("rainbow.cancel");
 
     var footer = document.getElementById("rainbow-analyzer-footer");
     footer.hidden = true;
@@ -66,13 +65,10 @@ var rainbowAnalyzer = {
     
     var close = document.getElementById("rainbow-analyzer-close");
     var footer = document.getElementById("rainbow-analyzer-footer");
-    var strings = document.getElementById("rainbow-strings");
-
     var win = document.getElementById("content").contentWindow;
-
     var pixels = rainbowAnalyzer.getPixelArray(win);
     var msg = document.getElementById("rainbow-analyzer-progress-msg");
-    msg.value = strings.getString("rainbow.analyzer.analyzing");
+    msg.value = rainbowc.getString("rainbow.analyzer.analyzing");
 
     if(rainbowAnalyzer.worker)
       rainbowAnalyzer.worker.terminate(); // cancel any previous worker
@@ -84,7 +80,7 @@ var rainbowAnalyzer = {
       rainbowAnalyzer.colors = event.data.colors;
       rainbowAnalyzer.resetExpander();
       progress.hidden = true;
-      close.tooltipText = strings.getString("rainbow.close");
+      close.tooltipText = rainbowc.getString("rainbow.close");
       rainbowAnalyzer.numShowing = Math.min(limit, rainbowAnalyzer.colors.length);
       rainbowAnalyzer.showColors(rainbowAnalyzer.colors.slice(0, limit));
       footer.hidden = false;
@@ -96,7 +92,7 @@ var rainbowAnalyzer = {
 
     rainbowAnalyzer.worker.onerror = function(error) {
       var progressMsg = document.getElementById("rainbow-analyzer-progress-msg");
-      progressMsg.value = strings.getString("rainbow.analyzer.error");
+      progressMsg.value = rainbowc.getString("rainbow.analyzer.error");
     };
 
     rainbowAnalyzer.worker.postMessage({pixels: pixels, width: win.innerWidth, height: win.innerHeight});
@@ -117,11 +113,9 @@ var rainbowAnalyzer = {
   },
 
   showColors : function(colors) {
-    var strings = document.getElementById("rainbow-strings");
     var format = rainbowc.prefs.getCharPref("format");
-
     var bookmark = document.getElementById("rainbow-analyzer-bookmark");
-    bookmark.value = strings.getString("rainbow.bookmark");
+    bookmark.value = rainbowc.getString("rainbow.bookmark");
     bookmark.setAttribute("onclick", "rainbowAnalyzer.bookmarkAll();");
 
     var container = document.getElementById("rainbow-analyzer-container");
@@ -184,18 +178,18 @@ var rainbowAnalyzer = {
       propLabel.hidden = true;
 
       var copyButton = document.createElement("button");
-      copyButton.setAttribute("label", strings.getString("rainbow.copy"));
+      copyButton.setAttribute("label", rainbowc.getString("rainbow.copy"));
       copyButton.className = "rainbow-analyzer-button";
       copyButton.hidden = true;
       copyButton.setAttribute("oncommand", "rainbowc.copyColor('" + color + "')");
 
       var bookmarkButton = document.createElement("button");
       if(rainbowc.storage.isSaved(colorCommon.toHex(color))) {
-        bookmarkButton.setAttribute("label", strings.getString("rainbow.library"));
+        bookmarkButton.setAttribute("label", rainbowc.getString("rainbow.library"));
         bookmarkButton.setAttribute("oncommand", "colorPlay.openLibrary('" + color + "');");
       }
       else {
-        bookmarkButton.setAttribute("label", strings.getString("rainbow.bookmark"));
+        bookmarkButton.setAttribute("label", rainbowc.getString("rainbow.bookmark"));
         bookmarkButton.setAttribute("oncommand", "rainbowAnalyzer.bookmarkColor('" + color + "')");
       }
  

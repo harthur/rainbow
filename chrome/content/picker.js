@@ -38,6 +38,8 @@ var picker = {
 
   forwardStack : [],
 
+  highlightClass : "highlight",
+
   init : function() {
     picker.wholeNumbers = rainbowc.prefs.getBoolPref("wholeNumbers");
     var mode = rainbowc.prefs.getCharPref("picker.mode");
@@ -106,6 +108,8 @@ var picker = {
 
     var inspector = document.getElementById("inspector-button");
     inspector.style.listStyleImage = "url('chrome://rainbows/skin/plus-white.png')";
+
+    picker.highlightClass = "highlight-light";
   },
 
   unload : function() {
@@ -260,15 +264,13 @@ var picker = {
       picker.changeString(color, wholeNumbers);
 
     var button = document.getElementById("bookmark-button");
-    var strings = document.getElementById("rainbow-strings");
-
     if(rainbowc.storage.isSaved(colorCommon.toHex(color))) {
-      button.label = strings.getString("rainbow.view");
+      button.label = rainbowc.getString("rainbow.view");
       button.removeAttribute("oncommand"); // firefox bug 
       button.setAttribute("oncommand", "picker.openLibrary();");
     }
     else {
-      button.label = strings.getString("rainbow.bookmark");
+      button.label = rainbowc.getString("rainbow.bookmark");
       button.removeAttribute("oncommand");
       button.setAttribute("oncommand", "picker.bookmark();");
     }
@@ -502,10 +504,16 @@ var picker = {
   selectDisplay : function(display, event) {
     picker.displayElem.className = "";
     picker.displayElem = display;
-    picker.displayElem.className = "highlight";
+    display.className = picker.highlightClass;
     
-    if(picker.displayElem.id == "display-text")
+    if(picker.displayElem.id == "display-text") {
       var color = display.style.color;
+      var bg = document.getElementById("display-color-1").style.backgroundColor;
+      if(!colorCommon.blackText(bg))
+        display.className = "highlight-light";
+      else
+        display.className = "highlight";
+    }
     else
       var color = display.style.backgroundColor;
     picker.visitColor(color, true, false);
@@ -565,6 +573,7 @@ var picker = {
       d1.style.backgroundColor = picker.displayElem.style.backgroundColor;
 
     picker.selectDisplay(d1);
+    d1.className = "highlight"; // show grey for dark and light themes
     d2.hidden = true;
     text.hidden = true;
 
