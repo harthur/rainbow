@@ -71,7 +71,7 @@
 #display-color-1, #display-color-2 {
   margin-left: 2px;
   margin-right: 5px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   height: 90px;
 }
 
@@ -81,6 +81,10 @@
 
 .highlight-light {
   border: 1px solid #DDD;
+}
+
+.selected {
+  outline: 1px dotted #222;
 }
 
 #display-text {
@@ -102,9 +106,15 @@
   margin-top: 4px;
 }
 
+.values-row {
+  margin-top: 14px;
+}
+
 #values-box label {
   -moz-user-focus: normal;
-  margin-top: 14px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
 }
 
 #values-box textbox {
