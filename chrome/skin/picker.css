@@ -1,5 +1,6 @@
 #container {
   margin: 18px;
+  -moz-user-focus: normal;
 }
 
 #color-navigator {
@@ -15,13 +16,13 @@
 }
 
 #display-string {
-  min-width: 216px;
-  max-width: 216px;
+  min-width: 202px;
+  max-width: 202px;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-#rainbow-picker-window[rainbow-platform="Windows"] #display-string {
+window[rainbow-platform="Windows"] #display-string {
   margin-left: 12px;
   margin-right: 12px;
 }
@@ -32,8 +33,8 @@
   margin-right: 4px !important;
 }
 
-#rainbow-picker-window[rainbow-platform="Windows"] #bookmark-button .toolbarbutton-text,
-#rainbow-picker-window[rainbow-platform="Windows"] #copy-button .toolbarbutton-text {
+window[rainbow-platform="Windows"] #bookmark-button .toolbarbutton-text,
+window[rainbow-platform="Windows"] #copy-button .toolbarbutton-text {
   margin-left: 6px !important;
   margin-right: 6px !important;
 }
@@ -43,7 +44,7 @@
   margin-right: 4px;
 }
 
-#rainbow-picker-window[rainbow-platform="Windows"] #selector-button{
+window[rainbow-platform="Windows"] #selector-button{
   margin-right: 5px;
 }
 
@@ -133,6 +134,10 @@ vbox[selected=true] {
 
 #values-box textbox {
   margin-left: 0px !important;
+}
+
+window[rainbow-platform="Linux"] #values-box textbox {
+  width: 44px;
 }
 
 radio .radio-label-box  {

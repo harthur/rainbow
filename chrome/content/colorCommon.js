@@ -36,15 +36,19 @@
 var colorCommon = {
   abbRegex : /^#?([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/,
   hexRegex : /^#?([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/,
-  rgbRegex : /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/,
-  perRegex : /^rgb\(\s*(\d{1,3}\.?\d?)\%\s*,\s*(\d{1,3}\.?\d?)\%\s*,\s*(\d{1,3}\.?\d?)\%\s*\)/,
-  hslRegex : /^hsl\(\s*(\d{1,3})\s*,\s*(\d{1,3}\.?\d?)%\s*,\s*(\d{1,3}\.?\d?)%\s*\)/,
-  hsvRegex : /^hsv\(\s*(\d{1,3})\s*,\s*(\d{1,3}\.?\d?)%\s*,\s*(\d{1,3}\.?\d?)%\s*\)/,
+  rgbRegex : /^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*([10]?\.?\d*)\s*)?\)/,
+  perRegex : /^rgba?\(\s*(\d{1,3}\.?\d?)\%\s*,\s*(\d{1,3}\.?\d?)\%\s*,\s*(\d{1,3}\.?\d?)\%\s*(?:,\s*([10]?\.?\d*)\s*)?\)/,
+  hslRegex : /^hsl\(\s*(\d{1,3})\s*,\s*(\d{1,3}\.?\d?)%\s*,\s*(\d{1,3}\.?\d?)%\s*(?:,\s*([10]?\.?\d*)\s*)?\)/,
+  hsvRegex : /^hsv\(\s*(\d{1,3})\s*,\s*(\d{1,3}\.?\d?)%\s*,\s*(\d{1,3}\.?\d?)%\s*(?:,\s*([10]?\.?\d*)\s*)?\)/,
   keywordRegex : /(\D+)/,
 
   toRgb : function(color) {
     var values = this.rgbValues(color);
-    return "rgb(" + values['red'] + ", " + values['green'] + ", " + values['blue'] + ")";    
+    var alpha = this.alphaValue(color);
+    str = "rgb(" + values['red'] + ", " + values['green'] + ", " + values['blue'];
+    /* if(alpha != 1)
+       str += ", " + alpha; */
+    return str + ")";    
   },
 
   toHex : function(color) {
@@ -268,7 +272,7 @@ var colorCommon = {
   },
   
   rgbValues : function(color) {
-    /* returns {255, 255, 255} */
+    /* returns {red : 255, green: 255, blue: 255} */
     var rgbExp = color.match(this.rgbRegex);
     if(rgbExp) {
       return {
@@ -394,6 +398,45 @@ var colorCommon = {
         return this.rgbValues(this.cssKeywords[keywordExp[1]]);
       return;
     }
+    else throw "InvalidColorValue " + color;
+  },
+
+  alphaValue : function(color) {
+    if(this.hexRegex.test(color))
+      return 1;
+    if(this.abbRegex.test(color))
+      return 1;
+
+    var rgbExp = color.match(this.rgbRegex);
+    if(rgbExp) {
+      if(rgbExp.length > 4)
+        return parseFloat(rgbExp[4])
+      else
+        return 0;
+    }
+    var perExp = color.match(this.perRegex);
+    if(perExp) {
+      if(perExp.length > 4)
+        return parseFloat(perExp[4])
+      else
+        return 0;
+    } 
+    var hslExp = color.match(this.hslRegex);
+    if(hslExp) {
+      if(hslExp.length > 4)
+        return parseFloat(hslExp[4])
+      else
+        return 0;
+    }
+    var hsvExp = color.match(this.hsvRegex);
+    if(hsvExp) {
+      if(hsvExp.length > 4)
+        return parseFloat(hsvExp[4])
+      else
+        return 0;
+    }
+    if(this.keywordRegex.test(color))
+      return 1;
     else throw "InvalidColorValue " + color;
   },
 

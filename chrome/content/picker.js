@@ -65,8 +65,6 @@ var picker = {
     var rwin = document.getElementById("rainbow-picker-window");
     rwin.setAttribute("rainbow-platform", platform);
 
-
-
     setTimeout(picker.switchDark, 200); // wait for theme to apply, doesn't at onload
   },
 
@@ -244,6 +242,7 @@ var picker = {
     var rgbVals = colorCommon.rgbValues(color);
     var hslVals = colorCommon.hslValues(color, wholeNumbers);
     var hsvVals = colorCommon.hsvValues(color, wholeNumbers);
+    var alpha = colorCommon.alphaValue(color);
     
     if(picker.displayElem.id == "display-text")
       picker.displayElem.style.color = hexVal;
@@ -258,6 +257,7 @@ var picker = {
     document.getElementById("h").value = hslVals['hue'];
     document.getElementById("s").value = hslVals['sat'];
     document.getElementById("l").value = hslVals['light'];
+    document.getElementById("a").value = alpha;
 
     if(changeString)
       picker.changeString(color, wholeNumbers);
@@ -339,7 +339,10 @@ var picker = {
         break;
     }
 
-    picker.visitColor(color, true, fromInput);
+    if(fromInput)
+      picker.visitColor(color, true, fromInput);
+    else
+      picker.selectColor(color, true, fromInput);
     picker.inspectColor(color);
   },
 
