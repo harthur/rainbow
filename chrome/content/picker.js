@@ -59,15 +59,13 @@ var picker = {
 
     picker.selectColor(color, true);
     picker.changeMode(mode);
-    
-    // picker.comparisonDisplay();
  
     /* for platform-specific styles */
     var platform = rainbowc.getPlatform();
     var rwin = document.getElementById("rainbow-picker-window");
     rwin.setAttribute("rainbow-platform", platform);
 
-    picker.selectRadio(mode);
+
 
     setTimeout(picker.switchDark, 200); // wait for theme to apply, doesn't at onload
   },
@@ -204,6 +202,7 @@ var picker = {
       default:
         break;      
     }
+    picker.selectRadio(mode);
     picker.inspectColor(picker.color);
   },
 
@@ -391,6 +390,12 @@ var picker = {
 
   selectField : function(field) {
     document.getElementById(field).inputField.select();
+    if(field == 'hv')
+      picker.changeMode('hue');
+    else if(field == 'sv')
+      picker.changeMode('sat');
+    else if(field == 'v')
+      picker.changeMode('val');
   },
 
   gradientClick : function (event) {

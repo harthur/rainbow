@@ -83,8 +83,24 @@
   border: 1px solid #DDD;
 }
 
-.selected {
+vbox[selected=true] {
   outline: 1px dotted #222;
+}
+
+.value-box {
+  padding: 0px;
+  padding-top: 1px;
+  padding-left: 1px;
+  padding-right: 1px;
+  margin-bottom: 3px;
+}
+
+.selection-box {
+  cursor: pointer;
+}
+
+.selection-box label {
+  cursor: pointer;
 }
 
 #display-text {
@@ -112,9 +128,7 @@
 
 #values-box label {
   -moz-user-focus: normal;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 3px;
+  margin-bottom: 0px;
 }
 
 #values-box textbox {

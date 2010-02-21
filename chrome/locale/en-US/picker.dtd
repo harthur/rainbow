@@ -22,7 +22,10 @@
 <!ENTITY picker.context.format.hsl "Hsl">
 <!ENTITY picker.context.format.hsl.accesskey "l">
 
-
-<!ENTITY picker.hue.label "Hue">
-<!ENTITY picker.val.label "Val">
-<!ENTITY picker.sat.label "Sat">
+<!ENTITY picker.hue "hue">
+<!ENTITY picker.val "value">
+<!ENTITY picker.sat  "saturation">
+<!ENTITY picker.light "lightness">
+<!ENTITY picker.red "red">
+<!ENTITY picker.green "green">
+<!ENTITY picker.blue "blue">
