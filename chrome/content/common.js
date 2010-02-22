@@ -143,6 +143,33 @@ var rainbowCommon = {
     return "#FFFFFF";
   },
 
+  getFont : function(element) {
+    var win = element.ownerDocument.defaultView;
+    var style = win.getComputedStyle(element, null);
+    var fonts = style.fontFamily.split(',');
+
+    for(var i = 0; i < fonts.length; i++)
+	  if(rainbowc.testFont(fonts[i]))
+        return fonts[i];
+    return "default";
+  },
+
+  testFont : function(font) {
+    var canvas = document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
+    var context = canvas.getContext("2d");
+    var testString = "abcdefghijklmnopqrstuvwxyz";
+
+    context.font = "400px serif";
+    var defaultWidth = context.measureText(testString).width;
+
+    context.font = "400px " + font;
+    var fontWidth = context.measureText(testString).width;
+
+    if(defaultWidth == fontWidth)
+      return false;
+    return true;
+  },
+
   textColorAffects : function(element) {
     if((element.nodeType == Node.TEXT_NODE &&
        !/^\s*$/.test(element.nodeValue))

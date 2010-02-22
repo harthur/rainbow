@@ -144,6 +144,10 @@ window[rainbow-platform="Windows"] #values-box textbox {
   width: 36px;
 }
 
+window[rainbow-platform="Mac"] #values-box textbox {
+  width: 36px;
+}
+
 radio .radio-label-box  {
   display: none;
 }

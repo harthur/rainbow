@@ -531,16 +531,17 @@ var picker = {
       event.stopPropagation();
   },
 
-  elementDisplay : function(color1, color2) {
+  elementDisplay : function(bg, txt, font) {
     var d1 = document.getElementById("display-color-1");
     var d2 = document.getElementById("display-color-2");
     var text = document.getElementById("display-text");
 
     d2.hidden = true;
-    d1.style.backgroundColor = color1;      
-    if(color2) {
-      text.style.color = color2;
+    d1.style.backgroundColor = bg;      
+    if(txt) {
+      text.style.color = txt;
       text.hidden = false;
+      text.value = font;
     }
     else
       text.style.color = "";
@@ -751,8 +752,9 @@ var selector = {
     if(rainbowc.textColorAffects(element)) {
       var win = element.ownerDocument.defaultView;
       var txt = win.getComputedStyle(element, null).color;
+      var font = rainbowc.getFont(element);
     }
-    picker.elementDisplay(bg, txt);
+    picker.elementDisplay(bg, txt, font);
 
     picker.url = element.ownerDocument.location.href;
     selector.selectedElement = element;
