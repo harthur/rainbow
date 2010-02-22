@@ -746,7 +746,7 @@ var selector = {
     selector.pause();
 
     var element = event.target;
-    var bg = rainbowc.getBgColor(element);
+    var bg = rainbowc.getBgColor(event);
 
     if(rainbowc.textColorAffects(element)) {
       var win = element.ownerDocument.defaultView;

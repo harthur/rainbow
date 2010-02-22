@@ -140,6 +140,10 @@ window[rainbow-platform="Linux"] #values-box textbox {
   width: 44px;
 }
 
+window[rainbow-platform="Windows"] #values-box textbox {
+  width: 36px;
+}
+
 radio .radio-label-box  {
   display: none;
 }

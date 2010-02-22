@@ -74,6 +74,10 @@
               oncommand="library.openSelection()" class="menuitem-iconic" 
               image="moz-icon://stock/gtk-open?size=menu"
               accesskey="&context.open.accesskey;"/>
+   <menuitem label="&context.url.label;" id="context-url" 
+              oncommand="library.openUrl()" class="menuitem-iconic" 
+              image="moz-icon://stock/gtk-open?size=menu"
+              accesskey="&context.url.accesskey;"/>
     <menu label="&context.tags.label;" id="context-tags" class="menu-iconic"
           accesskey="&context.tags.accesskey;">
       <menupopup id="context-tagslist" onpopupshowing="library.tagsMenuShowing()"/>
@@ -110,7 +114,7 @@
         <menuitem id="context-copy-rgb-list" label="&context.copy.rgb;"
                   oncommand="library.copySelection('rgb')" class="menuitem-iconic"
                   image="moz-icon://stock/gtk-copy?size=menu"/>
-        <menuitem id="context-copy-per-list" label="&context.copy.per;"
+        <menuitem id="context-copy-per-list" label="&context.copy.rgb;%"
                   oncommand="library.copySelection('per')" class="menuitem-iconic"
                   image="moz-icon://stock/gtk-copy?size=menu"/>
         <menuitem id="context-copy-hsl-list" label="&context.copy.hsl;"

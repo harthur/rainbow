@@ -18,9 +18,9 @@
 <!ENTITY columns.light.label "Light">
 <!ENTITY columns.light.tooltip "Lightness (hsl)">
 <!ENTITY columns.white.label "White Cont">
-<!ENTITY columns.white.tooltip "WCAG Contrast ratio with white, 4.5 is minimum for text">
+<!ENTITY columns.white.tooltip "WCAG contrast with white, 7 is recommended minimum for text">
 <!ENTITY columns.black.label "Black Cont">
-<!ENTITY columns.black.tooltip "WCAG Contrast ratio with black, 4.5 is minimum for text">
+<!ENTITY columns.black.tooltip "WCAG contrast with black, 7 is recommended minimum for text">
 <!ENTITY columns.lum.label "Luminosity">
 <!ENTITY columns.lum.tooltip "WCAG Luminosity - 1 is white, 0 is black">
 <!ENTITY columns.tags.label "Tags">
@@ -33,8 +33,10 @@
 <!ENTITY context.edit.accesskey "E">
 <!ENTITY context.delete.label "Delete">
 <!ENTITY context.delete.accesskey "D">
-<!ENTITY context.open.label "Open in Colorpicker">
-<!ENTITY context.open.accesskey "O">
+<!ENTITY context.open.label "View in Colorpicker">
+<!ENTITY context.open.accesskey "V">
+<!ENTITY context.url.label "Open Url">
+<!ENTITY context.url.accesskey "O">
 <!ENTITY context.tags.label "Tag with">
 <!ENTITY context.tags.accesskey "T">
 <!ENTITY context.copy.label "Copy">
@@ -46,5 +48,4 @@
 <!ENTITY context.copy.hex "#Hex">
 <!ENTITY context.copy.plain "Hex">
 <!ENTITY context.copy.rgb "Rgb">
-<!ENTITY context.copy.per "Rgb Percent">
 <!ENTITY context.copy.hsl "Hsl">

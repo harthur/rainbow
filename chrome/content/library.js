@@ -115,6 +115,7 @@ var library = {
     var copy = document.getElementById("context-copy");
     var edit = document.getElementById("context-edit");
     var open = document.getElementById("context-open");
+    var urlopen = document.getElementById("context-url");
     var tags = document.getElementById("context-tags");
     var merge = document.getElementById("context-merge");
     var cont = document.getElementById("context-contrast");
@@ -126,6 +127,15 @@ var library = {
       tags.hidden = true;
     else
       tags.hidden = false;
+
+    urlopen.hidden = true;
+    var colors = library.getSelection();
+    for(var i = 0; i < colors.length; i++) {
+      if(rainbowc.storage.urlOf(colors[i])) {
+        urlopen.hidden = false;
+        break;
+      }
+    }
 
     if(treeView.selection.count > 1) {
       edit.hidden = true;
@@ -179,6 +189,10 @@ var library = {
       dist94.hidden = true;
       list.hidden = true;
       merge.hidden = true;
+
+      url = rainbowc.storage.urlOf(color);
+      if(url)
+        urlopen.hidden = false;
       
       var copyRgb = document.getElementById("context-copy-rgb");
       copyRgb.label = colorCommon.toRgb(color);
@@ -251,6 +265,20 @@ var library = {
     var picker = window.openDialog("chrome://rainbows/content/picker.xul",
                       "", "chrome,all,dialog=yes",
                       colorCommon.toHex(color));
+  },
+
+  openUrl : function() {
+    var colors = library.getSelection();
+    var urls = {};
+    for(var i = 0; i < colors.length; i++) {
+      let url = rainbowc.storage.urlOf(colors[i]);
+      if(url)
+        urls[url] = url;
+    }
+    
+    var browser = rainbowc.wm.getMostRecentWindow("navigator:browser");
+    for(var url in urls)
+      browser.gBrowser.selectedTab = browser.gBrowser.addTab(url);
   },
 
   contrastSelection : function() {

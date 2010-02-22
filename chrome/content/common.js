@@ -70,7 +70,7 @@ var rainbowCommon = {
     var formatted = [];
     for(var i = 0; i < colors.length; i++)
       formatted.push(colorCommon.formatColor(colors[i], format, whole));
-    rainbowCommon.copy(formatted.join(","));
+    rainbowCommon.copy(formatted.join(", "));
   },
 
   getFirefoxVersion : function() {
@@ -128,21 +128,25 @@ var rainbowCommon = {
     return "rgb(" + data[0] + "," + data[1] + "," + data[2] + ")";
   },
 
-  getBgColor : function(element) {
+  getBgColor : function(event) {
+    var element = event.target;
+    var win = element.ownerDocument.defaultView;
     do {
-      var win = element.ownerDocument.defaultView;
       var style = win.getComputedStyle(element, null);
       if(style.backgroundColor != "transparent")
         return style.backgroundColor;
+      if(style.position != "static") // can't get bg color of positioned elements 
+        return rainbowc.getPixel(event);
       element = element.parentNode;
     } while(element.parentNode != element
            && element.nodeType == Node.ELEMENT_NODE)
-   return "#FFFFFF";
+    return "#FFFFFF";
   },
 
   textColorAffects : function(element) {
-    if(element.nodeType == Node.TEXT_NODE || 
-       element.nodeName == "A")
+    if((element.nodeType == Node.TEXT_NODE &&
+       !/^\s*$/.test(element.nodeValue))
+       || element.nodeName == "A")
       return true;
 
     var affects = false;
