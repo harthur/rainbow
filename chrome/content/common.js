@@ -133,30 +133,40 @@ var rainbowCommon = {
     var win = element.ownerDocument.defaultView;
     do {
       var style = win.getComputedStyle(element, null);
-      if(style.backgroundColor != "transparent")
-        return style.backgroundColor;
-      if(style.position != "static") // can't get bg color of positioned elements 
-        return rainbowc.getPixel(event);
+      if(style.backgroundColor != "transparent") { alert(element.nodeName + " " + element.id);
+        return style.backgroundColor; }
+      if(style.position != "static") {// can't get bg color of positioned elements
+       alert(element.nodeName + " " + style.position); return rainbowc.getBg(event);}
       element = element.parentNode;
     } while(element.parentNode != element
            && element.nodeType == Node.ELEMENT_NODE)
     return "#FFFFFF";
   },
 
-  getFont : function(element) {
-    var win = element.ownerDocument.defaultView;
-    var style = win.getComputedStyle(element, null);
-    var fonts = style.fontFamily.split(',');
+  getBg : function(event) {
+     // should really use canvas to compute background color
+     return rainbowc.getPixel(event);
+  },
 
+  getFont : function(element) {
+    if(rainbowc.getFirefoxVersion() < 3.5)
+      return "Text";
+
+    var doc = element.ownerDocument;
+    var win = doc.defaultView;
+
+    // create canvas in owner doc to get @font-face fonts
+    var canvas = doc.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
+    var context = canvas.getContext("2d");
+
+    var fonts = win.getComputedStyle(element, null).fontFamily.split(',');
     for(var i = 0; i < fonts.length; i++)
-	  if(rainbowc.testFont(fonts[i]))
+	  if(rainbowc.testFont(fonts[i], context))
         return fonts[i];
     return "default";
   },
 
-  testFont : function(font) {
-    var canvas = document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
-    var context = canvas.getContext("2d");
+  testFont : function(font, context) {
     var testString = "abcdefghijklmnopqrstuvwxyz";
 
     context.font = "400px serif";
@@ -173,8 +183,10 @@ var rainbowCommon = {
   textColorAffects : function(element) {
     if((element.nodeType == Node.TEXT_NODE &&
        !/^\s*$/.test(element.nodeValue))
-       || element.nodeName == "A")
+       || element.nodeName == "A") {
+      //alert(element.nodeValue);
       return true;
+    }
 
     var affects = false;
     var win = element.ownerDocument.defaultView;
@@ -190,8 +202,9 @@ var rainbowCommon = {
       // if the color is different than the parent then it defined it's own color
       // child.style.color only checks that the inline style was changed
       if(rainbowc.textColorAffects(child)
-         && (!childColor || !parentColor || (childColor == parentColor)))
+         && (!childColor || !parentColor || (childColor == parentColor))) {
         affects = true;
+       }
     }
     return affects;
   },
