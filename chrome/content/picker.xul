@@ -51,6 +51,13 @@
  <script type="application/x-javascript" src="chrome://rainbows/content/common.js"/>
  <script type="application/x-javascript" src="chrome://rainbows/content/picker.js"/>
 
+ <script type="application/x-javascript" src="chrome://rainbows/content/typeset/object.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/typeset/array.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/typeset/linked-list.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/typeset/formatter.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/typeset/linebreak.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/typeset/draw.js"/>
+
  <stringbundleset id="stringbundleset">
    <stringbundle id="rainbow-strings" src="chrome://rainbows/locale/rainbow.properties"/>
  </stringbundleset>
@@ -164,7 +171,7 @@
 
   <vbox id="selection-display" align="center">
     <vbox id="values-display">
-    <hbox flex="1">
+    <hbox>
       <vbox id="display-color-1"
             ondragstart="picker.dragStart(event);" flex="1"
             onclick="picker.selectDisplay(this)"
@@ -172,8 +179,9 @@
             ondrop="picker.cloneDisplay(event)"
             ondragover="return false;"
             class="highlight" pack="end" align="center">
-        <label id="display-text" value="Text"
-            onclick="picker.selectDisplay(this, event)" hidden="true"/>
+        <vbox id="display-text"
+            onclick="picker.selectDisplay(this, event)" hidden="true">
+        </vbox>
       </vbox>
       <vbox id="display-color-2"
             ondragstart="picker.dragStart(event);" flex="1"

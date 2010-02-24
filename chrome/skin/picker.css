@@ -4,7 +4,7 @@
 }
 
 #color-navigator {
-  margin-bottom: 26px;
+  margin-bottom: 14px;
 }
 
 #values-display {
@@ -72,7 +72,7 @@ window[rainbow-platform="Windows"] #selector-button{
 #display-color-1, #display-color-2 {
   margin-left: 2px;
   margin-right: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   height: 90px;
 }
 

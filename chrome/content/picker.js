@@ -136,7 +136,7 @@ var picker = {
     picker.url = "";
   },
 
-  back : function() { // perhaps we could just invoke ctl-z on textbox
+  back : function() {
     var back = document.getElementById("back-button");
     var forward = document.getElementById("forward-button");
 
@@ -541,7 +541,14 @@ var picker = {
     if(txt) {
       text.style.color = txt;
       text.hidden = false;
-      text.value = font;
+      while(text.firstChild)
+        text.removeChild(text.firstChild);
+      var lines = getLines(font, 60, 10);
+      for(var i = 0; i < lines.length; i++) {
+        var label = document.createElement("label");
+        label.setAttribute("value", lines[i]);
+        text.appendChild(label);
+      }
     }
     else
       text.style.color = "";

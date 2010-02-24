@@ -133,10 +133,10 @@ var rainbowCommon = {
     var win = element.ownerDocument.defaultView;
     do {
       var style = win.getComputedStyle(element, null);
-      if(style.backgroundColor != "transparent") { alert(element.nodeName + " " + element.id);
+      if(style.backgroundColor != "transparent") {
         return style.backgroundColor; }
-      if(style.position != "static") {// can't get bg color of positioned elements
-       alert(element.nodeName + " " + style.position); return rainbowc.getBg(event);}
+      if(style.position != "static")// can't get bg color of positioned elements
+        return rainbowc.getBg(event);
       element = element.parentNode;
     } while(element.parentNode != element
            && element.nodeType == Node.ELEMENT_NODE)
@@ -181,12 +181,9 @@ var rainbowCommon = {
   },
 
   textColorAffects : function(element) {
-    if((element.nodeType == Node.TEXT_NODE &&
+    if(element.nodeType == Node.TEXT_NODE &&
        !/^\s*$/.test(element.nodeValue))
-       || element.nodeName == "A") {
-      //alert(element.nodeValue);
       return true;
-    }
 
     var affects = false;
     var win = element.ownerDocument.defaultView;
@@ -207,6 +204,31 @@ var rainbowCommon = {
        }
     }
     return affects;
+  },
+
+  /* do our own line-wrapping b/c of xul flex issues */
+  getLines : function(string, maxChars) {
+    var words = string.split(/\s+/);
+    var rows = [];
+    var row = "";
+    for(var i = 0; i < words.length; i++) {
+      var word = words[i];
+      if(word.length > maxChars) {
+        if(row)
+          rows.push(row);
+        rows.push(word);
+        row = "";
+      }
+      else if(row.length + word.length > maxChars) {
+        rows.push(row);
+        row = word;
+      }
+      else {
+        row += " " + word;
+      }
+    }
+    rows.push(row);
+    return rows;
   },
 
   preventEvents : function (win, events) {
