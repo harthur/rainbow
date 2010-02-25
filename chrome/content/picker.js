@@ -543,7 +543,7 @@ var picker = {
       text.hidden = false;
       while(text.firstChild)
         text.removeChild(text.firstChild);
-      var lines = getLines(font, 60, 10);
+      var lines = getLines(font, 100);
       for(var i = 0; i < lines.length; i++) {
         var label = document.createElement("label");
         label.setAttribute("value", lines[i]);
