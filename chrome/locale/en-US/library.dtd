@@ -33,11 +33,11 @@
 <!ENTITY context.edit.accesskey "E">
 <!ENTITY context.delete.label "Delete">
 <!ENTITY context.delete.accesskey "D">
-<!ENTITY context.open.label "View in Colorpicker">
+<!ENTITY context.open.label "View in Color Picker">
 <!ENTITY context.open.accesskey "V">
 <!ENTITY context.url.label "Open Url">
 <!ENTITY context.url.accesskey "O">
-<!ENTITY context.tags.label "Tag with">
+<!ENTITY context.tags.label "Tag With">
 <!ENTITY context.tags.accesskey "T">
 <!ENTITY context.copy.label "Copy">
 <!ENTITY context.copy.accesskey "C">

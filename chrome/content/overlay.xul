@@ -80,8 +80,8 @@
   </menupopup>
 
   <popup id="contentAreaContextMenu">
-    <menuseparator id="rainbow-context-separator" hidden="true" persist="hidden"/>
-    <menu id="rainbow-context-menu" label="&rainbow.label;" class="menu-iconic"          image="chrome://rainbows/skin/favicon.png" hidden="true" persist="hidden">
+    <menuseparator id="rainbow-context-separator" hidden="true"/>
+    <menu id="rainbow-context-menu" label="&rainbow.label;" class="menu-iconic"          image="chrome://rainbows/skin/favicon.png" hidden="true">
       <menupopup>
         <menuitem id="rainbow-context-inspector"
                   label="&rainbow.menu.inspector.label;"
@@ -110,8 +110,7 @@
    <statusbarpanel id="rainbow-statusbar"
                    class="statusbarpanel-iconic"
                    onclick="colorPlay.statusBarClicked(event);"
-                   hidden="true"
-                   persist="hidden"/>
+                   hidden="true"/>
   </statusbar>
 
 

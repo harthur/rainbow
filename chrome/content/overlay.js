@@ -601,6 +601,13 @@ var colorPlay = {
     var analyzer = document.getElementById("rainbow-analyzer-panel");
     analyzer.setAttribute("rainbow-platform", platform);
 
+    var icon = document.getElementById("rainbow-statusbar");
+    icon.setAttribute("hidden", !rainbowc.prefs.getBoolPref("statusbar.show"));
+
+    var show = !rainbowc.prefs.getBoolPref("context");
+    document.getElementById("rainbow-context-menu").setAttribute("hidden", show);
+    document.getElementById("rainbow-context-separator").setAttribute("hidden", show);
+
     colorPlay.addDragListeners();
   },
 
