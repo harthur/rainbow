@@ -33,6 +33,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  * 
  * ***** END LICENSE BLOCK ***** */
+
 function allPartitions(array) {
   if(!array.length)
     return [];
@@ -71,6 +72,9 @@ function wordWidth(word) {
 
 /* intelligent word-wrapping, for short text only */
 function getLines(text, ideal) {
+  if(rainbowc.getFirefoxVersion() < 3.5)
+    return [text]; // no measureText support
+
   var words = text.split(/\s+/);
   var partitions = allPartitions(words);
   var minCost = 100000;
