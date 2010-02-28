@@ -51,6 +51,7 @@
  <script type="application/x-javascript" src="chrome://rainbows/content/common.js"/>
  <script type="application/x-javascript" src="chrome://rainbows/content/picker.js"/>
  <script type="application/x-javascript" src="chrome://rainbows/content/wrap.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/ctypes.js"/>
 
  <stringbundleset id="stringbundleset">
    <stringbundle id="rainbow-strings" src="chrome://rainbows/locale/rainbow.properties"/>

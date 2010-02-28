@@ -161,7 +161,7 @@ var rainbowCommon = {
 
     var fonts = win.getComputedStyle(element, null).fontFamily.split(',');
     for(var i = 0; i < fonts.length; i++)
-	  if(rainbowc.testFont(fonts[i], context))
+      if(rainbowc.testFont(fonts[i], context))
         return fonts[i];
     return "default";
   },
@@ -204,31 +204,6 @@ var rainbowCommon = {
        }
     }
     return affects;
-  },
-
-  /* do our own line-wrapping b/c of xul flex issues */
-  getLines : function(string, maxChars) {
-    var words = string.split(/\s+/);
-    var rows = [];
-    var row = "";
-    for(var i = 0; i < words.length; i++) {
-      var word = words[i];
-      if(word.length > maxChars) {
-        if(row)
-          rows.push(row);
-        rows.push(word);
-        row = "";
-      }
-      else if(row.length + word.length > maxChars) {
-        rows.push(row);
-        row = word;
-      }
-      else {
-        row += " " + word;
-      }
-    }
-    rows.push(row);
-    return rows;
   },
 
   preventEvents : function (win, events) {
