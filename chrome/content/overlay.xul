@@ -41,7 +41,8 @@
   <script type="application/x-javascript" src="chrome://rainbows/content/colorCommon.js"/>
   <script type="application/x-javascript" src="chrome://rainbows/content/common.js"/>
   <script type="application/x-javascript" src="chrome://rainbows/content/overlay.js"/>
-  <script type="application/x-javascript" src="chrome://rainbows/content/analyzer.js"/>
+  <script type="application/x-javascript" src="chrome://rainbows/content/inspector.js"/>
+  <script type="application/x-javascript" src="chrome://rainbows/content/analyzer/analyzer.js"/>
   
   <stringbundleset id="stringbundleset">
     <stringbundle id="rainbow-strings" src="chrome://rainbows/locale/rainbow.properties"/>
