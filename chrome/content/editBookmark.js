@@ -64,7 +64,7 @@ var editColor = {
 
     var textHex = document.getElementById("text-value");
     if(editing)
-      textHex.value = rainbowCommon.getFormattedColors(colors).join(",");
+      textHex.value = rainbowc.getFormattedColors(colors).join(",");
     var textUrl = document.getElementById("text-url");
     textUrl.value = url;
     

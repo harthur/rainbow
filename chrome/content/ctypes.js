@@ -1,16 +1,15 @@
-/* import js-ctypes */
 Components.utils.import("resource://gre/modules/ctypes.jsm");
 
-function addNums(a, b) {
+function add(a, b) {
   var file = getFile("chrome://rainbows/content/test.so");
   var libc = ctypes.open(file); 
 
-  var add = libc.declare("add", /* function name */
+  var addc = libc.declare("add", /* function name */
                            ctypes.default_abi, /* call ABI */
                            ctypes.int32_t, /* return type */
                            ctypes.int32_t, /* argument type */
                            ctypes.int32_t);
-  return add(a, b);
+  return addc(a, b);
 }
 
 

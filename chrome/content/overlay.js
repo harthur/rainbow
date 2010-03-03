@@ -48,7 +48,7 @@ var rainbowInspector = {
   startInspector : function() {
     rainbowInspector.inspectorOn = true;
    
-    var prefs = rainbowCommon.prefs;
+    var prefs = rainbowc.prefs;
     var location = prefs.getCharPref("inspector.location");
     rainbowInspector.openSwatch(location);  
 
@@ -57,7 +57,7 @@ var rainbowInspector = {
 
     rainbowInspector.showDisplay();
     
-    if(rainbowCommon.getFirefoxVersion() >= 3.6)
+    if(rainbowc.getFirefoxVersion() >= 3.6)
       rainbowInspector.canMove = true; // bug 474149
     
     rainbowInspector.startInspecting();
@@ -141,7 +141,7 @@ var rainbowInspector = {
       var win = enumerator.getNext();
       win.addEventListener("mousemove", rainbowInspector.inspectPixel, true);
       win.addEventListener("click", rainbowInspector.fixPixel, true);
-      rainbowCommon.preventEvents(win, rainbowInspector.mouseEvents);
+      rainbowc.preventEvents(win, rainbowInspector.mouseEvents);
     }
   },
 
@@ -152,7 +152,7 @@ var rainbowInspector = {
       try {
         win.removeEventListener("mousemove", rainbowInspector.inspectPixel, true);
         win.removeEventListener("click", rainbowInspector.fixPixel, true);
-        rainbowCommon.allowEvents(win, rainbowInspector.mouseEvents);
+        rainbowc.allowEvents(win, rainbowInspector.mouseEvents);
       } catch(e) { }
     }
   },
@@ -277,7 +277,7 @@ var rainbowInspector = {
     
     var blackText = colorCommon.blackText(color);
     var colorval = document.getElementById("rainbow-swatch-colorval");
-    colorval.value = rainbowCommon.getFormattedColor(color, rainbowInspector.format);
+    colorval.value = rainbowc.getFormattedColor(color, rainbowInspector.format);
     colorval.style.color = blackText ? 'black' : 'white';
 
     var stats = document.getElementById("rainbow-swatch-stats");
@@ -378,7 +378,7 @@ var rainbowInspector = {
     rainbowInspector.format = format;
     var color = document.getElementById("rainbow-swatch").style.backgroundColor;
     var colorval = document.getElementById("rainbow-swatch-colorval");
-    colorval.value = rainbowCommon.getFormattedColor(color, rainbowInspector.format);
+    colorval.value = rainbowc.getFormattedColor(color, rainbowInspector.format);
   },
 
 /*
@@ -575,7 +575,7 @@ var rainbowInspector = {
   },
 
   copyColor : function() {
-    rainbowCommon.copyColor(document.getElementById("rainbow-swatch-colorval").value);
+    rainbowc.copyColor(document.getElementById("rainbow-swatch-colorval").value);
   },
 
   bookmarkColor : function() {
@@ -591,7 +591,7 @@ var colorPlay = {
   onLoad : function() {
     rainbowc.prefs.addObserver("", colorPlay, false);
 
-    if(rainbowCommon.getFirefoxVersion() < 3.5)
+    if(rainbowc.getFirefoxVersion() < 3.5)
       document.getElementById("rainbow-menu-analyzer").hidden = true;
 
     /* set attributes for applying platform-specific styling */

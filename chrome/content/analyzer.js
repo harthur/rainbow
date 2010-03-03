@@ -171,7 +171,7 @@ var rainbowAnalyzer = {
         label.style.color = "white";
       }
 
-      var formatted = rainbowCommon.getFormattedColor(color);
+      var formatted = rainbowc.getFormattedColor(color);
       label.setAttribute("value", formatted);
       label.hidden = true;
       propLabel.setAttribute("value", proportion + "%");
@@ -362,11 +362,13 @@ var rainbowAnalyzer = {
       return;
 
     var panel = document.getElementById("rainbow-analyzer-panel");
-    if(rainbowCommon.getFirefoxVersion() >= 3.6)
-      panel.moveTo(event.screenX - panel.offsetX, event.screenY - panel.offsetY);
+    var x = event.screenX - panel.offsetX;
+    var y = event.screenY - panel.offsetY;
+    if(rainbowc.getFirefoxVersion() >= 3.6)
+      panel.moveTo(x, y);
     else {
       panel.hidePopup();
-      panel.openPopupAtScreen(event.screenX - panel.offsetX, event.screenY - panel.offsetY, false);
+      panel.openPopupAtScreen(x, y, false);
     }
     event.stopPropagation();
     event.preventDefault();

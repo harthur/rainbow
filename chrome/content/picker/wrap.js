@@ -49,17 +49,17 @@ function allPartitions(array) {
   return partitions;
 }
 
-function lineCost(row, ideal) {
+function lineCost(row, maxPixels) {
   var total = row.reduce(function(width, word) { return width + wordWidth(word) }, 0);
-  if(total > ideal)
+  if(total > maxPixels)
     return 10000; // can't go over
-  return ideal - total;  
+  return maxPixels - total;  
 }
 
-function partitionCost(partition, ideal) {
+function partitionCost(partition, maxPixels) {
   var cost = 0;
   for(var i = 0; i < partition.length; i++) 
-    cost = Math.max(lineCost(partition[i], ideal), cost);
+    cost = Math.max(lineCost(partition[i], maxPixels), cost);
   return cost;
 }
 
@@ -71,7 +71,7 @@ function wordWidth(word) {
 }
 
 /* intelligent word-wrapping, for short text only */
-function getLines(text, ideal) {
+function getLines(text, maxPixels) {
   if(rainbowc.getFirefoxVersion() < 3.5)
     return [text]; // no measureText support
 
@@ -79,7 +79,7 @@ function getLines(text, ideal) {
   var partitions = allPartitions(words);
   var minCost = 100000;
   for(var i = 0; i < partitions.length; i++) {
-    var cost = partitionCost(partitions[i], ideal);
+    var cost = partitionCost(partitions[i], maxPixels);
     if(cost < minCost) {
       minCost = cost;
       var bestPartition = partitions[i];

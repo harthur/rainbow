@@ -36,7 +36,7 @@
 
 importScripts('clustering2.js', 'rgb.js');
 
-onmessage = function(event){
+onmessage = function(event) {
   var pixels = event.data.pixels;
   var width = event.data.width;
   var height = event.data.height;

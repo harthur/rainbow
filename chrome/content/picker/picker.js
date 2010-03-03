@@ -51,18 +51,18 @@ var picker = {
     picker.format = rainbowc.prefs.getCharPref("format");
 
     if(rainbowc.prefs.getBoolPref("picker.hsl"))
-      document.getElementById("hsl-row").hidden = false;
+      rainbowc.get("hsl-row").hidden = false;
     else
-      document.getElementById("hsl-row").hidden = true;
+      rainbowc.get("hsl-row").hidden = true;
 
-    picker.displayElem = document.getElementById("display-color-1");
+    picker.displayElem = rainbowc.get("display-color-1");
 
     picker.selectColor(color, true);
     picker.changeMode(mode);
  
     /* for platform-specific styles */
     var platform = rainbowc.getPlatform();
-    var rwin = document.getElementById("rainbow-picker-window");
+    var rwin = rainbowc.get("rainbow-picker-window");
     rwin.setAttribute("rainbow-platform", platform);
 
     setTimeout(picker.switchDark, 200); // wait for theme to apply, doesn't at onload
@@ -71,38 +71,38 @@ var picker = {
   selectRadio : function(mode) {
      switch(mode) {
       case 'sat':
-        document.getElementById("radio-h").setAttribute("selected", false);
-        document.getElementById("radio-s").setAttribute("selected", true);
-        document.getElementById("radio-v").setAttribute("selected", false);
+        rainbowc.get("radio-h").setAttribute("selected", false);
+        rainbowc.get("radio-s").setAttribute("selected", true);
+        rainbowc.get("radio-v").setAttribute("selected", false);
         break;
       case 'val':
-        document.getElementById("radio-h").setAttribute("selected", false);
-        document.getElementById("radio-s").setAttribute("selected", false);
-        document.getElementById("radio-v").setAttribute("selected", true);
+        rainbowc.get("radio-h").setAttribute("selected", false);
+        rainbowc.get("radio-s").setAttribute("selected", false);
+        rainbowc.get("radio-v").setAttribute("selected", true);
         break;
       case 'hue': default:
-        document.getElementById("radio-h").setAttribute("selected", true);
-        document.getElementById("radio-s").setAttribute("selected", false);
-        document.getElementById("radio-v").setAttribute("selected", false);
+        rainbowc.get("radio-h").setAttribute("selected", true);
+        rainbowc.get("radio-s").setAttribute("selected", false);
+        rainbowc.get("radio-v").setAttribute("selected", false);
         break;
     }
   },
 
   switchDark : function() {
-    var container = document.getElementById("container");
+    var container = rainbowc.get("container");
     var bg = rainbowc.getWindowPixel(window, container.boxObject.x, container.boxObject.y);
    
     if(colorCommon.luminosity(bg) > .5)
       return; // it's light enough
 
     /* for the dark themes */
-    var barsel = document.getElementById("bar-sel");
+    var barsel = rainbowc.get("bar-sel");
     barsel.src = "chrome://rainbows/skin/arrows-white.png";
 
-    var selector = document.getElementById("selector-icon");
+    var selector = rainbowc.get("selector-icon");
     selector.style.border = " white dashed 1px";
 
-    var inspector = document.getElementById("inspector-button");
+    var inspector = rainbowc.get("inspector-button");
     inspector.style.listStyleImage = "url('chrome://rainbows/skin/plus-white.png')";
 
     picker.highlightClass = "highlight-light";
@@ -120,8 +120,8 @@ var picker = {
   },
 
   visitColor : function(color, changeString, fromInput) {
-    var back = document.getElementById("back-button");
-    var forward = document.getElementById("forward-button");
+    var back = rainbowc.get("back-button");
+    var forward = rainbowc.get("forward-button");
 
     var stack = picker.backStack;
     if(!stack.length || stack[stack.length - 1] != picker.color) { 
@@ -137,8 +137,8 @@ var picker = {
   },
 
   back : function() {
-    var back = document.getElementById("back-button");
-    var forward = document.getElementById("forward-button");
+    var back = rainbowc.get("back-button");
+    var forward = rainbowc.get("forward-button");
 
     if(back.disabled) // rapid clicking race condition
      return;
@@ -154,8 +154,8 @@ var picker = {
   },
 
   forward: function() {
-    var back = document.getElementById("back-button");
-    var forward = document.getElementById("forward-button");
+    var back = rainbowc.get("back-button");
+    var forward = rainbowc.get("forward-button");
 
     if(forward.disabled)
       return;
@@ -171,10 +171,10 @@ var picker = {
   },
 
   changeMode : function(mode) {
-    var topGradient = document.getElementById("top-gradient");
-    var bottomGradient = document.getElementById("bottom-gradient");
-    var bar = document.getElementById("bar");
-    var topBar = document.getElementById("top-bar");
+    var topGradient = rainbowc.get("top-gradient");
+    var bottomGradient = rainbowc.get("bottom-gradient");
+    var bar = rainbowc.get("bar");
+    var topBar = rainbowc.get("top-bar");
 
     switch(mode) {
       case 'hue':
@@ -248,21 +248,21 @@ var picker = {
       picker.displayElem.style.color = hexVal;
     else
       picker.displayElem.style.backgroundColor = hexVal;
-    document.getElementById("r").value = rgbVals['red'];
-    document.getElementById("g").value = rgbVals['green'];
-    document.getElementById("b").value = rgbVals['blue'];
-    document.getElementById("hv").value = hsvVals['hue'];
-    document.getElementById("sv").value = hsvVals['satv'];
-    document.getElementById("v").value = hsvVals['val'];
-    document.getElementById("h").value = hslVals['hue'];
-    document.getElementById("s").value = hslVals['sat'];
-    document.getElementById("l").value = hslVals['light'];
-    document.getElementById("a").value = alpha;
+    rainbowc.get("r").value = rgbVals['red'];
+    rainbowc.get("g").value = rgbVals['green'];
+    rainbowc.get("b").value = rgbVals['blue'];
+    rainbowc.get("hv").value = hsvVals['hue'];
+    rainbowc.get("sv").value = hsvVals['satv'];
+    rainbowc.get("v").value = hsvVals['val'];
+    rainbowc.get("h").value = hslVals['hue'];
+    rainbowc.get("s").value = hslVals['sat'];
+    rainbowc.get("l").value = hslVals['light'];
+    rainbowc.get("a").value = alpha;
 
     if(changeString)
       picker.changeString(color, wholeNumbers);
 
-    var button = document.getElementById("bookmark-button");
+    var button = rainbowc.get("bookmark-button");
     if(rainbowc.storage.isSaved(colorCommon.toHex(color))) {
       button.label = rainbowc.getString("rainbow.view");
       button.removeAttribute("oncommand"); // firefox bug 
@@ -279,31 +279,31 @@ var picker = {
       if(picker.displayElem.id == "display-text")
         selector.selectedElement.style.color = hexVal + "";
       else
-        selector.selectedElement.style.backgroundColor = hexVal + "";
+        selector.selectedElement.style.background = hexVal + "";
    
       picker.displayContrast();
     }
   },
 
   displayContrast : function() {
-    var c1 = document.getElementById("display-text").style.color;
+    var c1 = rainbowc.get("display-text").style.color;
     if(!colorCommon.isValid(c1)) {
-      document.getElementById("contrast").value = "   ";
+      rainbowc.get("contrast").value = "   ";
       return;
     }
-    var c2 = document.getElementById("display-color-1").style.backgroundColor;
+    var c2 = rainbowc.get("display-color-1").style.backgroundColor;
     var contrast = Math.round(colorCommon.contrast(c1, c2));
     cstring = rainbowc.getString("rainbow.picker.contrast", contrast);
-    document.getElementById("contrast").value = cstring;
+    rainbowc.get("contrast").value = cstring;
   },
 
   changeString : function(color) {
-    var string = document.getElementById("display-string");
-    string.value = rainbowCommon.getFormattedColor(color);
+    var string = rainbowc.get("display-string");
+    string.value = rainbowc.getFormattedColor(color);
   },
 
   stringChanged : function() {
-    var color = document.getElementById("display-string").value;
+    var color = rainbowc.get("display-string").value;
     picker.visitColor(color, false, true);
     picker.inspectColor(color);
   },
@@ -318,21 +318,21 @@ var picker = {
     var color;
     switch(field) {
       case 'r': case 'g': case 'b':
-        var r = document.getElementById("r").value;
-        var g = document.getElementById("g").value;
-        var b = document.getElementById("b").value;
+        var r = rainbowc.get("r").value;
+        var g = rainbowc.get("g").value;
+        var b = rainbowc.get("b").value;
         color = colorCommon.rgbString(r, g, b);
         break;
       case 'h': case 's': case 'l':
-        var h = document.getElementById("h").value;
-        var s = document.getElementById("s").value;
-        var l = document.getElementById("l").value;
+        var h = rainbowc.get("h").value;
+        var s = rainbowc.get("s").value;
+        var l = rainbowc.get("l").value;
         color = colorCommon.hslString(h, s, l);
         break;
       case 'hv': case 'sv': case 'v':
-        var h = document.getElementById("hv").value;
-        var s = document.getElementById("sv").value;
-        var v = document.getElementById("v").value;
+        var h = rainbowc.get("hv").value;
+        var s = rainbowc.get("sv").value;
+        var v = rainbowc.get("v").value;
         color = colorCommon.hsvString(h, s, v);
         break;
       default:
@@ -392,7 +392,7 @@ var picker = {
   },
 
   selectField : function(field) {
-    document.getElementById(field).inputField.select();
+    rainbowc.get(field).inputField.select();
     if(field == 'hv')
       picker.changeMode('hue');
     else if(field == 'sv')
@@ -402,16 +402,17 @@ var picker = {
   },
 
   gradientClick : function (event) {
-    var xOffset = picker.getXOffset(event.clientX);
-    var yOffset = picker.getYOffset(event.clientY);
+    var parent = rainbowc.get("gradient-display");
+    var x = event.clientX - parent.boxObject.x;
+    var y = event.clientY - parent.boxObject.y; // get the visual feedback of click right
 
-    picker.inspectGrad(xOffset, yOffset);
+    picker.inspectGrad(x, y);
     var newColor = picker.getInspectedColor();
     picker.visitColor(newColor, true);
   },
 
   inspectGrad : function(x, y) {
-    var pixsel = document.getElementById("pix-sel");
+    var pixsel = rainbowc.get("pix-sel");
     pixsel.style.left = x - pixsel.width / 2 + 1 + "px";
     pixsel.style.top = y - pixsel.width / 2 + 1 + "px";
 
@@ -423,13 +424,13 @@ var picker = {
     switch(picker.mode) {
       case 'sat':
         var barColor = colorCommon.hsvString(vals['hue'], '100', vals['val']);
-        document.getElementById("bar").style.backgroundColor = 
+        rainbowc.get("bar").style.backgroundColor = 
                 colorCommon.toHex(colorCommon.hsvString(vals['hue'], '100', '100'));
-        document.getElementById("top-bar").style.opacity = 1 - vals['val'] / 100;
+        rainbowc.get("top-bar").style.opacity = 1 - vals['val'] / 100;
         break;
       case 'val':
         var barColor = colorCommon.hsvString(vals['hue'], vals['satv'], '100');
-        document.getElementById("bar").style.backgroundColor = colorCommon.toHex(barColor);
+        rainbowc.get("bar").style.backgroundColor = colorCommon.toHex(barColor);
         break;
       default:
         break;
@@ -437,31 +438,32 @@ var picker = {
   },
 
   barClick : function (event) {
-    var zOffset = picker.getZOffset(event.clientY);
-    picker.inspectBar(zOffset);
+    var parent = rainbowc.get("bar-display");
+    var y = event.clientY - parent.boxObject.y;
+    picker.inspectBar(y);
     var newColor = picker.getInspectedColor();
     picker.visitColor(newColor, true);
   },
   
   inspectBar : function(z) {
-    var barsel = document.getElementById("bar-sel");
+    var barsel = rainbowc.get("bar-sel");
     barsel.style.top = z - barsel.height / 2 + 1 + "px";
      
     switch(picker.mode) {
       case 'hue':
         var hue = Math.round((255 - z) / 255 * 360);
-        document.getElementById("bottom-gradient").style.backgroundColor 
+        rainbowc.get("bottom-gradient").style.backgroundColor 
                   = colorCommon.hslString(hue,100,50);
         picker.hue = hue;
         break;
       case 'sat':
         var sat = Math.round((255 - z)/255 * 1000)/10;
-        document.getElementById("top-gradient").style.opacity = 1 - sat/100;
+        rainbowc.get("top-gradient").style.opacity = 1 - sat/100;
         picker.sat = sat;
         break;
       case 'val':
         var val = Math.round((255 - z)/255 * 1000)/10;
-        document.getElementById("top-gradient").style.opacity = 1 - val/100;
+        rainbowc.get("top-gradient").style.opacity = 1 - val/100;
         picker.val = val;
         break;
       default:
@@ -471,17 +473,17 @@ var picker = {
 
   getInspectedColor : function() {    
     var h, s, v;
-    var pixsel = document.getElementById("pix-sel");
-    var pixParent = document.getElementById("gradient-display");
+    var pixsel = rainbowc.get("pix-sel");
+    var pixParent = rainbowc.get("gradient-display");
     var x = pixsel.getBoundingClientRect().left - pixParent.boxObject.x 
-            + pixsel.width / 2 + 1;
+            + pixsel.width / 2;
     var y = pixsel.getBoundingClientRect().top - pixParent.boxObject.y 
-            + pixsel.height / 2 + 1;
+            + pixsel.height / 2;
 
-    var barsel = document.getElementById("bar-sel");
-    var barParent = document.getElementById("bar-display");
+    var barsel = rainbowc.get("bar-sel");
+    var barParent = rainbowc.get("bar-display");
     var z = barsel.getBoundingClientRect().top - barParent.boxObject.y
-            + barsel.height / 2 + 1;
+            + barsel.height / 2;
 
     switch(picker.mode) {
       case 'hue':
@@ -516,7 +518,7 @@ var picker = {
     
     if(picker.displayElem.id == "display-text") {
       var color = display.style.color;
-      var bg = document.getElementById("display-color-1").style.backgroundColor;
+      var bg = rainbowc.get("display-color-1").style.backgroundColor;
       if(!colorCommon.blackText(bg))
         display.className = "highlight-light";
       else
@@ -532,9 +534,9 @@ var picker = {
   },
 
   elementDisplay : function(bg, txt, font) {
-    var d1 = document.getElementById("display-color-1");
-    var d2 = document.getElementById("display-color-2");
-    var text = document.getElementById("display-text");
+    var d1 = rainbowc.get("display-color-1");
+    var d2 = rainbowc.get("display-color-2");
+    var text = rainbowc.get("display-text");
 
     d2.hidden = true;
     d1.style.backgroundColor = bg;      
@@ -560,8 +562,8 @@ var picker = {
   },
 
   comparisonDisplay : function(color1, color2) {
-    var d1 = document.getElementById("display-color-1");
-    var d2 = document.getElementById("display-color-2");
+    var d1 = rainbowc.get("display-color-1");
+    var d2 = rainbowc.get("display-color-2");
 
     if(color1 && color2) {
       d1.style.backgroundColor = color1;
@@ -579,9 +581,9 @@ var picker = {
   },
 
   singleDisplay : function() {
-    var d1 = document.getElementById("display-color-1");
-    var d2 = document.getElementById("display-color-2");
-    var text = document.getElementById("display-text");
+    var d1 = rainbowc.get("display-color-1");
+    var d2 = rainbowc.get("display-color-2");
+    var text = rainbowc.get("display-text");
 
     if(picker.displayElem.id == "display-text")
       d1.style.backgroundColor = picker.displayElem.style.color;
@@ -596,7 +598,7 @@ var picker = {
     d1.ondblclick = picker.comparisonDisplay;
     d2.ondblclick = picker.comparisonDisplay;
 
-    document.getElementById("contrast").value = "";
+    rainbowc.get("contrast").value = "";
   },
 
   cloneDisplay : function(event) {
@@ -612,11 +614,11 @@ var picker = {
   },
   
   copy : function() {
-    rainbowCommon.copyColor(picker.color);
+    rainbowc.copyColor(picker.color);
   },
 
   bookmark : function() {
-    var button = document.getElementById("bookmark-button");
+    var button = rainbowc.get("bookmark-button");
     window.openDialog("chrome://rainbows/content/editBookmark.xul",
                   "Window:EditColor", "all,dialog=yes,resizable=no, centerscreen",
                   {colors: [picker.color], button: button, url: picker.url} );
@@ -628,21 +630,6 @@ var picker = {
                   'rainbow:library', 'chrome,all,dialog=yes', picker.color); 
     library.focus();
   },
- 
-  getXOffset : function(clientX) {
-    var parent = document.getElementById("gradient-display");
-    return clientX - parent.boxObject.x - 1;
-  },
-  
-  getYOffset : function(clientY) {
-    var parent = document.getElementById("gradient-display");
-    return clientY - parent.boxObject.y - 2; // get the visual feedback of click right
-  },
-
-  getZOffset : function(clientY) {
-    var parent = document.getElementById("bar-display");
-    return clientY - parent.boxObject.y - 2;
-  },
 
   dragStart : function(event) {
     event.dataTransfer.setData("text/rainbow-color", event.target.style.backgroundColor);
@@ -651,148 +638,4 @@ var picker = {
 };
 
 
-var inspector = {
-  mouseEvents : ["click", "mousedown", "mouseup", "mouseout", "mouseover"],
-
-  start: function() {
-    var enumerator = rainbowc.wm.getEnumerator("");
-    while(enumerator.hasMoreElements()) {
-      var win = enumerator.getNext();
-      win.addEventListener('click', inspector.inspectElement, true);
-      rainbowCommon.preventEvents(win, inspector.mouseEvents);
-    }
-
-    rainbowc.registerSheet("chrome://rainbows/skin/crosshairs.css");
-
-    // for Mac
-    rainbowc.wm.getMostRecentWindow("navigator:browser").focus();
-  },
-
-  stop : function() {
-    var enumerator = rainbowc.wm.getEnumerator("");
-    while(enumerator.hasMoreElements()) {
-      var win = enumerator.getNext();
-      win.removeEventListener('click', inspector.inspectElement, true);
-      rainbowCommon.allowEvents(win, inspector.mouseEvents);
-    }
-    rainbowc.unregisterSheet("chrome://rainbows/skin/crosshairs.css");
-  }, 
-
-  inspectElement : function(event) {
-    inspector.stop();
-   
-    var color = rainbowCommon.getPixel(event);
-    picker.visitColor(color, true, false);
-    picker.inspectColor(color);
-    picker.url = event.target.ownerDocument.location.href;
-
-    window.focus(); // for Windows
-    event.preventDefault();
-    event.stopPropagation();
-  }
-};
-
-
-var selector = {
-  start: function() {
-    var enumerator =  rainbowc.wm.getEnumerator("navigator:browser");
-    while(enumerator.hasMoreElements())
-      selector.addSelectionListeners(enumerator.getNext());
-
-    // for drop indicator styling of webpage content
-    rainbowc.registerSheet("chrome://rainbows/skin/selector.css", null, null);
-    var button = document.getElementById("selector-button");
-    button.oncommand = selector.stop;
-
-    if(rainbowc.getPlatform() == "Mac")
-      rainbowc.wm.getMostRecentWindow("navigator:browser").focus();
-  },
-
-  stop : function() {
-    selector.pause();
-    var sel = selector.selectedElement;
-    if(sel && sel.removeAttribute)
-      sel.removeAttribute("rainbowselector");
-    else if (sel && sel.parentNode.removeAttribute)
-      sel.parentNode.removeAttribute("rainbowselector");
-    selector.selectedElement = "";
-    var button = document.getElementById("selector-button");
-    button.oncommand = selector.start;
-    
-    picker.singleDisplay();
-  }, 
-
-  pause : function() {
-    var enumerator =  rainbowc.wm.getEnumerator("navigator:browser");
-    while(enumerator.hasMoreElements()) {
-      var win = enumerator.getNext();
-      selector.removeSelectionListeners(win);
-    }
-  },
-
-  mouseoverElement : function(event) {
-    if(event.target.setAttribute)
-      event.target.setAttribute("rainbowselector", "true");
-    else
-      event.target.parentNode.setAttribute("rainbowselector", "true");
-
-    event.preventDefault();
-    event.stopPropagation();
-  },
-
-  mouseoutElement : function(event) {
-    if(event.target.removeAttribute)
-      event.target.removeAttribute("rainbowselector");
-    else
-      event.target.parentNode.removeAttribute("rainbowselector");
-
-    event.preventDefault();
-    event.stopPropagation();
-  },
-
-  selectElement : function(event) {
-    selector.pause();
-
-    var element = event.target;
-    var bg = rainbowc.getBgColor(event);
-
-    if(rainbowc.textColorAffects(element)) {
-      var win = element.ownerDocument.defaultView;
-      var txt = win.getComputedStyle(element, null).color;
-      var font = rainbowc.getFont(element);
-    }
-    picker.elementDisplay(bg, txt, font);
-
-    picker.url = element.ownerDocument.location.href;
-    selector.selectedElement = element;
-
-    window.focus(); // for Windows
-    event.preventDefault();
-    event.stopPropagation();
-  },
-
-  addSelectionListeners : function(win) {
-    // skip main browser window, go straight to content windows
-    for (var i = 0; i < win.frames.length; i++) {
-      var frame = win.frames[i];
-      frame.addEventListener('mouseover', selector.mouseoverElement, true);
-      frame.addEventListener('mouseout', selector.mouseoutElement, true);
-      frame.addEventListener('click', selector.selectElement, true);
-      this.addSelectionListeners(frame);
-    }
-  },
-
-  removeSelectionListeners : function(win) {
-    for (var i = 0; i < win.frames.length; i++) {
-      var frame = win.frames[i];
-      try {
-        frame.removeEventListener('mouseover', selector.mouseoverElement, true);
-        frame.removeEventListener('mouseout', selector.mouseoutElement, true);
-        frame.removeEventListener('click', selector.selectElement, true);
-     } 
-     catch(e) {}
-     this.removeSelectionListeners(frame);
-    }
-  }
-};
 

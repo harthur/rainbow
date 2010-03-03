@@ -235,7 +235,7 @@ var library = {
   },
     
   copySelection : function(format) {
-    rainbowCommon.copyColors(library.getSelection(), format);
+    rainbowc.copyColors(library.getSelection(), format);
   },
 
   deleteSelection : function() {

@@ -124,19 +124,19 @@
             accesskey="&rainbow.context.copy.accesskey;"> 
       <menupopup>
         <menuitem id="rainbow-context-plain" 
-                  oncommand="rainbowCommon.copy(this.label)" class="menuitem-iconic"
+                  oncommand="rainbowc.copy(this.label)" class="menuitem-iconic"
                   image="moz-icon://stock/gtk-copy?size=menu"/>
         <menuitem id="rainbow-context-hex" 
-                  oncommand="rainbowCommon.copy(this.label)" class="menuitem-iconic"
+                  oncommand="rainbowc.copy(this.label)" class="menuitem-iconic"
                   image="moz-icon://stock/gtk-copy?size=menu"/>
         <menuitem id="rainbow-context-rgb"
-                  oncommand="rainbowCommon.copy(this.label)" class="menuitem-iconic"
+                  oncommand="rainbowc.copy(this.label)" class="menuitem-iconic"
                   image="moz-icon://stock/gtk-copy?size=menu"/>
         <menuitem id="rainbow-context-per"
-                  oncommand="rainbowCommon.copy(this.label)" class="menuitem-iconic"
+                  oncommand="rainbowc.copy(this.label)" class="menuitem-iconic"
                   image="moz-icon://stock/gtk-copy?size=menu"/>
         <menuitem id="rainbow-context-hsl"
-                  oncommand="rainbowCommon.copy(this.label)" class="menuitem-iconic"
+                  oncommand="rainbowc.copy(this.label)" class="menuitem-iconic"
                   image="moz-icon://stock/gtk-copy?size=menu"/>
        </menupopup>
       </menu>

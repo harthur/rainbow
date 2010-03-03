@@ -1,4 +1,4 @@
-var rainbowCommon = {
+var rainbowc = {
 
   prefs :  Components.classes['@mozilla.org/preferences-service;1']
            .getService(Components.interfaces.nsIPrefService)
@@ -16,6 +16,10 @@ var rainbowCommon = {
   wm : Components.classes["@mozilla.org/appshell/window-mediator;1"]
        .getService(Components.interfaces.nsIWindowMediator),
 
+  get : function(id) {
+    return document.getElementById(id);
+  },
+
   toDate : function(date) {
     var dateStr = (new Date(date)).toDateString();
     var dateRegex = /^(.*?) (.*)$/;
@@ -32,8 +36,8 @@ var rainbowCommon = {
   },
 
   getFormattedColors : function(colors) {
-    var format = rainbowCommon.prefs.getCharPref("format");
-    var whole = rainbowCommon.prefs.getBoolPref("wholeNumbers");
+    var format = rainbowc.prefs.getCharPref("format");
+    var whole = rainbowc.prefs.getBoolPref("wholeNumbers");
 
     var formatted = [];
     for(var i = 0; i < colors.length; i++)
@@ -43,34 +47,34 @@ var rainbowCommon = {
 
   getFormattedColor : function(color, format) {
     if(!format)     
-      format = rainbowCommon.prefs.getCharPref("format");
-    var whole = rainbowCommon.prefs.getBoolPref("wholeNumbers");
+      format = rainbowc.prefs.getCharPref("format");
+    var whole = rainbowc.prefs.getBoolPref("wholeNumbers");
     return colorCommon.formatColor(color, format, whole);
   },
 
   copyColor : function(color, format) {
     if(!format) {
-      if(rainbowCommon.prefs.getBoolPref("copyDifferent"))
-        format = rainbowCommon.prefs.getCharPref("copyFormat");
+      if(rainbowc.prefs.getBoolPref("copyDifferent"))
+        format = rainbowc.prefs.getCharPref("copyFormat");
       else
-        format = rainbowCommon.prefs.getCharPref("format");
+        format = rainbowc.prefs.getCharPref("format");
     }
     var whole = false;
-    rainbowCommon.copy(colorCommon.formatColor(color, format, whole));
+    rainbowc.copy(colorCommon.formatColor(color, format, whole));
   },
 
   copyColors : function(colors, format) { 
     if(!format) {
-      if(rainbowCommon.prefs.getBoolPref("copyDifferent"))
-        format = rainbowCommon.prefs.getCharPref("copyFormat");
+      if(rainbowc.prefs.getBoolPref("copyDifferent"))
+        format = rainbowc.prefs.getCharPref("copyFormat");
       else
-        format = rainbowCommon.prefs.getCharPref("format");
+        format = rainbowc.prefs.getCharPref("format");
     }
     var whole = false;
     var formatted = [];
     for(var i = 0; i < colors.length; i++)
       formatted.push(colorCommon.formatColor(colors[i], format, whole));
-    rainbowCommon.copy(formatted.join(", "));
+    rainbowc.copy(formatted.join(", "));
   },
 
   getFirefoxVersion : function() {
@@ -163,7 +167,7 @@ var rainbowCommon = {
     for(var i = 0; i < fonts.length; i++)
       if(rainbowc.testFont(fonts[i], context))
         return fonts[i];
-    return "default";
+    return "serif";
   },
 
   testFont : function(font, context) {
@@ -208,12 +212,12 @@ var rainbowCommon = {
 
   preventEvents : function (win, events) {
     for(var i = 0; i < events.length; i++)
-      win.addEventListener(events[i], rainbowCommon.prevent, true); 
+      win.addEventListener(events[i], rainbowc.prevent, true); 
   },
 
   allowEvents : function(win, events) {
     for(var i = 0; i < events.length; i++)
-      win.removeEventListener(events[i], rainbowCommon.prevent, true); 
+      win.removeEventListener(events[i], rainbowc.prevent, true); 
   },
 
   prevent : function (event) {
@@ -259,6 +263,5 @@ var rainbowCommon = {
   }
 }
 
-rainbowc = rainbowCommon;
 rainbowc.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2); // for addObserver
 

@@ -49,9 +49,10 @@
 
  <script type="application/x-javascript" src="chrome://rainbows/content/colorCommon.js"/>
  <script type="application/x-javascript" src="chrome://rainbows/content/common.js"/>
- <script type="application/x-javascript" src="chrome://rainbows/content/picker.js"/>
- <script type="application/x-javascript" src="chrome://rainbows/content/wrap.js"/>
- <script type="application/x-javascript" src="chrome://rainbows/content/ctypes.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/picker/picker.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/picker/selector.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/picker/inspector.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/picker/wrap.js"/>
 
  <stringbundleset id="stringbundleset">
    <stringbundle id="rainbow-strings" src="chrome://rainbows/locale/rainbow.properties"/>
