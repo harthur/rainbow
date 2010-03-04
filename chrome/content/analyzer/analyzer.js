@@ -74,7 +74,7 @@ var rainbowAnalyzer = {
       rainbowAnalyzer.worker.terminate(); // cancel any previous worker
 
     // put time-consuming clustering on a worker thread
-    rainbowAnalyzer.worker = new Worker("chrome://rainbows/content/analyzer-worker.js");
+    rainbowAnalyzer.worker = new Worker("chrome://rainbows/content/analyzer/analyzer-worker.js");
     
     rainbowAnalyzer.worker.onmessage = function(event){
       rainbowAnalyzer.colors = event.data.colors;

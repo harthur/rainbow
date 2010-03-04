@@ -100,7 +100,7 @@ var selector = {
     if(rainbowc.textColorAffects(element)) {
       var win = element.ownerDocument.defaultView;
       var txt = win.getComputedStyle(element, null).color;
-      var font = rainbowc.getFont(element);
+      var font = getFont(element);
     }
     picker.elementDisplay(bg, txt, font);
 

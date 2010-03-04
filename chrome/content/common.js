@@ -152,38 +152,6 @@ var rainbowc = {
      return rainbowc.getPixel(event);
   },
 
-  getFont : function(element) {
-    if(rainbowc.getFirefoxVersion() < 3.5)
-      return "Text";
-
-    var doc = element.ownerDocument;
-    var win = doc.defaultView;
-
-    // create canvas in owner doc to get @font-face fonts
-    var canvas = doc.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
-    var context = canvas.getContext("2d");
-
-    var fonts = win.getComputedStyle(element, null).fontFamily.split(',');
-    for(var i = 0; i < fonts.length; i++)
-      if(rainbowc.testFont(fonts[i], context))
-        return fonts[i];
-    return "serif";
-  },
-
-  testFont : function(font, context) {
-    var testString = "abcdefghijklmnopqrstuvwxyz";
-
-    context.font = "400px serif";
-    var defaultWidth = context.measureText(testString).width;
-
-    context.font = "400px " + font;
-    var fontWidth = context.measureText(testString).width;
-
-    if(defaultWidth == fontWidth)
-      return false;
-    return true;
-  },
-
   textColorAffects : function(element) {
     if(element.nodeType == Node.TEXT_NODE &&
        !/^\s*$/.test(element.nodeValue))
