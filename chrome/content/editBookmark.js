@@ -89,12 +89,7 @@ var editColor = {
       rainbowc.storage.addColor(colorCommon.toHex(colors[i]), tags, url);
     
     if(button) {
-      var command = "var wm = Components.classes['@mozilla.org/appshell/window-mediator;1']" + 
-            ".getService(Components.interfaces.nsIWindowMediator);" + 
-            "var library = wm.getMostRecentWindow('rainbow:library')" + 
-              "|| window.openDialog('chrome://rainbows/content/library.xul'," +
-             "'rainbow:library', 'chrome,all,dialog=yes','" + colors[0] + "' );" + 
-              " library.focus();"; // do observer service instead of this
+      var command = "rainbowc.openLibrary('" + colors[0] + "')";
       if(button.nodeName == 'label') {
         button.value = document.getElementById("rainbow-strings").getString("rainbow.view");
         button.removeAttribute("onclick"); // bug 

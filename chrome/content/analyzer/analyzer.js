@@ -37,38 +37,28 @@ var rainbowAnalyzer = {
   analyzePage : function(merge) {
     rainbowAnalyzer.clearPanel();
 
-    var panel = document.getElementById("rainbow-analyzer-panel");
-    var content = document.getElementById("content");
-    panel.url = content.contentDocument.location.href;
+    var panel = rainbowc.get("rainbow-analyzer-panel");
+    panel.url = rainbowc.get("content").contentDocument.location.href;
 
-    var progress = document.getElementById("rainbow-analyzer-progress");
-    progress.hidden = false;
-    var progressUrl = document.getElementById("rainbow-analyzer-progress-url");
-    progressUrl.value = rainbowc.getString("rainbow.analyzer.progress", panel.url);
-    var progressMsg = document.getElementById("rainbow-analyzer-progress-msg");
-    progressMsg.value = rainbowc.getString("rainbow.analyzer.extracting");
+    rainbowc.get("rainbow-analyzer-progress").hidden = false;
+    var urlString = rainbowc.getString("rainbow.analyzer.progress", panel.url);
+    rainbowc.get("rainbow-analyzer-progress-url").value = urlString;
+    var progressMsg = rainbowc.getString("rainbow.analyzer.extracting");
+    rainbowc.get("rainbow-analyzer-progress-msg").value = progressMsg;
 
-    var close = document.getElementById("rainbow-analyzer-close");
-    close.tooltipText = rainbowc.getString("rainbow.cancel");
+    rainbowc.get("rainbow-analyzer-close").tooltipText = rainbowc.getString("rainbow.cancel");
+    rainbowc.get("rainbow-analyzer-footer").hidden = true;
 
-    var footer = document.getElementById("rainbow-analyzer-footer");
-    footer.hidden = true;
-
-    var statusbar = document.getElementById("status-bar");
-    panel.openPopup(statusbar, "before_start", 0, 0);
+    panel.openPopup(rainbowc.get("status-bar"), "before_start", 0, 0);
     setTimeout("rainbowAnalyzer.getPixels()", 200); // otherwise panel won't show immediately
   },
 
   getPixels : function() {
     var limit = rainbowc.prefs.getIntPref("analyzer.limit");
-    var progress = document.getElementById("rainbow-analyzer-progress");
-    
-    var close = document.getElementById("rainbow-analyzer-close");
-    var footer = document.getElementById("rainbow-analyzer-footer");
-    var win = document.getElementById("content").contentWindow;
+    var win = rainbowc.get("content").contentWindow;
     var pixels = rainbowAnalyzer.getPixelArray(win);
-    var msg = document.getElementById("rainbow-analyzer-progress-msg");
-    msg.value = rainbowc.getString("rainbow.analyzer.analyzing");
+    var msg = rainbowc.getString("rainbow.analyzer.analyzing");
+    rainbowc.get("rainbow-analyzer-progress-msg").value = msg;
 
     if(rainbowAnalyzer.worker)
       rainbowAnalyzer.worker.terminate(); // cancel any previous worker
@@ -79,20 +69,21 @@ var rainbowAnalyzer = {
     rainbowAnalyzer.worker.onmessage = function(event){
       rainbowAnalyzer.colors = event.data.colors;
       rainbowAnalyzer.resetExpander();
-      progress.hidden = true;
-      close.tooltipText = rainbowc.getString("rainbow.close");
+      rainbowc.get("rainbow-analyzer-progress").hidden = true;
+      rainbowc.get("rainbow-analyzer-close").tooltipText = rainbowc.getString("rainbow.close");
       rainbowAnalyzer.numShowing = Math.min(limit, rainbowAnalyzer.colors.length);
       rainbowAnalyzer.showColors(rainbowAnalyzer.colors.slice(0, limit));
-      footer.hidden = false;
+      rainbowc.get("rainbow-analyzer-footer").hidden = false;
       
       // TAKE OUT
-      // alert("pixels: " + event.data.pixelTime + " clustering : " + event.data.clusterTime); 
+       alert("pixels: " + event.data.pixelTime + " clustering : " + event.data.clusterTime + " colors: " + rainbowAnalyzer.colors.length
+              + " aliased: "  + event.data.aliased); 
       //rainbowAnalyzer.worker.terminate(); // crashy crashy
     };
 
-    rainbowAnalyzer.worker.onerror = function(error) {
-      var progressMsg = document.getElementById("rainbow-analyzer-progress-msg");
-      progressMsg.value = rainbowc.getString("rainbow.analyzer.error");
+    rainbowAnalyzer.worker.onerror = function() {
+      var error = rainbowc.getString("rainbow.analyzer.error");
+      rainbowc.get("rainbow-analyzer-progress-msg").value = error;
     };
 
     rainbowAnalyzer.worker.postMessage({pixels: pixels, width: win.innerWidth, height: win.innerHeight});
@@ -113,15 +104,14 @@ var rainbowAnalyzer = {
   },
 
   showColors : function(colors) {
-    var format = rainbowc.prefs.getCharPref("format");
-    var bookmark = document.getElementById("rainbow-analyzer-bookmark");
-    bookmark.value = rainbowc.getString("rainbow.bookmark");
-    bookmark.setAttribute("onclick", "rainbowAnalyzer.bookmarkAll();");
+    var bookmarkAll = rainbowc.get("rainbow-analyzer-bookmark");
+    bookmarkAll.value = rainbowc.getString("rainbow.bookmark");
+    bookmarkAll.setAttribute("onclick", "rainbowAnalyzer.bookmarkAll();");
 
-    var container = document.getElementById("rainbow-analyzer-container");
+    var container = rainbowc.get("rainbow-analyzer-container");
     
     // For Mac
-    document.getElementById("rainbow-analyzer-panel").focus();
+    rainbowc.get("rainbow-analyzer-panel").focus();
 
     var row;
     var rowWidth = rainbowAnalyzer.getRowWidth(colors.length);
@@ -150,12 +140,13 @@ var rainbowAnalyzer = {
       else
         var outline = false;
 
+      var format = rainbowc.prefs.getCharPref("format");
       if(format == 'rgb')
         swatch.style.width = "130px";
       if(format == 'per' || format == 'hsl')
         swatch.style.width = "138px";
 
-      swatch.addEventListener("dblclick", function(c) { return function() {colorPlay.openPicker(c);}}(color), true);
+      swatch.addEventListener("dblclick", function(c) { return function() {rainbowc.openPicker(c);}}(color), true);
       
       var label = document.createElement("label");
       label.className = "rainbow-analyzer-color";
@@ -186,7 +177,7 @@ var rainbowAnalyzer = {
       var bookmarkButton = document.createElement("button");
       if(rainbowc.storage.isSaved(colorCommon.toHex(color))) {
         bookmarkButton.setAttribute("label", rainbowc.getString("rainbow.library"));
-        bookmarkButton.setAttribute("oncommand", "colorPlay.openLibrary('" + color + "');");
+        bookmarkButton.setAttribute("oncommand", "rainbowc.openLibrary('" + color + "');");
       }
       else {
         bookmarkButton.setAttribute("label", rainbowc.getString("rainbow.bookmark"));
@@ -215,7 +206,7 @@ var rainbowAnalyzer = {
 
   setLimit : function(limit) {
     rainbowc.prefs.setIntPref("analyzer.limit", limit);
-    var container = document.getElementById("rainbow-analyzer-container");
+    var container = rainbowc.get("rainbow-analyzer-container");
     while(container.firstChild)
      container.removeChild(container.firstChild);
     rainbowAnalyzer.showColors(rainbowAnalyzer.colors.slice(0, limit)); // reshow the saved colors
@@ -229,7 +220,7 @@ var rainbowAnalyzer = {
     rainbowAnalyzer.numShowing = Math.min(limit + rowWidth, rainbowAnalyzer.colors.length);
     rainbowAnalyzer.showColors(rainbowAnalyzer.colors.slice(limit, rainbowAnalyzer.numShowing));
 
-    var expander = document.getElementById("rainbow-analyzer-expand");
+    var expander = rainbowc.get("rainbow-analyzer-expand");
     expander.style.MozTransform = "rotate(180deg)";
     expander.removeAttribute("onclick");
     expander.setAttribute("onclick", "rainbowAnalyzer.subtractRow()");
@@ -239,7 +230,7 @@ var rainbowAnalyzer = {
     var limit = rainbowc.prefs.getIntPref("analyzer.limit");
     rainbowAnalyzer.numShowing = Math.min(limit, rainbowAnalyzer.colors.length);
 
-    var container = document.getElementById("rainbow-analyzer-container");
+    var container = rainbowc.get("rainbow-analyzer-container");
     var hboxes = container.getElementsByTagName("hbox");
     container.removeChild(hboxes[hboxes.length - 1]);  
 
@@ -247,7 +238,7 @@ var rainbowAnalyzer = {
   },
 
   resetExpander : function() {
-    var expander = document.getElementById("rainbow-analyzer-expand");
+    var expander = rainbowc.get("rainbow-analyzer-expand");
     var limit = rainbowc.prefs.getIntPref("analyzer.limit");
 
     if(rainbowAnalyzer.colors.length <= limit)
@@ -290,7 +281,7 @@ var rainbowAnalyzer = {
   
 
     // we have to do this due to mouseout bubbling madness
-    var container = document.getElementById("rainbow-analyzer-container");
+    var container = rainbowc.get("rainbow-analyzer-container");
     var swatches = container.getElementsByClassName("rainbow-swatch");
     for(var i = 0; i < swatches.length; i++) {
       if(swatches[i] != swatch) {
@@ -332,7 +323,7 @@ var rainbowAnalyzer = {
   },
 
   clearPanel : function() {
-    var container = document.getElementById("rainbow-analyzer-container");
+    var container = rainbowc.get("rainbow-analyzer-container");
     while(container.firstChild)
       container.removeChild(container.firstChild);
   },
@@ -340,7 +331,7 @@ var rainbowAnalyzer = {
   closePanel : function() {
     rainbowAnalyzer.clearPanel();
 
-    var panel = document.getElementById("rainbow-analyzer-panel");
+    var panel = rainbowc.get("rainbow-analyzer-panel");
     panel.hidePopup();
   },
 
@@ -348,7 +339,7 @@ var rainbowAnalyzer = {
     if(event.target.id == "swatch-colorval")
      return;
 
-    var panel = document.getElementById("rainbow-analyzer-panel");
+    var panel = rainbowc.get("rainbow-analyzer-panel");
     panel.offsetX = event.screenX - panel.boxObject.screenX; // offset of mouse on swatch
     panel.offsetY = event.screenY - panel.boxObject.screenY;
 
@@ -361,7 +352,7 @@ var rainbowAnalyzer = {
     if(color != 'analyzer')
       return;
 
-    var panel = document.getElementById("rainbow-analyzer-panel");
+    var panel = rainbowc.get("rainbow-analyzer-panel");
     var x = event.screenX - panel.offsetX;
     var y = event.screenY - panel.offsetY;
     if(rainbowc.getFirefoxVersion() >= 3.6)
@@ -375,8 +366,8 @@ var rainbowAnalyzer = {
   },
 
   bookmarkColor : function(color) {
-    var panel = document.getElementById("rainbow-analyzer-panel");
-    var button = document.getElementById("rainbow-bookmark-" + color);
+    var panel = rainbowc.get("rainbow-analyzer-panel");
+    var button = rainbowc.get("rainbow-bookmark-" + color);
     window.openDialog("chrome://rainbows/content/editBookmark.xul",
                   "", "all,dialog=yes,resizable=no,centerscreen",
                   {colors: [color], url: panel.url, button: button} );
@@ -384,7 +375,6 @@ var rainbowAnalyzer = {
 
   getDisplayedColors : function() {
     var colors = rainbowAnalyzer.colors.slice(0, rainbowAnalyzer.numShowing);
-   
     var colorStrings = [];
     for(var i = 0; i < colors.length; i++)
       colorStrings.push(colorCommon.fromBits(colors[i].color));
@@ -396,8 +386,8 @@ var rainbowAnalyzer = {
   },
 
   bookmarkAll : function() {
-    var button = document.getElementById("rainbow-analyzer-bookmark");
-    var panel = document.getElementById("rainbow-analyzer-panel");
+    var button = rainbowc.get("rainbow-analyzer-bookmark");
+    var panel = rainbowc.get("rainbow-analyzer-panel");
 
     window.openDialog("chrome://rainbows/content/editBookmark.xul",
                "", "all,dialog=yes,resizable=no,centerscreen",

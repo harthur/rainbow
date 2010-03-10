@@ -228,7 +228,20 @@ var rainbowc = {
   addCellProperty : function(sheet, property, decl) {
     var rule = "treechildren::-moz-tree-cell(" + property + ")" + decl;
     sheet.insertRule(rule, 0);
-  }
+  },
+
+  openLibrary : function(color) {
+    var library = rainbowc.wm.getMostRecentWindow("rainbow:library")
+                  || window.openDialog("chrome://rainbows/content/library/library.xul",
+                       "rainbow:library", "chrome,all,dialog=yes", color);
+    library.focus();
+  },
+
+  openPicker : function(color) {
+     var color = colorCommon.isValid(color) ? colorCommon.toHex(color) : '';
+     window.openDialog("chrome://rainbows/content/picker/picker.xul",
+                      "", "chrome,all,dialog=yes", color);
+  },
 }
 
 rainbowc.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2); // for addObserver

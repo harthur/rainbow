@@ -46,7 +46,7 @@ var picker = {
     var color;
     if(window.arguments)
       color = window.arguments[0];
-    if(!color) // otherwise get their last-viewed color
+    if(!color || !colorCommon.isValid(color)) // otherwise get their last-viewed color
       color = rainbowc.prefs.getCharPref("picker.color");
     picker.format = rainbowc.prefs.getCharPref("format");
 
@@ -262,18 +262,19 @@ var picker = {
     if(changeString)
       picker.changeString(color, wholeNumbers);
 
+    picker.color = hexVal;
+
     var button = rainbowc.get("bookmark-button");
     if(rainbowc.storage.isSaved(colorCommon.toHex(color))) {
       button.label = rainbowc.getString("rainbow.view");
-      button.removeAttribute("oncommand"); // firefox bug 
-      button.setAttribute("oncommand", "picker.openLibrary();");
+      button.removeAttribute("oncommand"); // firefox bug
+      button.setAttribute("oncommand", "rainbowc.openLibrary('" + picker.color + "');");
     }
     else {
       button.label = rainbowc.getString("rainbow.bookmark");
       button.removeAttribute("oncommand");
       button.setAttribute("oncommand", "picker.bookmark();");
     }
-    picker.color = hexVal;
 
     if(selector.selectedElement) {
       if(picker.displayElem.id == "display-text")
@@ -622,13 +623,6 @@ var picker = {
     window.openDialog("chrome://rainbows/content/editBookmark.xul",
                   "Window:EditColor", "all,dialog=yes,resizable=no, centerscreen",
                   {colors: [picker.color], button: button, url: picker.url} );
-  },
-
-  openLibrary : function() {
-    var library = rainbowc.wm.getMostRecentWindow('rainbow:library')
-               || window.openDialog('chrome://rainbows/content/library.xul',
-                  'rainbow:library', 'chrome,all,dialog=yes', picker.color); 
-    library.focus();
   },
 
   dragStart : function(event) {

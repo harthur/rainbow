@@ -51,8 +51,6 @@
   <keyset>
     <key id="rainbow-inspector-key" modifiers="accel, alt" key="I" 
          oncommand="rainbowInspector.toggleInspector();"/>
-    <key id="rainbow-picker-key" modifiers="accel, alt" key="P" 
-         oncommand="colorPlay.openPicker();"/>
   </keyset>
 
   <menupopup id="menu_ToolsPopup">
@@ -67,11 +65,11 @@
         <menuitem id="rainbow-menu-picker"
                   label="&rainbow.menu.picker.label;"
                   accesskey="&rainbow.menu.picker.accesskey;"
-                  oncommand="colorPlay.openPicker();"/>
+                  oncommand="rainbowc.openPicker();"/>
         <menuitem id="rainbow-menu-library"
                   label="&rainbow.menu.library.label;"
                   accesskey="&rainbow.menu.library.accesskey;"
-                  oncommand="colorPlay.openLibrary();"/>
+                  oncommand="rainbowc.openLibrary();"/>
         <menuitem id="rainbow-menu-analyzer"
                   label="&rainbow.menu.analyzer.label;"
                   accesskey="&rainbow.menu.analyzer.accesskey;"
@@ -93,11 +91,11 @@
                   label="&rainbow.menu.picker.label;"
                   accesskey="&rainbow.menu.picker.accesskey;"
                   key="rainbow-picker-key"
-                  oncommand="colorPlay.openPicker();"/>
+                  oncommand="rainbowc.openPicker();"/>
         <menuitem id="rainbow-context-library"
                   label="&rainbow.menu.library.label;"
                   accesskey="&rainbow.menu.library.accesskey;"
-                  oncommand="colorPlay.openLibrary();"/>
+                  oncommand="rainbowc.openLibrary();"/>
         <menuitem id="rainbow-context-analyzer"
                   label="&rainbow.menu.analyzer.label;"
                   accesskey="&rainbow.menu.analyzer.accesskey;"
@@ -211,7 +209,7 @@
            ondragstart="rainbowInspector.dragStart(event);"
            ondragend="rainbowInspector.dragEnd(event);"
            onkeypress="rainbowInspector.moveSwatch(event);"
-           ondblclick="colorPlay.openPicker(this.color);"
+           ondblclick="rainbowc.openPicker(this.color);"
            context="rainbow-swatch-context">
       <vbox id="rainbow-swatch-content">
         <stack id="rainbow-swatch-stack">

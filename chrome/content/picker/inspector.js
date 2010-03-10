@@ -55,7 +55,9 @@ var inspector = {
     var enumerator = rainbowc.wm.getEnumerator("");
     while(enumerator.hasMoreElements()) {
       var win = enumerator.getNext();
-      win.removeEventListener('click', inspector.inspectElement, true);
+      try {
+        win.removeEventListener('click', inspector.inspectElement, true);
+      } catch(e) {}
       rainbowc.allowEvents(win, inspector.mouseEvents);
     }
     rainbowc.unregisterSheet("chrome://rainbows/skin/crosshairs.css");

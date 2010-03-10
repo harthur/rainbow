@@ -87,28 +87,16 @@ var colorPlay = {
     }
   },
 
-  openLibrary : function(color) {
-    var library = rainbowc.wm.getMostRecentWindow("rainbow:library")
-                  || window.openDialog("chrome://rainbows/content/library/library.xul",
-                       "rainbow:library", "chrome,all,dialog=yes", color);
-    library.focus();
-  },
-
-  openPicker : function(color) {
-     window.openDialog("chrome://rainbows/content/picker/picker.xul",
-                      "", "chrome,all,dialog=yes", color);
-  },
-
   statusBarClicked : function() {
     switch(rainbowc.prefs.getCharPref("statusbar.action")) {
       case 'inspector':
         rainbowInspector.toggleInspector();
         break;
       case 'picker':
-        colorPlay.openPicker();
+        rainbowc.openPicker();
         break;
       case 'library':
-        colorPlay.openLibrary();
+        rainbowc.openLibrary();
         break;
      case 'analyzer':
         rainbowAnalyzer.analyzePage();

@@ -45,7 +45,7 @@ onmessage = function(event) {
   var arr = getColors(pixels, width, height);
   var allColors = arr[0];
   var t2 = Date.now();
-  var merged = mergeColors(allColors.slice(0, 540), width * height); // only merge top colors for speed
+  var merged = mergeColors(allColors.slice(0, 460), width * height); // only merge top colors for speed
   var t3 = Date.now();
   postMessage({colors: merged, pixelTime: t2 - t1, clusterTime: t3 - t2, num: allColors.length, aliased: arr[1] / (width * height)});
 };

@@ -262,9 +262,7 @@ var library = {
 
   openSelection : function() {
     var color = library.getSelection()[0];
-    var picker = window.openDialog("chrome://rainbows/content/picker.xul",
-                      "", "chrome,all,dialog=yes",
-                      colorCommon.toHex(color));
+    rainbowc.openPicker(color);
   },
 
   openUrl : function() {
@@ -302,8 +300,7 @@ var library = {
   mergeSelection : function() {
     var colors = library.getSelection();
     var hybrid = colorCommon.merge(colors[0], colors[1]);
-    window.openDialog("chrome://rainbows/content/picker.xul",
-                      "", "chrome,all,dialog=yes", hybrid);
+    rainbowc.openPicker(hybrid);
   },
 
   getSelection : function() {
