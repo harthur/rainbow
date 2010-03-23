@@ -38,7 +38,7 @@ var rainbowInspector = {
 
   mouseEvents : ["mousedown", "mouseup", "mouseout", "mouseover"],
 
-  toggleInspector : function(event) {
+  toggleInspector : function() {
    if(rainbowInspector.inspectorOn)
      rainbowInspector.stopInspector();
    else
@@ -50,7 +50,7 @@ var rainbowInspector = {
    
     var prefs = rainbowc.prefs;
     var location = prefs.getCharPref("inspector.location");
-    rainbowInspector.openSwatch(location);  
+    rainbowc.openPanel(rainbowc.get("rainbow-swatch"), location);  
 
     rainbowInspector.format = prefs.getCharPref("format");
     rainbowInspector.follow = prefs.getBoolPref("inspector.followMouse");
@@ -75,29 +75,6 @@ var rainbowInspector = {
 
     rainbowInspector.stopInspecting();
     rainbowInspector.stopFix();
-  },
-
-  openSwatch : function(dir) {
-    var swatch = document.getElementById("rainbow-swatch");
-    var browser = document.getElementById("content");
-    var content = browser.mPanelContainer.boxObject;
-    swatch.style.backgroundColor = "white";
-
-    switch(dir) {
-      case 'nw':
-       swatch.openPopupAtScreen(content.screenX, content.screenY, false);
-       break;
-      case 'ne':
-       var x = content.screenX + browser.contentWindow.innerWidth - 126;
-       swatch.openPopupAtScreen(x, content.screenY, false);
-       break;
-      case 'sw':
-       swatch.openPopup(document.getElementById("status-bar"), "before_start", 0, 0);
-       break;
-      case 'se':
-       swatch.openPopup(document.getElementById("status-bar"), "before_end", 0, 0);
-       break;
-    }
   },
 
   getSwatchLocation : function() {
@@ -251,7 +228,6 @@ var rainbowInspector = {
     var swatch = document.getElementById("rainbow-swatch");
     if(rainbowInspector.canMove && rainbowInspector.follow)
       swatch.moveTo(event.screenX + 3, event.screenY + 3);
-    swatch.element = event.target.nodeName;
     swatch.clientX = event.clientX - 3; // can keep track in case of keypress moving
     swatch.clientY = event.clientY - 3;
     swatch.pageX = event.clientX + win.scrollX;
@@ -462,17 +438,17 @@ var rainbowInspector = {
   getNodeName : function(win, event) {
     var swatch = document.getElementById("rainbow-swatch");
     var nodeLabel = document.getElementById("rainbow-swatch-nodeName");
-    var nodeName;
+    var element;
     if(event)
-      nodeName = event.originalTarget.nodeName;
+      element = event.originalTarget;
     else {
       var utils = win.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                   .getInterface(Components.interfaces.nsIDOMWindowUtils);
       try {
-        nodeName = utils.elementFromPoint(swatch.x, swatch.y, false, false).nodeName;
+        element = utils.elementFromPoint(swatch.x, swatch.y, false, false);
       } catch(e) { /* we need a windowFromPoint function */ return "";}
     }
-    return nodeName.toLowerCase();
+    return rainbowc.elementString(element);
   },
 
   swatchClick : function(event) {

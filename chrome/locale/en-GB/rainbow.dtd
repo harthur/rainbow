@@ -8,6 +8,7 @@
 <!ENTITY rainbow.menu.library.accesskey "L">
 <!ENTITY rainbow.menu.analyzer.label "Website Analyzer">
 <!ENTITY rainbow.menu.analyzer.accesskey "A">
+<!ENTITY rainbow.menu.prefs.label "Settings">
 
 <!ENTITY rainbow.inspector.copy.label "Copy">
 <!ENTITY rainbow.inspector.bookmark.label "Bookmark">

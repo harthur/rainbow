@@ -178,6 +178,39 @@ var rainbowc = {
     return affects;
   },
 
+  elementString : function(element) {
+    var string = element.nodeName.toLowerCase();
+    if(element.nodeType == Node.ELEMENT_NODE) {
+      if(element.id)
+        string += "#" + element.id
+      else if(element.classList && element.classList.length)
+        string += "." + element.classList[0];
+    }
+    return string;
+  },
+
+  openPanel : function(panel, loc) {
+    var browser = document.getElementById("content");
+    var content = browser.mPanelContainer.boxObject;
+    panel.style.backgroundColor = "white";
+
+    switch(loc) {
+      case 'nw':
+       panel.openPopupAtScreen(content.screenX, content.screenY, false);
+       break;
+      case 'ne':
+       var x = content.screenX + browser.contentWindow.innerWidth - 126;
+       panel.openPopupAtScreen(x, content.screenY, false);
+       break;
+      case 'sw':
+       panel.openPopup(document.getElementById("status-bar"), "before_start", 0, 0);
+       break;
+      case 'se':
+       panel.openPopup(document.getElementById("status-bar"), "before_end", 0, 0);
+       break;
+    }
+  },
+
   preventEvents : function (win, events) {
     for(var i = 0; i < events.length; i++)
       win.addEventListener(events[i], rainbowc.prevent, true); 
@@ -241,6 +274,11 @@ var rainbowc = {
      var color = colorCommon.isValid(color) ? colorCommon.toHex(color) : '';
      window.openDialog("chrome://rainbows/content/picker/picker.xul",
                       "", "chrome,all,dialog=yes", color);
+  },
+
+  openPrefs : function() {
+    window.openDialog("chrome://rainbows/content/options.xul",
+                      "", "chrome,all,dialog=yes");
   },
 }
 

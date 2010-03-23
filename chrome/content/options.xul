@@ -88,7 +88,6 @@
         </rows>
        </grid>
       </hbox>
-      <checkbox preference="wholepref" label="&whole.label;" accesskey="&whole.accesskey;"/>
       <checkbox preference="contextpref" label="&context.label;" accesskey="&context.accesskey;"/>
       <hbox align="center">
         <checkbox preference="statuspref" label="&status.label;" accesskey="&status.accesskey;"/>

@@ -87,7 +87,10 @@ var colorPlay = {
     }
   },
 
-  statusBarClicked : function() {
+  statusBarClicked : function(event) {
+    if(event.button != 0)
+      return;
+
     switch(rainbowc.prefs.getCharPref("statusbar.action")) {
       case 'inspector':
         rainbowInspector.toggleInspector();

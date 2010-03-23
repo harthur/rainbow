@@ -7,7 +7,7 @@
 <!ENTITY picker.select.tooltip "Select element to preview">
 <!ENTITY picker.inspect.tooltip "Inspect pixel on browser">
 
-<!ENTITY picker.contrast.wcag "WCAG contrast ratio">
+<!ENTITY picker.contrast.wcag "WCAG contrast ratio (scale of 1 to 21)">
 <!ENTITY picker.contrast.minimum "recommended minimum:">
 <!ENTITY picker.contrast.small "small text:">
 <!ENTITY picker.contrast.large "large text:">

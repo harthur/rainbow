@@ -279,9 +279,13 @@ var picker = {
     if(selector.selectedElement) {
       if(picker.displayElem.id == "display-text")
         selector.selectedElement.style.color = hexVal + "";
-      else
+      else {
         selector.selectedElement.style.background = hexVal + "";
-   
+        if(colorCommon.blackText(hexVal))
+          rainbowc.get("display-element").style.color = "black";
+        else
+          rainbowc.get("display-element").style.color = "white";          
+      }
       picker.displayContrast();
     }
   },
@@ -534,27 +538,35 @@ var picker = {
       event.stopPropagation();
   },
 
-  elementDisplay : function(bg, txt, font) {
+  elementDisplay : function(bg, txt, font, elementString) {
     var d1 = rainbowc.get("display-color-1");
     var d2 = rainbowc.get("display-color-2");
-    var text = rainbowc.get("display-text");
+    var fontDisplay = rainbowc.get("display-text");
+    var elemDisplay = rainbowc.get("display-element");
 
     d2.hidden = true;
     d1.style.backgroundColor = bg;      
     if(txt) {
-      text.style.color = txt;
-      text.hidden = false;
-      while(text.firstChild)
-        text.removeChild(text.firstChild);
+      fontDisplay.style.color = txt;
+      fontDisplay.hidden = false;
+      while(fontDisplay.firstChild)
+        fontDisplay.removeChild(fontDisplay.firstChild);
       var lines = getLines(font, 100);
       for(var i = 0; i < lines.length; i++) {
         var label = document.createElement("label");
         label.setAttribute("value", lines[i]);
-        text.appendChild(label);
+        fontDisplay.appendChild(label);
       }
     }
     else
-      text.style.color = "";
+      fontDisplay.style.color = "";
+
+    elemDisplay.hidden = false;
+    elemDisplay.value = elementString;
+    if(colorCommon.blackText(bg))
+      elemDisplay.style.color = "black";
+    else
+      elemDisplay.style.color = "white";      
 
     picker.displayElem = d1;
     picker.selectDisplay(d1);
@@ -584,7 +596,8 @@ var picker = {
   singleDisplay : function() {
     var d1 = rainbowc.get("display-color-1");
     var d2 = rainbowc.get("display-color-2");
-    var text = rainbowc.get("display-text");
+    var fontDisplay = rainbowc.get("display-text");
+    var elemDisplay = rainbowc.get("display-element");
 
     if(picker.displayElem.id == "display-text")
       d1.style.backgroundColor = picker.displayElem.style.color;
@@ -594,7 +607,8 @@ var picker = {
     picker.selectDisplay(d1);
     d1.className = "highlight"; // show grey for dark and light themes
     d2.hidden = true;
-    text.hidden = true;
+    fontDisplay.hidden = true;
+    elemDisplay.hidden = true;
 
     d1.ondblclick = picker.comparisonDisplay;
     d2.ondblclick = picker.comparisonDisplay;

@@ -23,7 +23,7 @@
 <!ENTITY stats.label "Only show display when hovering over swatch">
 <!ENTITY stats.accesskey "O">
 <!ENTITY nodename.accesskey "E">
-<!ENTITY nodename.label "Show node name">
+<!ENTITY nodename.label "Show element info">
 <!ENTITY nodename.accesskey "E">
 <!ENTITY coordinates.label "Show coordinates">
 <!ENTITY coordinates.accesskey "C">

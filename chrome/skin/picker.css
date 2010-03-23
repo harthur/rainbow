@@ -74,6 +74,8 @@ window[rainbow-platform="Windows"] #selector-button{
   margin-right: 5px;
   margin-bottom: 8px;
   height: 90px;
+  max-width: 156px;
+  overflow: hidden;
 }
 
 .highlight {
@@ -102,6 +104,10 @@ vbox[selected=true] {
 
 .selection-box label {
   cursor: pointer;
+}
+
+#display-element {
+  font-size: 12px;
 }
 
 #display-text {
@@ -161,7 +167,6 @@ radio .radio-label-box  {
 
 #picker-display {
   margin-left: 10px;
-  margin-bottom: 30px;
 }
 
 #bar-display {

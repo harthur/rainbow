@@ -102,7 +102,8 @@ var selector = {
       var txt = win.getComputedStyle(element, null).color;
       var font = getFont(element);
     }
-    picker.elementDisplay(bg, txt, font);
+    var elementString = rainbowc.elementString(element);
+    picker.elementDisplay(bg, txt, font, elementString);
 
     picker.url = element.ownerDocument.location.href;
     selector.selectedElement = element;

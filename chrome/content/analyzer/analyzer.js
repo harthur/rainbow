@@ -49,7 +49,7 @@ var rainbowAnalyzer = {
     rainbowc.get("rainbow-analyzer-close").tooltipText = rainbowc.getString("rainbow.cancel");
     rainbowc.get("rainbow-analyzer-footer").hidden = true;
 
-    panel.openPopup(rainbowc.get("status-bar"), "before_start", 0, 0);
+    rainbowc.openPanel(panel, "se");
     setTimeout("rainbowAnalyzer.getPixels()", 200); // otherwise panel won't show immediately
   },
 
@@ -76,8 +76,9 @@ var rainbowAnalyzer = {
       rainbowc.get("rainbow-analyzer-footer").hidden = false;
       
       // TAKE OUT
-       alert("pixels: " + event.data.pixelTime + " clustering : " + event.data.clusterTime + " colors: " + rainbowAnalyzer.colors.length
-              + " aliased: "  + event.data.aliased); 
+      // alert("pixels: " + event.data.pixelTime + " clustering : " + event.data.clusterTime 
+               // + " colors: " + rainbowAnalyzer.colors.length
+               // + " aliased: "  + event.data.aliased); 
       //rainbowAnalyzer.worker.terminate(); // crashy crashy
     };
 
@@ -392,10 +393,5 @@ var rainbowAnalyzer = {
     window.openDialog("chrome://rainbows/content/editBookmark.xul",
                "", "all,dialog=yes,resizable=no,centerscreen",
               {colors: rainbowAnalyzer.getDisplayedColors(), url: panel.url, button: button});
-  },
-
-  descendingSort : function(a, b) {
-    return b.freq - a.freq; 
-  },
-
+  }
 }

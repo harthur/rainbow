@@ -103,13 +103,16 @@
       </menupopup>
     </menu>
   </popup>
+
+
  
 
   <statusbar id="status-bar">
    <statusbarpanel id="rainbow-statusbar"
                    class="statusbarpanel-iconic"
                    onclick="colorPlay.statusBarClicked(event);"
-                   hidden="true"/>
+                   hidden="true"
+                   context="rainbow-status-context"/>
   </statusbar>
 
 
@@ -120,7 +123,7 @@
                 image="moz-icon://stock/gtk-open?size=menu"
                 accesskey="&rainbow.context.open.accesskey;"/>
       <menu label="&rainbow.context.copy.label;" class="menu-iconic"
-            accesskey="&rainbow.context.copy.accesskey;"> 
+            accesskey="&rainbow.context.copy.accesskey;">
       <menupopup>
         <menuitem id="rainbow-context-plain" 
                   oncommand="rainbowc.copy(this.label)" class="menuitem-iconic"
@@ -139,7 +142,8 @@
                   image="moz-icon://stock/gtk-copy?size=menu"/>
        </menupopup>
       </menu>
-    </menupopup>  
+    </menupopup>
+
     <menupopup id="rainbow-analyzer-context">
       <menu label="&rainbow.analyzer.limit;"
             accesskey="&rainbow.analyzer.limit.accesskey;"> 
@@ -163,6 +167,19 @@
        </menupopup>
       </menu>
     </menupopup>
+
+    <popup id="rainbow-status-context">
+      <menuitem label="&rainbow.menu.inspector.label;"
+                oncommand="rainbowInspector.toggleInspector();"/>
+      <menuitem label="&rainbow.menu.picker.label;"
+                oncommand="rainbowc.openPicker();"/>
+      <menuitem label="&rainbow.menu.library.label;"
+                oncommand="rainbowc.openLibrary();"/>
+      <menuitem label="&rainbow.menu.analyzer.label;"
+                oncommand="rainbowAnalyzer.analyzePage();"/>
+      <menuitem label="&rainbow.menu.prefs.label;"
+                oncommand="rainbowc.openPrefs();"/>
+    </popup>
 
     <html:canvas id="rainbow-inspector" style="display:none;" width="1px" height="1px"/>
 
