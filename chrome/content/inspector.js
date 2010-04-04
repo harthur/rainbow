@@ -53,15 +53,15 @@ var rainbowInspector = {
     rainbowc.openPanel(rainbowc.get("rainbow-swatch"), location);  
 
     rainbowInspector.format = prefs.getCharPref("format");
-    rainbowInspector.follow = prefs.getBoolPref("inspector.followMouse");
+
+    if(rainbowc.getFirefoxVersion() >= 3.6)
+      rainbowInspector.canMove = true; // bug 474149
+    rainbowInspector.follow = rainbowInspector.canMove && prefs.getBoolPref("inspector.followMouse");
 
     if(rainbowInspector.follow)
       rainbowInspector.shrink();
     else
       rainbowInspector.expand();
-    
-    if(rainbowc.getFirefoxVersion() >= 3.6)
-      rainbowInspector.canMove = true; // bug 474149
     
     rainbowInspector.startInspecting();
   },
@@ -230,11 +230,11 @@ var rainbowInspector = {
     var swatch = rainbowc.get("rainbow-swatch");
 
     if(rainbowInspector.canMove && rainbowInspector.follow)
-      swatch.moveTo(event.screenX + 5, event.screenY + 5);
+      swatch.moveTo(event.screenX + 5, event.screenY + 6);
     rainbowInspector.updateDisplay(event.clientX, event.clientY, win, event);
 
     swatch.clientX = event.clientX - 5; // can keep track in case of keypress moving
-    swatch.clientY = event.clientY - 5;
+    swatch.clientY = event.clientY - 6;
     swatch.pageX = event.clientX + win.scrollX;
     swatch.pageY = event.clientY + win.scrollY;
     swatch.win = win;
