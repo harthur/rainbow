@@ -183,16 +183,10 @@ var rainbowInspector = {
     var swatch = rainbowc.get("rainbow-swatch");
     swatch.addEventListener("mouseover", rainbowInspector.showOnHover, true);
     swatch.addEventListener("mouseout", rainbowInspector.hideOnHover, true);
-
-    /* var container = content.mPanelContainer;
-       container.addEventListener("mousemove", rainbowInspector.measureCoords, true); 
-    if(rainbowc.prefs.getBoolPref("inspector.showDifference"))
-      rainbowInspector.showDifference(); */
-
-    rainbowInspector.addFixListeners();
-
     swatch.url = event.target.ownerDocument.location.href; // for potential bookmarking
     swatch.focus(); // so keypress event fires to move swatch up and down
+
+    rainbowInspector.addFixListeners();
 
     if(rainbowInspector.follow)
       rainbowInspector.expand();
@@ -219,13 +213,8 @@ var rainbowInspector = {
     swatch.removeEventListener("mouseover", rainbowInspector.showOnHover, true);
     swatch.removeEventListener("mouseout", rainbowInspector.hideOnHover, true);
 
-    /* var container = rainbowc.get("content").mPanelContainer;
-       container.removeEventListener("mousemove", rainbowInspector.measureCoords, true); 
-       rainbowInspector.hideMeasure();*/
-
     if(rainbowInspector.follow)
       rainbowInspector.shrink();
-
 
     rainbowInspector.removeFixListeners();
     rainbowInspector.hideOnHover();
@@ -370,27 +359,6 @@ var rainbowInspector = {
     var colorval = rainbowc.get("rainbow-swatch-colorval");
     colorval.value = rainbowc.getFormattedColor(color, rainbowInspector.format);
   },
-
-/*
-  showDifference : function() {
-    var coords = rainbowc.get("rainbow-swatch-measure");
-    coords.hidden = false;
-  },
-
-
-  hideMeasure : function() {
-    var coords = rainbowc.get("rainbow-swatch-measure");
-    coords.hidden = true;
-  },
-
-  measureCoords : function(event) {
-    var swatch = rainbowc.get("rainbow-swatch");
-    var dX = event.clientX - swatch.x;
-    var dY = event.clientY - swatch.y;
-    var coords = rainbowc.get("rainbow-swatch-measure");
-    coords.value = "   " + dX + "   " + dY;
-  },
-*/
 
   updateDisplay : function(clientX, clientY, win, event) {
     var coords = rainbowc.get("rainbow-swatch-coords");
