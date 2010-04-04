@@ -177,6 +177,7 @@
                 oncommand="rainbowc.openLibrary();"/>
       <menuitem label="&rainbow.menu.analyzer.label;"
                 oncommand="rainbowAnalyzer.analyzePage();"/>
+      <menuseparator/>
       <menuitem label="&rainbow.menu.prefs.label;"
                 oncommand="rainbowc.openPrefs();"/>
     </popup>

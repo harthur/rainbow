@@ -55,7 +55,10 @@ var rainbowInspector = {
     rainbowInspector.format = prefs.getCharPref("format");
     rainbowInspector.follow = prefs.getBoolPref("inspector.followMouse");
 
-    rainbowInspector.showDisplay();
+    if(rainbowInspector.follow)
+      rainbowInspector.shrink();
+    else
+      rainbowInspector.expand();
     
     if(rainbowc.getFirefoxVersion() >= 3.6)
       rainbowInspector.canMove = true; // bug 474149
@@ -66,7 +69,7 @@ var rainbowInspector = {
   stopInspector : function() {
     this.inspectorOn = false;
 
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     var location = rainbowInspector.getSwatchLocation();
     rainbowc.prefs.setCharPref("inspector.location", location);
 
@@ -78,14 +81,14 @@ var rainbowInspector = {
   },
 
   getSwatchLocation : function() {
-    var browser = document.getElementById("content");
+    var browser = rainbowc.get("content");
     var content = browser.mPanelContainer;
     var bleft = content.boxObject.screenX; 
     var btop = content.boxObject.screenY;
     var bright = bleft + browser.contentWindow.innerWidth;
     var bbottom = btop + browser.contentWindow.innerHeight;
 
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     var sleft = swatch.boxObject.screenX;
     var stop = swatch.boxObject.screenY;
     var sright = sleft + swatch.boxObject.width;
@@ -99,7 +102,7 @@ var rainbowInspector = {
       return "ne";
     if(Math.abs(sright - bright) < 200 && Math.abs(sbottom - bbottom) < 200)
       return "se";
-    return "nw";
+    return "se";
   },
 
   startInspecting : function() {
@@ -138,7 +141,7 @@ var rainbowInspector = {
     var enumerator = rainbowc.wm.getEnumerator("navigator:browser");
     while(enumerator.hasMoreElements()) {
       var win = enumerator.getNext();
-      var content = win.document.getElementById("content").mPanelContainer;
+      var content = win.rainbowc.get("content").mPanelContainer;
       content.addEventListener("dblclick", rainbowInspector.resumeInspect, true);
     }
   },
@@ -148,7 +151,7 @@ var rainbowInspector = {
     while(enumerator.hasMoreElements()) {
       var win = enumerator.getNext(); 
       try {
-        var content = win.document.getElementById("content").mPanelContainer;
+        var content = win.rainbowc.get("content").mPanelContainer;
         content.removeEventListener("dblclick", rainbowInspector.resumeInspect, true);
       } catch(e) {}
     }
@@ -169,12 +172,15 @@ var rainbowInspector = {
     rainbowInspector.startInspecting();
     if(event)
       rainbowInspector.inspectPixel(event); // get it started
+    
+    if(rainbowInspector.follow)
+      rainbowInspector.shrink();
   },
 
   startFix : function (event) {
     rainbowInspector.fixed = true;
-    var content = document.getElementById("content");
-    var swatch = document.getElementById("rainbow-swatch");
+    var content = rainbowc.get("content");
+    var swatch = rainbowc.get("rainbow-swatch");
     swatch.addEventListener("mouseover", rainbowInspector.showOnHover, true);
     swatch.addEventListener("mouseout", rainbowInspector.hideOnHover, true);
 
@@ -188,7 +194,10 @@ var rainbowInspector = {
     swatch.url = event.target.ownerDocument.location.href; // for potential bookmarking
     swatch.focus(); // so keypress event fires to move swatch up and down
 
-    var button = document.getElementById("rainbow-swatch-bookmark");
+    if(rainbowInspector.follow)
+      rainbowInspector.expand();
+
+    var button = rainbowc.get("rainbow-swatch-bookmark");
     var color = colorCommon.toHex(swatch.style.backgroundColor);
     if(rainbowc.storage.isSaved(color)) {
       button.label = rainbowc.getString("rainbow.view");
@@ -206,13 +215,17 @@ var rainbowInspector = {
 
   stopFix : function() {
     rainbowInspector.fixed = false;
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     swatch.removeEventListener("mouseover", rainbowInspector.showOnHover, true);
     swatch.removeEventListener("mouseout", rainbowInspector.hideOnHover, true);
 
-    /* var container = document.getElementById("content").mPanelContainer;
+    /* var container = rainbowc.get("content").mPanelContainer;
        container.removeEventListener("mousemove", rainbowInspector.measureCoords, true); 
        rainbowInspector.hideMeasure();*/
+
+    if(rainbowInspector.follow)
+      rainbowInspector.shrink();
+
 
     rainbowInspector.removeFixListeners();
     rainbowInspector.hideOnHover();
@@ -225,43 +238,44 @@ var rainbowInspector = {
     var color = rainbowInspector.getPixel(win, pageX, pageY);
     rainbowInspector.changeColor(color);
 
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
+
     if(rainbowInspector.canMove && rainbowInspector.follow)
-      swatch.moveTo(event.screenX + 3, event.screenY + 3);
-    swatch.clientX = event.clientX - 3; // can keep track in case of keypress moving
-    swatch.clientY = event.clientY - 3;
+      swatch.moveTo(event.screenX + 5, event.screenY + 5);
+    rainbowInspector.updateDisplay(event.clientX, event.clientY, win, event);
+
+    swatch.clientX = event.clientX - 5; // can keep track in case of keypress moving
+    swatch.clientY = event.clientY - 5;
     swatch.pageX = event.clientX + win.scrollX;
     swatch.pageY = event.clientY + win.scrollY;
     swatch.win = win;
 
-    rainbowInspector.updateDisplay(event.clientX, event.clientY, win, event);
-   
     event.preventDefault();
     event.stopPropagation();
   },
 
   reloadPixel : function() {
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     var color = rainbowInspector.getPixel(swatch.win, swatch.pageX, swatch.pageY);
     rainbowInspector.changeColor(color, true);
   },
   
   changeColor : function(color, show) {
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     swatch.style.backgroundColor = color;
     swatch.color = colorCommon.toHex(color);
     
     var blackText = colorCommon.blackText(color);
-    var colorval = document.getElementById("rainbow-swatch-colorval");
+    var colorval = rainbowc.get("rainbow-swatch-colorval");
     colorval.value = rainbowc.getFormattedColor(color, rainbowInspector.format);
     colorval.style.color = blackText ? 'black' : 'white';
 
-    var stats = document.getElementById("rainbow-swatch-stats");
+    var stats = rainbowc.get("rainbow-swatch-stats");
     stats.style.color = blackText ? '#333333' : '#EEEEEE';
   },
 
   getPixel : function(win, x, y) {
-    context = document.getElementById("rainbow-inspector").getContext("2d");
+    context = rainbowc.get("rainbow-inspector").getContext("2d");
     context.drawWindow(win, x, y, 1, 1, "white");
     var data = context.getImageData(0, 0, 1, 1).data;
     return "rgb(" + data[0] + "," + data[1] + "," + data[2] + ")";
@@ -271,7 +285,7 @@ var rainbowInspector = {
     if(!rainbowInspector.canMove)
       return;
 
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     var screenX = swatch.boxObject.screenX;
     var screenY = swatch.boxObject.screenY;
 
@@ -293,7 +307,7 @@ var rainbowInspector = {
     }
     swatch.moveTo(screenX, screenY);
  
-    var content = document.getElementById("content");
+    var content = rainbowc.get("content");
     var browser = content.mCurrentBrowser;
     var clientX = swatch.boxObject.x - browser.boxObject.x - 1;
     var clientY = swatch.boxObject.y - browser.boxObject.y - 1;
@@ -305,7 +319,7 @@ var rainbowInspector = {
 
     rainbowInspector.changeColor(color);
 
-    var button = document.getElementById("rainbow-swatch-bookmark");
+    var button = rainbowc.get("rainbow-swatch-bookmark");
 
     color = colorCommon.toHex(color);
     if(rainbowc.storage.isSaved(color)) {
@@ -352,73 +366,93 @@ var rainbowInspector = {
   formatChanged : function() {
     var format = rainbowc.prefs.getCharPref("format");
     rainbowInspector.format = format;
-    var color = document.getElementById("rainbow-swatch").style.backgroundColor;
-    var colorval = document.getElementById("rainbow-swatch-colorval");
+    var color = rainbowc.get("rainbow-swatch").style.backgroundColor;
+    var colorval = rainbowc.get("rainbow-swatch-colorval");
     colorval.value = rainbowc.getFormattedColor(color, rainbowInspector.format);
   },
 
 /*
   showDifference : function() {
-    var coords = document.getElementById("rainbow-swatch-measure");
+    var coords = rainbowc.get("rainbow-swatch-measure");
     coords.hidden = false;
   },
 
 
   hideMeasure : function() {
-    var coords = document.getElementById("rainbow-swatch-measure");
+    var coords = rainbowc.get("rainbow-swatch-measure");
     coords.hidden = true;
   },
 
   measureCoords : function(event) {
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     var dX = event.clientX - swatch.x;
     var dY = event.clientY - swatch.y;
-    var coords = document.getElementById("rainbow-swatch-measure");
+    var coords = rainbowc.get("rainbow-swatch-measure");
     coords.value = "   " + dX + "   " + dY;
   },
 */
 
   updateDisplay : function(clientX, clientY, win, event) {
-    var coords = document.getElementById("rainbow-swatch-coords");
+    var coords = rainbowc.get("rainbow-swatch-coords");
     coords.value = "x:" + clientX + " y:" + clientY;
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     swatch.x = clientX;
     swatch.y = clientY;
 
-    var nodeName = document.getElementById("rainbow-swatch-nodeName");
+    var nodeName = rainbowc.get("rainbow-swatch-nodeName");
     nodeName.value = rainbowInspector.getNodeName(win, event);
   },
 
   showDisplay : function() {
     if(!rainbowc.prefs.getBoolPref("inspector.alwaysShow")) {
-      document.getElementById("rainbow-swatch-colorval").hidden = true;
-      document.getElementById("rainbow-swatch-coords").hidden = true;
-      document.getElementById("rainbow-swatch-nodeName").hidden = true;
+      rainbowc.get("rainbow-swatch-colorval").hidden = true;
+      rainbowc.get("rainbow-swatch-coords").hidden = true;
+      rainbowc.get("rainbow-swatch-nodeName").hidden = true;
       return;
     }
     if(rainbowc.prefs.getBoolPref("inspector.showCoordinates"))
-      document.getElementById("rainbow-swatch-coords").hidden = false;
+      rainbowc.get("rainbow-swatch-coords").hidden = false;
     else
-      document.getElementById("rainbow-swatch-coords").hidden = true;
+      rainbowc.get("rainbow-swatch-coords").hidden = true;
     if(rainbowc.prefs.getBoolPref("inspector.showNodeName"))
-      document.getElementById("rainbow-swatch-nodeName").hidden = false;
+      rainbowc.get("rainbow-swatch-nodeName").hidden = false;
     else
-      document.getElementById("rainbow-swatch-nodeName").hidden = true;
-    document.getElementById("rainbow-swatch-colorval").hidden = false;
+      rainbowc.get("rainbow-swatch-nodeName").hidden = true;
+    rainbowc.get("rainbow-swatch-colorval").hidden = false;
+  },
+
+  hideDisplay : function() {
+    rainbowc.get("rainbow-swatch-colorval").hidden = true;
+    rainbowc.get("rainbow-swatch-coords").hidden = true;
+    rainbowc.get("rainbow-swatch-nodeName").hidden = true;
+  },
+
+  shrink : function() {
+    var swatch = rainbowc.get("rainbow-swatch");
+    swatch.style.width = "60px";
+    swatch.style.height = "60px";
+    rainbowInspector.hideDisplay();
+  },
+
+  expand : function() {
+    var swatch = rainbowc.get("rainbow-swatch");
+    swatch.style.width = "126px";
+    swatch.style.height = "122px";
+    rainbowInspector.showDisplay();
   },
 
   showOnHover : function(event) {
     if(rainbowc.prefs.getBoolPref("inspector.showCoordinates"))
-      document.getElementById("rainbow-swatch-coords").hidden = false;
+      rainbowc.get("rainbow-swatch-coords").hidden = false;
     else
-      document.getElementById("rainbow-swatch-coords").hidden = true;
+      rainbowc.get("rainbow-swatch-coords").hidden = true;
     if(rainbowc.prefs.getBoolPref("inspector.showNodeName"))
-      document.getElementById("rainbow-swatch-nodeName").hidden = false;
+      rainbowc.get("rainbow-swatch-nodeName").hidden = false;
     else
-      document.getElementById("rainbow-swatch-nodeName").hidden = true;
-    document.getElementById("rainbow-swatch-colorval").hidden = false;
-    document.getElementById("rainbow-swatch-buttons").hidden = false;
-    document.getElementById("rainbow-swatch-top-buttons").hidden = false;
+      rainbowc.get("rainbow-swatch-nodeName").hidden = true;
+    rainbowc.get("rainbow-swatch-colorval").hidden = false;
+    rainbowc.get("rainbow-swatch-buttons").hidden = false;
+    rainbowc.get("rainbow-swatch-top-buttons").hidden = false;
   },
 
   hideOnHover : function(event) {
@@ -427,17 +461,17 @@ var rainbowInspector = {
 
     // hide whatever was displayed from hovering
     if(!rainbowc.prefs.getBoolPref("inspector.alwaysShow")) {
-      document.getElementById("rainbow-swatch-coords").hidden = true;
-      document.getElementById("rainbow-swatch-nodeName").hidden = true;
-      document.getElementById("rainbow-swatch-colorval").hidden = true;
+      rainbowc.get("rainbow-swatch-coords").hidden = true;
+      rainbowc.get("rainbow-swatch-nodeName").hidden = true;
+      rainbowc.get("rainbow-swatch-colorval").hidden = true;
     }
-    document.getElementById("rainbow-swatch-buttons").hidden = true;
-    document.getElementById("rainbow-swatch-top-buttons").hidden = true;
+    rainbowc.get("rainbow-swatch-buttons").hidden = true;
+    rainbowc.get("rainbow-swatch-top-buttons").hidden = true;
   },
 
   getNodeName : function(win, event) {
-    var swatch = document.getElementById("rainbow-swatch");
-    var nodeLabel = document.getElementById("rainbow-swatch-nodeName");
+    var swatch = rainbowc.get("rainbow-swatch");
+    var nodeLabel = rainbowc.get("rainbow-swatch-nodeName");
     var element;
     if(event)
       element = event.originalTarget;
@@ -461,11 +495,11 @@ var rainbowInspector = {
 
   focusSwatch : function(event) {
     window.focus(); // yes, have to do this or else panel will not focus
-    document.getElementById("rainbow-swatch").focus();
+    rainbowc.get("rainbow-swatch").focus();
   },
 
   mouseOverPanel : function(event) {
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     var left = swatch.boxObject.x + 4;
     var top = swatch.boxObject.y + 4;
     var right = swatch.boxObject.x + 120;
@@ -487,7 +521,7 @@ var rainbowInspector = {
     if(event.target.id == "rainbow-swatch-colorval") // bubble trouble
      return;
 
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     swatch.offsetX = event.screenX - swatch.boxObject.screenX; // offset of mouse on swatch
     swatch.offsetY = event.screenY - swatch.boxObject.screenY;
 
@@ -500,7 +534,7 @@ var rainbowInspector = {
     if(color != 'rainbow-swatch')
       return;
 
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     if(rainbowInspector.canMove)
       swatch.moveTo(event.screenX - swatch.offsetX, event.screenY - swatch.offsetY);
     else {
@@ -512,7 +546,7 @@ var rainbowInspector = {
   },
 
   applyStart : function(event) {
-    var swatch = document.getElementById("rainbow-swatch");
+    var swatch = rainbowc.get("rainbow-swatch");
     var color = swatch.style.backgroundColor;
     event.dataTransfer.setData('text/rainbow-color', color);
     event.dataTransfer.setData('text/rainbow-url', swatch.url);
@@ -526,37 +560,36 @@ var rainbowInspector = {
   },
 
   onContextShowing : function() {
-    var color = document.getElementById("rainbow-swatch").color;
-    var copyPlain = document.getElementById("rainbow-context-plain");
-    var copyRgb = document.getElementById("rainbow-context-rgb");
-    var copyHex = document.getElementById("rainbow-context-hex");
-    var copyPer = document.getElementById("rainbow-context-per");
-    var copyHsl = document.getElementById("rainbow-context-hsl");
-
+    var color = rainbowc.get("rainbow-swatch").color;
+    var copyPlain = rainbowc.get("rainbow-context-plain");
     copyPlain.value = colorCommon.toPlain(color);
     copyPlain.label = copyPlain.value;
+    var copyRgb = rainbowc.get("rainbow-context-rgb");
     copyRgb.value = colorCommon.toRgb(color);
     copyRgb.label = copyRgb.value;
+    var copyHex = rainbowc.get("rainbow-context-hex");
     copyHex.value = colorCommon.toHex(color);
     copyHex.label = copyHex.value;
+    var copyPer = rainbowc.get("rainbow-context-per");
     copyPer.value = colorCommon.toPercent(color);
     copyPer.label = copyPer.value;
+    var copyHsl = rainbowc.get("rainbow-context-hsl");
     copyHsl.value = colorCommon.toHsl(color);
     copyHsl.label = copyHsl.value;
   },
 
   openColor : function() {
-    var color = document.getElementById("rainbow-swatch").style.backgroundColor;
+    var color = rainbowc.get("rainbow-swatch").style.backgroundColor;
     rainbowc.openPicker(color);
   },
 
   copyColor : function() {
-    rainbowc.copyColor(document.getElementById("rainbow-swatch-colorval").value);
+    rainbowc.copyColor(rainbowc.get("rainbow-swatch-colorval").value);
   },
 
   bookmarkColor : function() {
-    var swatch = document.getElementById("rainbow-swatch");
-    var button = document.getElementById("rainbow-swatch-bookmark");
+    var swatch = rainbowc.get("rainbow-swatch");
+    var button = rainbowc.get("rainbow-swatch-bookmark");
     window.openDialog("chrome://rainbows/content/editBookmark.xul",
                   "Window:EditColor", "all,dialog=yes,resizable=no,centerscreen",
                   {colors: [swatch.color], url: swatch.url, button: button} );

@@ -7,7 +7,7 @@ pref("extensions.rainbows.inspector.alwaysShow", true);
 pref("extensions.rainbows.inspector.showNodeName", false);
 pref("extensions.rainbows.inspector.showCoordinates", true);
 pref("extensions.rainbows.inspector.showDifference", false);
-pref("extensions.rainbows.inspector.followMouse", false);
+pref("extensions.rainbows.inspector.followMouse", true);
 pref("extensions.rainbows.inspector.location", "se");
 pref("extensions.rainbows.picker.color", "#11EEEE");
 pref("extensions.rainbows.picker.mode", "hue");

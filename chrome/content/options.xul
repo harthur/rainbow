@@ -58,35 +58,17 @@
 
     <groupbox>
       <caption label="&general.label;"/>
-      <hbox>
-        <grid>
-          <rows>
-          <row align="center">
-          <label value="&mode.label;" accesskey="&mode.accesskey;" control="format-list"/>
-          <menulist id="format-list" preference="formatpref" sizetopopup="pref">
-            <menupopup>
-               <menuitem label="&hex.label;" value="plain"/>
-               <menuitem label="#&hex.label;" value="hex"/>
-               <menuitem label="&rgb.label;" value="rgb"/>
-               <menuitem label="&rgb.label; %" value="per"/>
-               <menuitem label="&hsl.label;" value="hsl"/>
-            </menupopup>
-          </menulist>
-        </row>
-        <row align="center">
-          <checkbox preference="copydiffpref" label="&copy.label;" accesskey="&copy.accesskey;"/>
-          <menulist preference="copypref" sizetopopup="pref">
-            <menupopup>
-               <menuitem label="&hex.label;" value="plain"/>
-               <menuitem label="#&hex.label;" value="hex"/>
-               <menuitem label="&rgb.label;" value="rgb"/>
-               <menuitem label="&rgb.label; %" value="per"/>
-               <menuitem label="&hsl.label;" value="hsl"/>
-            </menupopup>
-          </menulist>
-        </row>
-        </rows>
-       </grid>
+      <hbox align="center">
+        <label value="&mode.label;" accesskey="&mode.accesskey;" control="format-list"/>
+        <menulist id="format-list" preference="formatpref" sizetopopup="pref">
+          <menupopup>
+             <menuitem label="&hex.label;" value="plain"/>
+             <menuitem label="#&hex.label;" value="hex"/>
+             <menuitem label="&rgb.label;" value="rgb"/>
+             <menuitem label="&rgb.label; %" value="per"/>
+             <menuitem label="&hsl.label;" value="hsl"/>
+          </menupopup>
+        </menulist>
       </hbox>
       <checkbox preference="contextpref" label="&context.label;" accesskey="&context.accesskey;"/>
       <hbox align="center">
@@ -103,7 +85,6 @@
     </groupbox>
     <groupbox>
       <caption label="&inspector.label;"/>
-      <checkbox preference="statspref" label="&stats.label;" accesskey="&stats.accesskey;"/>
       <checkbox preference="nodepref" label="&nodename.label;" accesskey="&nodename.accesskey;"/>
       <checkbox preference="coorspref" label="&coordinates.label;" accesskey="&coordinates.accesskey;"/>
       <checkbox id="follow-box" preference="followpref" label="&follow.label;" accesskey="&follow.accesskey;"/>
