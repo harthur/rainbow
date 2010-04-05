@@ -1,5 +1,8 @@
 #container {
-  margin: 18px;
+  margin-bottom: 18px;
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-top: 2px;
   -moz-user-focus: normal;
 }
 
@@ -68,6 +71,11 @@ window[rainbow-platform="Windows"] #selector-button{
 /*********************************** 
  *    Values display
  ***********************************/
+
+#selector-element {
+  padding-left: 8px;
+  text-align: center;
+}
 
 #display-color-1, #display-color-2 {
   margin-left: 2px;

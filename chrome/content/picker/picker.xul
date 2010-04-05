@@ -133,164 +133,175 @@
   </toolbar>
 
 <vbox id="container">
-  <hbox>
-  <vbox id="left-box">
-    <hbox id="picker-display">
-      <vbox align="center">
-        <box id="gradient-display">
-          <html:div id="picker-box" style="position: relative;">
-            <html:div id="gradients-box">
-              <html:img id="bottom-gradient" onclick="picker.gradientClick(event);"
-                        src="chrome://rainbows/skin/sat-bottom.png"/>
-              <html:img id="top-gradient" onclick="picker.gradientClick(event);"
-                        style="position: absolute; top: 0px; left: 0px; z-index: 2;"/>
-              <html:img id="pix-sel" src="chrome://rainbows/skin/box_thin.png"
-                        style="position: absolute; top: 0px; left: 0px; z-index: 3;"
-                        onclick="picker.gradientClick(event);"/>
+ <grid>
+   <columns>
+     <column/>
+     <column/>
+   </columns>
+   <rows>
+     <row>
+       <spacer/><label id="selector-element" value=" "/>
+     </row>
+     <row>
+       <vbox id="left-box">
+       <hbox id="picker-display">
+         <vbox align="center">
+          <box id="gradient-display">
+            <html:div id="picker-box" style="position: relative;">
+              <html:div id="gradients-box">
+                <html:img id="bottom-gradient" onclick="picker.gradientClick(event);"
+                          src="chrome://rainbows/skin/sat-bottom.png"/>
+                <html:img id="top-gradient" onclick="picker.gradientClick(event);"
+                          style="position: absolute; top: 0px; left: 0px; z-index: 2;"/>
+                <html:img id="pix-sel" src="chrome://rainbows/skin/box_thin.png"
+                          style="position: absolute; top: 0px; left: 0px; z-index: 3;"
+                          onclick="picker.gradientClick(event);"/>
+              </html:div>
             </html:div>
+          </box>
+        </vbox>
+        <box id="bar-display">
+          <html:div id="bar-box" style="position: relative;">
+            <html:img id="bar" onclick="picker.barClick(event);"
+                      src="chrome://rainbows/skin/hue-bar.png"/>
+            <html:img id="top-bar" onclick="picker.barClick(event);"
+                      src="chrome://rainbows/skin/sat-bar-top.png"
+                      style="position: absolute; top: 0px; left: 0px; z-index: 2; opacity: 0;"/>
+            <html:img id="bar-sel" src="chrome://rainbows/skin/arrows.png"
+                      style="position: absolute; top: 0px; left: 0px; z-index: 3"
+                      onclick="picker.barClick(event);"/>
           </html:div>
         </box>
-      </vbox>
-      <box id="bar-display">
-        <html:div id="bar-box" style="position: relative;">
-          <html:img id="bar" onclick="picker.barClick(event);"
-                    src="chrome://rainbows/skin/hue-bar.png"/>
-          <html:img id="top-bar" onclick="picker.barClick(event);"
-                    src="chrome://rainbows/skin/sat-bar-top.png"
-                    style="position: absolute; top: 0px; left: 0px; z-index: 2; opacity: 0;"/>
-          <html:img id="bar-sel" src="chrome://rainbows/skin/arrows.png"
-                    style="position: absolute; top: 0px; left: 0px; z-index: 3"
-                    onclick="picker.barClick(event);"/>
-        </html:div>
-      </box>
-    </hbox>
-  </vbox>
-
-  <vbox id="selection-display" align="center">
-    <vbox id="values-display">
-    <hbox>
-      <vbox id="display-color-1"
-            ondragstart="picker.dragStart(event);" flex="1"
-            onclick="picker.selectDisplay(this)"
-            ondblclick="picker.comparisonDisplay()"
-            ondrop="picker.cloneDisplay(event)"
-            ondragover="return false;"
-            class="highlight" align="center">
-        <label id="display-element" hidden="true">
-        </label>
-        <vbox flex="1" pack="end">
-        <vbox id="display-text"
-            onclick="picker.selectDisplay(this, event)" hidden="true">
-        </vbox>
-       </vbox>
-      </vbox>
-      <vbox id="display-color-2"
-            ondragstart="picker.dragStart(event);" flex="1"
-            onclick="picker.selectDisplay(this)"
-            ondblclick="picker.comparisonDisplay()"
-            ondrop="picker.cloneDisplay(event)"
-            ondragover="return false;"
-            hidden="true"/>
-    </hbox>
-    <vbox align="end" flex="1">
-       <label id="contrast" value="   " tooltip="contrast-tooltip"/>
+      </hbox>
     </vbox>
 
-    <vbox id="values-box">
-      <hbox align="center" class="values-row">
-        <vbox align="center">
-            <vbox class="value-box" onclick="picker.selectField('r');">
-	          <label value="R" tooltiptext="&picker.red;"/>
-            </vbox>
-	        <textbox id="r" integer="true" maximum="255" size="2" tabindex="2"
-                     onchange="picker.fieldChange(this, 255);"
-                     onkeypress="picker.keyPressed(event, this);"/>
-        </vbox>
-        <vbox align="center">
-          <vbox class="value-box" onclick="picker.selectField('g');">  
-            <label value="G" tooltiptext="&picker.green;"/>
+    <vbox id="selection-display" align="center">
+      <vbox id="values-display">
+      <hbox>
+        <vbox id="display-color-1"
+              ondragstart="picker.dragStart(event);" flex="1"
+              onclick="picker.selectDisplay(this)"
+              ondblclick="picker.comparisonDisplay()"
+              ondrop="picker.cloneDisplay(event)"
+              ondragover="return false;"
+              class="highlight" align="center">
+          <label id="display-element" hidden="true">
+          </label>
+          <vbox flex="1" pack="end">
+          <vbox id="display-text"
+              onclick="picker.selectDisplay(this, event)" hidden="true">
           </vbox>
-	        <textbox id="g" integer="true" maximum="255" size="2" tabindex="3"
+         </vbox>
+        </vbox>
+        <vbox id="display-color-2"
+              ondragstart="picker.dragStart(event);" flex="1"
+              onclick="picker.selectDisplay(this)"
+              ondblclick="picker.comparisonDisplay()"
+              ondrop="picker.cloneDisplay(event)"
+              ondragover="return false;"
+              hidden="true"/>
+      </hbox>
+      <vbox align="end" flex="1">
+         <label id="contrast" value="   " tooltip="contrast-tooltip"/>
+      </vbox>
+
+      <vbox id="values-box">
+        <hbox align="center" class="values-row">
+          <vbox align="center">
+              <vbox class="value-box" onclick="picker.selectField('r');">
+	            <label value="R" tooltiptext="&picker.red;"/>
+              </vbox>
+	          <textbox id="r" integer="true" maximum="255" size="2" tabindex="2"
+                       onchange="picker.fieldChange(this, 255);"
+                       onkeypress="picker.keyPressed(event, this);"/>
+          </vbox>
+          <vbox align="center">
+            <vbox class="value-box" onclick="picker.selectField('g');">  
+              <label value="G" tooltiptext="&picker.green;"/>
+            </vbox>
+	          <textbox id="g" integer="true" maximum="255" size="2" tabindex="3"
+                       onchange="picker.fieldChange(this);"
+                       onkeypress="picker.keyPressed(event, this);"/>
+          </vbox>
+          <vbox align="center">
+            <vbox class="value-box" onclick="picker.selectField('b');">   
+              <label value="B" tooltiptext="&picker.blue;"/>
+            </vbox>
+            <textbox id="b" integer="true" maximum="255" size="2" tabindex="4"
                      onchange="picker.fieldChange(this);"
                      onkeypress="picker.keyPressed(event, this);"/>
-        </vbox>
-        <vbox align="center">
-          <vbox class="value-box" onclick="picker.selectField('b');">   
-            <label value="B" tooltiptext="&picker.blue;"/>
           </vbox>
-	      <textbox id="b" integer="true" maximum="255" size="2" tabindex="4"
-                   onchange="picker.fieldChange(this);"
-                   onkeypress="picker.keyPressed(event, this);"/>
-        </vbox>
-      </hbox>
-      <hbox align="center" id="hsl-row" class="values-row">
-        <vbox align="center">
+        </hbox>
+        <hbox align="center" id="hsl-row" class="values-row">
+          <vbox align="center">
             <vbox class="value-box" onclick="picker.selectField('h');">
 	          <label value="H" tooltiptext="&picker.hue;"/>
             </vbox>
 	        <textbox id="h" integer="true" maximum="360" size="2" tabindex="8"
                    onchange="picker.fieldChange(this);"
                    onkeypress="picker.keyPressed(event, this);"/>
-        </vbox>
-        <vbox align="center">
-          <vbox class="value-box" onclick="picker.selectField('s');">
-            <label value="S" tooltiptext="&picker.sat;"/>
           </vbox>
-	      <textbox id="s" maximum="100" size="2" tabindex="9"
-                   onchange="picker.fieldChange(this);"
-                   onkeypress="picker.keyPressed(event, this);"/>
-        </vbox>
-        <vbox align="center">
-          <vbox class="value-box" onclick="picker.selectField('l');">
-            <label value="L" tooltiptext="&picker.light;"/>
+          <vbox align="center">
+            <vbox class="value-box" onclick="picker.selectField('s');">
+              <label value="S" tooltiptext="&picker.sat;"/>
+            </vbox>
+	        <textbox id="s" maximum="100" size="2" tabindex="9"
+                     onchange="picker.fieldChange(this);"
+                     onkeypress="picker.keyPressed(event, this);"/>
           </vbox>
-	        <textbox id="l" maximum="100" size="2" tabindex="10"
-                   onchange="picker.fieldChange(this);"
-                   onkeypress="picker.keyPressed(event, this);"/>
-        </vbox>
-      </hbox>
-      <hbox align="center" id="hsv-row" class="values-row">
-        <vbox align="center" >
-           <vbox id="radio-h" class="value-box selection-box"
-                 onclick="picker.selectField('hv');">
-	         <label value="H" class="selected"
-                    tooltiptext="&picker.hue;"/>
-           </vbox>
-	        <textbox id="hv" integer="true" maximum="360" size="2" tabindex="5"
-                   onchange="picker.fieldChange(this);"
-                   onkeypress="picker.keyPressed(event, this);"/>
-        </vbox>
-        <vbox align="center">  
-          <vbox id="radio-s" class="value-box selection-box"
-                  onclick="picker.selectField('sv');">
-            <label value="S" tooltiptext="&picker.sat;"/>
+          <vbox align="center">
+            <vbox class="value-box" onclick="picker.selectField('l');">
+              <label value="L" tooltiptext="&picker.light;"/>
+            </vbox>
+            <textbox id="l" maximum="100" size="2" tabindex="10"
+                     onchange="picker.fieldChange(this);"
+                     onkeypress="picker.keyPressed(event, this);"/>
           </vbox>
-	      <textbox id="sv" maximum="100" size="2" tabindex="6"
-                   onchange="picker.fieldChange(this);"
-                   onkeypress="picker.keyPressed(event, this);"/>
-        </vbox>
-        <vbox align="center">            
-          <vbox id="radio-v" class="value-box selection-box"
-                  onclick="picker.selectField('v');">
-            <label value="V" tooltiptext="&picker.val;"/>
+        </hbox>
+        <hbox align="center" id="hsv-row" class="values-row">
+          <vbox align="center" >
+             <vbox id="radio-h" class="value-box selection-box"
+                   onclick="picker.selectField('hv');">
+	           <label value="H" class="selected"
+                      tooltiptext="&picker.hue;"/>
+             </vbox>
+	         <textbox id="hv" integer="true" maximum="360" size="2" tabindex="5"
+                      onchange="picker.fieldChange(this);"
+                      onkeypress="picker.keyPressed(event, this);"/>
           </vbox>
+          <vbox align="center">  
+            <vbox id="radio-s" class="value-box selection-box"
+                    onclick="picker.selectField('sv');">
+              <label value="S" tooltiptext="&picker.sat;"/>
+            </vbox>
+	        <textbox id="sv" maximum="100" size="2" tabindex="6"
+                     onchange="picker.fieldChange(this);"
+                     onkeypress="picker.keyPressed(event, this);"/>
+          </vbox>
+          <vbox align="center">            
+            <vbox id="radio-v" class="value-box selection-box"
+                    onclick="picker.selectField('v');">
+              <label value="V" tooltiptext="&picker.val;"/>
+            </vbox>
 	      <textbox id="v" maximum="100" size="2" tabindex="7"
                    onchange="picker.fieldChange(this);"
                    onkeypress="picker.keyPressed(event, this);"/>
-        </vbox>
-      </hbox>
-      <hbox align="center" id="opacity-row" class="values-row" hidden="true">
-        <hbox align="center" pack="end" flex="1">
-	        <label value="opacity:"  onclick="picker.selectField('a');"/>
-	        <textbox id="a" integer="true" maximum="100" size="2" tabindex="11"
-                   onchange="picker.fieldChange(this);"
-                   onkeypress="picker.keyPressed(event, this);"/>
+          </vbox>
         </hbox>
-      </hbox>
+        <hbox align="center" id="opacity-row" class="values-row" hidden="true">
+          <hbox align="center" pack="end" flex="1">
+	          <label value="opacity:"  onclick="picker.selectField('a');"/>
+	          <textbox id="a" integer="true" maximum="100" size="2" tabindex="11"
+                     onchange="picker.fieldChange(this);"
+                     onkeypress="picker.keyPressed(event, this);"/>
+          </hbox>
+        </hbox>
+        </vbox>
+      </vbox>
     </vbox>
-    </vbox>
-  </vbox>
-</hbox>
+  </row>
+ </rows>
+</grid>
 </vbox>
 </vbox>
 </window>

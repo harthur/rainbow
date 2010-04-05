@@ -77,6 +77,8 @@ var selector = {
     else
       event.target.parentNode.setAttribute("rainbowselector", "true");
 
+    rainbowc.get("selector-element").value = rainbowc.elementString(event.target);
+
     event.preventDefault();
     event.stopPropagation();
   },
@@ -102,8 +104,8 @@ var selector = {
       var txt = win.getComputedStyle(element, null).color;
       var font = getFont(element);
     }
-    var elementString = rainbowc.elementString(element);
-    picker.elementDisplay(bg, txt, font, elementString);
+
+    picker.elementDisplay(bg, txt, font);
 
     picker.url = element.ownerDocument.location.href;
     selector.selectedElement = element;
