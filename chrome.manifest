@@ -1,9 +1,0 @@
-content	rainbows chrome/content/
-
-locale	rainbows	en-US	chrome/locale/en-US/
-locale	rainbows	en-GB	chrome/locale/en-GB/
-
-skin	rainbows	classic/1.0	chrome/skin/
-
-overlay	chrome://browser/content/browser.xul	chrome://rainbows/content/overlay.xul
-overlay chrome://firebug/content/firebugOverlay.xul chrome://rainbows/content/firebugOverlay.xul
