@@ -8,7 +8,7 @@ body {
 
 #container {
   margin: 0 auto;
-  width: 800px;
+  width: 780px;
 }
 
 #header {
@@ -23,16 +23,19 @@ body {
   font-variant: small-caps;
 }
 
+.section {
+  margin-top: 54px;
+}
+
 .section-header {
   font-weight: bold;
   border-bottom: 1px dotted #ccc;
-}
-
-.sub-section {
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .sub-section-header {
+  padding: 6px;
+  margin-top: 8px;
 }
 
 img {
@@ -49,6 +52,21 @@ img {
       <div id="subtitle">color tools for firefox</div>
     </div>
     <div id="content">
+
+      <div class="section">
+        <div class="section-header">
+          Download
+        </div>
+        Rainbow is a Firefox addon that can be downloaded and installed from addons.mozilla.org: <a href="https://addons.mozilla.org/en-US/firefox/addon/14328/">https://addons.mozilla.org/en-US/firefox/addon/14328</a>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          Issues or Suggestions
+        </div>
+        Suggestions and bug reports are very welcome! If you have a github account, you can <a href="http://github.com/harthur/rainbow/issues">file an issue</a>. You can also just <a href="mailto:fayearthur@gmail.com"> email me</a>.
+      </div>
+
       <div class="section">
         <div class="section-header">
           Features
@@ -56,31 +74,32 @@ img {
 
         <div class="sub-section">
           <div class="sub-section-header">
-            inspector
+            Inspector
           </div>
           <img src="inspector.png">
           <img src="inspector_hover.png">
         </div>
 
-        <div class="sub-section">
-          <div class="sub-section-header">
-            website analyzer
-          </div>
-          <img src="analyzer_gh.png">
-        </div>
 
         <div class="sub-section">
           <div class="sub-section-header">
-            picker
+            Picker
           </div>
           <img src="picker.png">
         </div>
 
         <div class="sub-section">
           <div class="sub-section-header">
-            library
+            Website analyzer
           </div>
-          <img src="picker.png">
+          <img src="analyzer.png">
+        </div>
+
+        <div class="sub-section">
+          <div class="sub-section-header">
+            Library
+          </div>
+          <img src="library.png">
         </div>
       </div>
 
