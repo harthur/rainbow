@@ -36,10 +36,8 @@
 
 var selector = {
   start: function() {
-    var enumerator =  rainbowc.wm.getEnumerator("navigator:browser");
-    while(enumerator.hasMoreElements())
-      selector.addSelectionListeners(enumerator.getNext());
-
+    rainbowc.mapWindows(selector.addSelectionListeners);
+    
     // for drop indicator styling of webpage content
     rainbowc.registerSheet("chrome://rainbows/skin/selector.css", null, null);
     var button = document.getElementById("selector-button");
@@ -64,11 +62,7 @@ var selector = {
   }, 
 
   pause : function() {
-    var enumerator =  rainbowc.wm.getEnumerator("navigator:browser");
-    while(enumerator.hasMoreElements()) {
-      var win = enumerator.getNext();
-      selector.removeSelectionListeners(win);
-    }
+    rainbowc.mapWindows(selector.removeSelectionListeners);
   },
 
   mouseoverElement : function(event) {
@@ -116,27 +110,17 @@ var selector = {
   },
 
   addSelectionListeners : function(win) {
-    // skip main browser window, go straight to content windows
-    for (var i = 0; i < win.frames.length; i++) {
-      var frame = win.frames[i];
-      frame.addEventListener('mouseover', selector.mouseoverElement, true);
-      frame.addEventListener('mouseout', selector.mouseoutElement, true);
-      frame.addEventListener('click', selector.selectElement, true);
-      this.addSelectionListeners(frame);
-    }
+    win.addEventListener('mouseover', selector.mouseoverElement, true);
+    win.addEventListener('mouseout', selector.mouseoutElement, true);
+    win.addEventListener('click', selector.selectElement, true);
   },
 
   removeSelectionListeners : function(win) {
-    for (var i = 0; i < win.frames.length; i++) {
-      var frame = win.frames[i];
-      try {
-        frame.removeEventListener('mouseover', selector.mouseoverElement, true);
-        frame.removeEventListener('mouseout', selector.mouseoutElement, true);
-        frame.removeEventListener('click', selector.selectElement, true);
-     } 
-     catch(e) {}
-     this.removeSelectionListeners(frame);
-    }
+    try {
+      win.removeEventListener('mouseover', selector.mouseoverElement, true);
+      win.removeEventListener('mouseout', selector.mouseoutElement, true);
+      win.removeEventListener('click', selector.selectElement, true);
+    } catch(e) {}
   }
 };
 

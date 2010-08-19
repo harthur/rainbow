@@ -1,4 +1,4 @@
-var colorStorage = {}; Components.utils.import('resource://rainbows/colorStorage.js', colorStorage);
+var rainbowColorStorage = {}; Components.utils.import('resource://rainbows/colorStorage.js', rainbowColorStorage);
 
 var rainbowc = {
 
@@ -9,7 +9,7 @@ var rainbowc = {
   prefService : Components.classes['@mozilla.org/preferences-service;1']
              .getService(Components.interfaces.nsIPrefBranch2),
 
-  storage : colorStorage.ColorStorageService,
+  storage : rainbowColorStorage.ColorStorageService,
 
   observers : Components.classes["@mozilla.org/observer-service;1"]
               .getService(Components.interfaces.nsIObserverService),
@@ -280,6 +280,22 @@ var rainbowc = {
   openPrefs : function() {
     window.openDialog("chrome://rainbows/content/options.xul",
                       "", "chrome,all,dialog=yes");
+  },
+  
+  mapWindows : function(callback) {
+    var enumerator =  rainbowc.wm.getEnumerator("navigator:browser");
+    while(enumerator.hasMoreElements()) {
+      var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
+      rainbowc.mapNestedFrames(win, callback);
+    }
+  },
+  
+  mapNestedFrames : function(win, callback) {
+    for (var i = 0; i < win.frames.length; i++) {
+      var frame = win.frames[i].QueryInterface(Components.interfaces.nsIDOMWindow);
+      callback(frame);
+      rainbowc.mapNestedFrames(frame, callback);
+    }
   },
 }
 
