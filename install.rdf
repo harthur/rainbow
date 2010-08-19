@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>rainbow@colors.org</em:id>
     <em:name>Rainbow</em:name>
-    <em:version>0.9.5</em:version>
+    <em:version>0.9.6</em:version>
     <em:type>2</em:type>
     <em:creator>Heather Arthur</em:creator>
     <em:description>Color tools for web development</em:description>
