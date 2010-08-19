@@ -37,41 +37,35 @@ const Cc = Components.classes;
 const Ci = Components.interfaces;
 const DB_VERSION = 1;
 
-Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
-function ColorStorage() {
-  this.wrappedJSObject = this;
+var EXPORTED_SYMBOLS = ["ColorStorageService"];
 
-  this._obService = Components.classes["@mozilla.org/observer-service;1"]
-			      .getService(Components.interfaces.nsIObserverService);
+var obService = Components.classes["@mozilla.org/observer-service;1"]
+			          .getService(Components.interfaces.nsIObserverService);
 
-  /* initialize database and create if necessary */
-  var storageService = Cc["@mozilla.org/storage/service;1"]
-			      .getService(Ci.mozIStorageService);
-
-  var file = Cc["@mozilla.org/file/directory_service;1"]  
-             .getService(Components.interfaces.nsIProperties)  
-             .get("ProfD", Components.interfaces.nsIFile);
-  file.append("rainbow-easel");
-  if(!file.exists())
-    file.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0777);
-  file.append("rainbow-colors.sqlite");  
-
-  this._dbConnection = storageService.openDatabase(file);
-
-  if(this._dbConnection.schemaVersion == 0)
-    this._dbCreate();
-};
-
-ColorStorage.prototype = {
-  classDescription : "ColorStorage",
-  contractID : "@rainbow.org/colorstorage;1",
-  classID : Components.ID("{a4631c87-0b14-4c81-8241-b2f4a9b756cb}"),
-	QueryInterface: XPCOMUtils.generateQI([Ci.nsISupports]),
+var ColorStorageService = {
 
   _tables : {
     colors : "id INTEGER PRIMARY KEY ON CONFLICT REPLACE, date INTEGER, url TEXT",
     tagof : "id INTEGER, tag TEXT NOT NULL, date INTEGER"
+  },
+
+  /* initialize database and create if necessary */
+  initialize : function() {
+    var file = Cc["@mozilla.org/file/directory_service;1"]  
+               .getService(Components.interfaces.nsIProperties)  
+               .get("ProfD", Components.interfaces.nsIFile);
+    file.append("rainbow-easel");
+    if(!file.exists())
+      file.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0777);
+    file.append("rainbow-colors.sqlite");  
+
+    var storageService = Cc["@mozilla.org/storage/service;1"]
+                      	 .getService(Ci.mozIStorageService);
+    this._dbConnection = storageService.openDatabase(file);
+
+    if(this._dbConnection.schemaVersion == 0)
+      this._dbCreate();
   },
 
   addColor : function(color, tagstring, url) {
@@ -100,9 +94,9 @@ ColorStorage.prototype = {
 		
     /* notify those waiting on modification to color database */
     if(wasSaved)
-      this._obService.notifyObservers(null, "rainbow-color-edited", [color]);
+      obService.notifyObservers(null, "rainbow-color-edited", [color]);
     else
-      this._obService.notifyObservers(null, "rainbow-color-added", [color]);
+      obService.notifyObservers(null, "rainbow-color-added", [color]);
   },
 
   addTags : function(color, tagstring) {
@@ -120,7 +114,7 @@ ColorStorage.prototype = {
     }
 
     if(tags.length > 0)
-      this._obService.notifyObservers(null, "rainbow-color-edited", [color]);
+      obService.notifyObservers(null, "rainbow-color-edited", [color]);
   },
 
   removeColor : function(color) {
@@ -205,7 +199,7 @@ ColorStorage.prototype = {
   },
   
   colorsWithTag : function(tag) {
-    var colors = new Array();
+    var colors = [];
     var query = "SELECT DISTINCT id FROM tagof WHERE tag LIKE ?1";
     var statement = this._dbConnection.createStatement(query);
     statement.bindUTF8StringParameter(0, "%" + tag + "%");
@@ -217,7 +211,7 @@ ColorStorage.prototype = {
   },
 
   colorsWithUrl : function(url) {
-    var colors = new Array();
+    var colors = [];
     var query = "SELECT DISTINCT id FROM colors WHERE url LIKE ?1";
     var statement = this._dbConnection.createStatement(query);
     statement.bindUTF8StringParameter(0, "%" + url + "%");
@@ -229,7 +223,7 @@ ColorStorage.prototype = {
   },
 
   colorsMatching : function(filter) {
-    var colors = new Array();
+    var colors = [];
     var ands = this._stringToArray(filter);
 
     /* if it is comma-separated, find matches that have all tags */
@@ -269,7 +263,7 @@ ColorStorage.prototype = {
   },
 
   colorsMatchingTag : function(filter) {
-    var colors = new Array();
+    var colors = [];
     var ands = this._stringToArray(filter);
 
     /* if it is comma-separated, find matches that have all tags */
@@ -331,7 +325,7 @@ ColorStorage.prototype = {
   allColors : function() {
     var query = "SELECT DISTINCT id FROM colors";
     var statement = this._dbConnection.createStatement(query);
-    var colors = new Array();		
+    var colors = [];		
     while(statement.executeStep()) 
       colors.push(this._int32ToColor(statement.getInt32(0)));
     statement.reset();
@@ -341,7 +335,7 @@ ColorStorage.prototype = {
   allTags : function() {
     var query = "SELECT DISTINCT tag FROM tagof";
     var statement = this._dbConnection.createStatement(query);
-    var tags = new Array();		
+    var tags = [];		
     while(statement.executeStep()) 
       tags.push(statement.getUTF8String(0));
     statement.reset();		
@@ -351,7 +345,7 @@ ColorStorage.prototype = {
   recentTags : function() {
     var query = "SELECT DISTINCT tag FROM tagof ORDER BY date DESC LIMIT 10";
     var statement = this._dbConnection.createStatement(query);
-    var tags = new Array();		
+    var tags = [];		
     while(statement.executeStep()) 
       tags.push(statement.getUTF8String(0));
     statement.reset();		
@@ -431,9 +425,6 @@ ColorStorage.prototype = {
       this._dbConnection.executeSimpleSQL(statement);
     }
   }
-};
-
-let component = [ColorStorage];
-function NSGetModule(compMgr, fileSpec) {
-  return XPCOMUtils.generateModule(component);
 }
+
+ColorStorageService.initialize();

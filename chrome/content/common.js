@@ -1,3 +1,5 @@
+var colorStorage = {}; Components.utils.import('resource://rainbows/colorStorage.js', colorStorage);
+
 var rainbowc = {
 
   prefs :  Components.classes['@mozilla.org/preferences-service;1']
@@ -7,8 +9,7 @@ var rainbowc = {
   prefService : Components.classes['@mozilla.org/preferences-service;1']
              .getService(Components.interfaces.nsIPrefBranch2),
 
-  storage : Components.classes["@rainbow.org/colorstorage;1"]
-            .getService().wrappedJSObject,
+  storage : colorStorage.ColorStorageService,
 
   observers : Components.classes["@mozilla.org/observer-service;1"]
               .getService(Components.interfaces.nsIObserverService),

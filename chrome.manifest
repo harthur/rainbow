@@ -1,3 +1,5 @@
+resource rainbows resource/
+
 content	rainbows chrome/content/
 
 locale	rainbows	en-US	chrome/locale/en-US/
