@@ -78,9 +78,10 @@
     </menu>
   </menupopup>
 
-  <popup id="contentAreaContextMenu">
+  <menupopup id="contentAreaContextMenu">
     <menuseparator id="rainbow-context-separator" hidden="true"/>
-    <menu id="rainbow-context-menu" label="&rainbow.label;" class="menu-iconic"          image="chrome://rainbows/skin/favicon.png" hidden="true">
+    <menu id="rainbow-context-menu" label="&rainbow.label;" class="menu-iconic"
+          image="chrome://rainbows/skin/favicon.png" hidden="true">
       <menupopup>
         <menuitem id="rainbow-context-inspector"
                   label="&rainbow.menu.inspector.label;"
@@ -102,7 +103,7 @@
                   oncommand="rainbowAnalyzer.analyzePage();"/>
       </menupopup>
     </menu>
-  </popup>
+  </menupopup>
 
 
  
@@ -168,7 +169,7 @@
       </menu>
     </menupopup>
 
-    <popup id="rainbow-status-context">
+    <menupopup id="rainbow-status-context">
       <menuitem label="&rainbow.menu.inspector.label;"
                 oncommand="rainbowInspector.toggleInspector();"/>
       <menuitem label="&rainbow.menu.picker.label;"
@@ -180,7 +181,7 @@
       <menuseparator/>
       <menuitem label="&rainbow.menu.prefs.label;"
                 oncommand="rainbowc.openPrefs();"/>
-    </popup>
+    </menupopup>
 
     <html:canvas id="rainbow-inspector" style="display:none;" width="1px" height="1px"/>
 
