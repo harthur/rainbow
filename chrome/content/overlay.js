@@ -135,6 +135,14 @@ var colorPlay = {
     }
   },
 
+  applyDragOver : function(event) {
+    var color = event.dataTransfer.getData("text/rainbow-color");
+    if(colorCommon.isValid(color)) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  },
+
   applyDragLeave : function(event) {
     if(event.dataTransfer == null) {
       // sometimes this happens
@@ -159,6 +167,7 @@ var colorPlay = {
     container.addEventListener("drop", colorPlay.applyDrop, true);
     container.addEventListener("dragenter", colorPlay.applyDragEnter, true);
     container.addEventListener("dragleave", colorPlay.applyDragLeave, true);
+    container.addEventListener("dragover", colorPlay.applyDragOver, true);
 
     // for drop indicator styling of webpage content
     rainbowc.registerSheet("chrome://rainbows/skin/drag.css", null, null);
@@ -170,6 +179,7 @@ var colorPlay = {
     container.removeEventListener("drop", colorPlay.applyDrop, true);
     container.removeEventListener("dragenter", colorPlay.applyDragEnter, true);
     container.removeEventListener("dragleave", colorPlay.applyDragLeave, true);
+    container.removeEventListener("dragover", colorPlay.applyDragOver, true);
   }
 }
 
