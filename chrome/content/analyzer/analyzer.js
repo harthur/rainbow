@@ -74,12 +74,9 @@ var rainbowAnalyzer = {
       rainbowAnalyzer.numShowing = Math.min(limit, rainbowAnalyzer.colors.length);
       rainbowAnalyzer.showColors(rainbowAnalyzer.colors.slice(0, limit));
       rainbowc.get("rainbow-analyzer-footer").hidden = false;
-      
-      // TAKE OUT
-      // alert("pixels: " + event.data.pixelTime + " clustering : " + event.data.clusterTime 
-               // + " colors: " + rainbowAnalyzer.colors.length
-               // + " aliased: "  + event.data.aliased); 
-      //rainbowAnalyzer.worker.terminate(); // crashy crashy
+
+      /* alert("pixels: " + event.data.pixelTime + " clustering : " + event.data.clusterTime 
+               + " colors: " + rainbowAnalyzer.colors.length);  */
     };
 
     rainbowAnalyzer.worker.onerror = function() {

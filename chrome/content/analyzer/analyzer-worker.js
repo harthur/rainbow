@@ -34,7 +34,7 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-importScripts('clustering2.js', 'rgb.js');
+importScripts('rgb.js', 'clusterfck.js');
 
 onmessage = function(event) {
   var pixels = event.data.pixels;
@@ -42,12 +42,19 @@ onmessage = function(event) {
   var height = event.data.height;
 
   var t1 = Date.now();
-  var arr = getColors(pixels, width, height);
-  var allColors = arr[0];
+  var allColors = getColors(pixels, width, height);
   var t2 = Date.now();
-  var merged = mergeColors(allColors.slice(0, 460), width * height); // only merge top colors for speed
+
+  var colors = allColors.slice(0, 2400); // only merge top colors by frequency for speed
+  var threshold = 10;
+
+  var merged = mergeColors(colors, width * height, threshold).map(function(cluster) {
+    return cluster.canonical;
+  });
+  merged.sort(descendingSort);
+
   var t3 = Date.now();
-  postMessage({colors: merged, pixelTime: t2 - t1, clusterTime: t3 - t2, num: allColors.length, aliased: arr[1] / (width * height)});
+  postMessage({colors: merged, pixelTime: t2 - t1, clusterTime: t3 - t2, num: allColors.length});
 };
 
 
@@ -74,16 +81,119 @@ function getColors(data, width, height) {
   for(color in colorFrequency)
     colors.push({color: color, freq: colorFrequency[color]});
   colors.sort(descendingSort);
-  return [colors, aliased];
+  return colors;
 }
 
-function mergeColors(colors, numPixels) {
-  /* algorithm tweak point - defining when to call two colors different */
-  var dist = 9;
-
-  merged = clustering.mergeColors(colors, dist, numPixels);
-  merged.sort(descendingSort);
+function mergeColors(colors, numPixels, threshold) {
+  var items = colors.map(function(item) {
+    var color = item.color;
+    var freq = item.freq;
+    return {
+      mean: convertRGBtoLAB(color >> 16, color >> 8 & 0xff, color & 0xff),
+      num: 1,
+      color: color, // the canonical color of the cluster (one w/ highest freq or closest to mean)
+      colors : [color],
+      highFreq: freq,
+      highRatio : freq / numPixels,
+      highColor: color, // the individual color w/ the highest frequency in this cluster
+      ratio: freq / numPixels, // ratio of page taken up by colors in this cluster
+      freq: freq,
+    };
+  });
+  
+  var merged = clusterfck.hcluster(items, distance, merge, threshold);
   return merged;
+}
+
+function descendingSort(a, b){
+  return b.freq - a.freq; 
+}
+
+function distance(c1, c2) {
+  // don't cluster large blocks of color unless they're really similar  
+  var r1 = c1.highRatio;
+  var r2 = c2.highRatio;
+  var f1 = c1.highFreq;
+  var f2 = c2.highFreq;  
+  var handicap;
+  if((r1 > 0.2 && r2 > 0.2) || (f1 > 200000 && f2 > 200000))
+    handicap = 5; 
+  else if((r1 > 0.14 && r2 > 0.14) || (f1 > 100000 && f2 > 100000))
+    handicap = 4;
+  else if((r1 > 0.10 && r2 > 0.10) || (f1 > 90000 && f2 > 90000))
+    handicap = 3;
+  else if((r1 > 0.07 && r2 > 0.07) || (f1 > 76000 && f2 > 76000))
+    handicap = 2;
+  else
+    handicap = 0;
+
+  var dist = euclidean(c1.mean, c2.mean);
+
+  return dist + handicap;
+}
+
+function euclidean(col1, col2) {
+  return Math.sqrt(
+      Math.pow(col2[0] - col1[0], 2)
+    + Math.pow(col2[1] - col1[1], 2)
+    + Math.pow(col2[2] - col1[2], 2));
+}
+
+function merge(c1, c2) {
+  var rgb = c1.mean;
+  var r1 = rgb[0];
+  var g1 = rgb[1];
+  var b1 = rgb[2];
+
+  rgb = c2.mean;
+  var r2 = rgb[0];
+  var g2 = rgb[1];
+  var b2 = rgb[2];
+
+  /* algorithm tweak point - weighting the mean of the cluster */
+  var num1 = c1.freq;
+  var num2 = c2.freq;
+
+  var total = num1 + num2;
+
+  var mean = [(r1 * num1 + r2 * num2) / total , (g1 * num1 + g2 * num2) / total,
+             (b1 * num1 + b2 * num2) / total];
+  
+  var colors = c1.colors.concat(c2.colors);
+  
+  // get the canonical color of the new cluster
+  var color;
+  var avgFreq = colors.length /(c1.freq + c2.freq);
+  if((c1.highFreq > c2.highFreq) && (c1.highFreq > avgFreq*2))
+    color = c1.highColor;
+  else if(c2.highFreq > avgFreq*2)
+    color = c2.highColor;
+  else {
+    // if there's no stand-out color
+    var minDist = 1000, closest = 0;
+    for(var i = 0; i < colors.length; i++) {
+      var color = colors[i];
+      var lab = convertRGBtoLAB(color >> 16, color >> 8 & 0xff, color & 0xff);
+      var dist = euclidean(lab, mean);
+      if(dist < minDist) {
+        minDist = dist;
+        closest = i;
+      }
+    }
+    color = colors[closest];
+  }
+
+  return {
+    mean: mean,
+    num: c1.num + c2.num,
+    color: color,
+    highFreq:  c1.highFreq > c2.highFreq ? c1.highFreq : c2.highFreq,
+    highColor: c1.highFreq > c2.highFreq ? c1.highColor : c2.highColor,
+    highRatio : c1.highFreq > c2.highFreq ? c1.highRatio : c2.highRatio,
+    ratio: c1.ratio + c2.ratio,
+    freq: c1.freq + c2.freq,
+    colors : colors,
+  };
 }
 
 
@@ -135,7 +245,3 @@ function isEdgePixel(image, width, x, y) {
   } catch(e) {return false; /* was at the corner or of edge of website */}
 }
 
-
-function descendingSort(a, b){
-  return b.freq - a.freq; 
-}
