@@ -56,7 +56,7 @@
   <menupopup id="menu_ToolsPopup">
     <menu id="rainbow-menu" label="&rainbow.label;" class="menu-iconic"
           image="chrome://rainbows/skin/favicon.png">
-      <menupopup>
+      <menupopup id="rainbow-popup">
         <menuitem id="rainbow-menu-inspector"
                   label="&rainbow.menu.inspector.label;"
                   accesskey="&rainbow.menu.inspector.accesskey;"
@@ -74,9 +74,40 @@
                   label="&rainbow.menu.analyzer.label;"
                   accesskey="&rainbow.menu.analyzer.accesskey;"
                   oncommand="rainbowAnalyzer.analyzePage();"/>
+        <menuseparator/>
+        <menuitem label="&rainbow.menu.prefs.label;"
+                  oncommand="rainbowc.openPrefs();"/>
       </menupopup>
     </menu>
   </menupopup>
+  
+  <vbox id="appmenuPrimaryPane">
+  <menu id="rainbow-menu" label="&rainbow.label;" class="menu-iconic"
+        image="chrome://rainbows/skin/favicon.png" insertafter="appmenu_webDeveloper">
+    <menupopup>
+      <menuitem id="rainbow-menu-inspector"
+                label="&rainbow.menu.inspector.label;"
+                accesskey="&rainbow.menu.inspector.accesskey;"
+                key="rainbow-inspector-key"
+                oncommand="rainbowInspector.toggleInspector();"/>
+      <menuitem id="rainbow-menu-picker"
+                label="&rainbow.menu.picker.label;"
+                accesskey="&rainbow.menu.picker.accesskey;"
+                oncommand="rainbowc.openPicker();"/>
+      <menuitem id="rainbow-menu-library"
+                label="&rainbow.menu.library.label;"
+                accesskey="&rainbow.menu.library.accesskey;"
+                oncommand="rainbowc.openLibrary();"/>
+      <menuitem id="rainbow-menu-analyzer"
+                label="&rainbow.menu.analyzer.label;"
+                accesskey="&rainbow.menu.analyzer.accesskey;"
+                oncommand="rainbowAnalyzer.analyzePage();"/>
+      <menuseparator/>
+      <menuitem label="&rainbow.menu.prefs.label;"
+                oncommand="rainbowc.openPrefs();"/>
+    </menupopup>
+    </menu>
+  </vbox>
 
   <menupopup id="contentAreaContextMenu">
     <menuseparator id="rainbow-context-separator" hidden="true"/>
@@ -106,8 +137,6 @@
   </menupopup>
 
 
- 
-
   <statusbar id="status-bar">
    <statusbarpanel id="rainbow-statusbar"
                    class="statusbarpanel-iconic"
@@ -115,7 +144,14 @@
                    hidden="true"
                    context="rainbow-status-context"/>
   </statusbar>
-
+  
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="rainbow-toolbarbutton"
+      class="toolbarbutton-1 chromeclass-toolbar-additional"
+      tooltiptext="&rainbow.label;"
+      oncommand="colorPlay.statusBarClicked();"
+      image="chrome://rainbows/skin/favicon.png"/>
+  </toolbarpalette>
 
   <window id="main-window" xmlns:html="http://www.w3.org/1999/xhtml">
     <menupopup id="rainbow-swatch-context" onpopupshowing="rainbowInspector.onContextShowing()">

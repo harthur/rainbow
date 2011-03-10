@@ -88,7 +88,7 @@ var colorPlay = {
   },
 
   statusBarClicked : function(event) {
-    if(event.button != 0)
+    if(event && event.button != 0)
       return;
 
     switch(rainbowc.prefs.getCharPref("statusbar.action")) {
