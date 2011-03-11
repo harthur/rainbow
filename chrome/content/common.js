@@ -194,6 +194,9 @@ var rainbowc = {
     var browser = document.getElementById("content");
     var content = browser.mPanelContainer.boxObject;
     panel.style.backgroundColor = "white";
+    
+    var anchor = document.getElementById("addon-bar")
+      || document.getElementById("status-bar");
 
     switch(loc) {
       case 'nw':
@@ -204,10 +207,10 @@ var rainbowc = {
        panel.openPopupAtScreen(x, content.screenY, false);
        break;
       case 'sw':
-       panel.openPopup(document.getElementById("status-bar"), "before_start", 0, 0);
+       panel.openPopup(anchor, "before_start", 0, 0);
        break;
       case 'se':
-       panel.openPopup(document.getElementById("status-bar"), "before_end", 0, 0);
+       panel.openPopup(anchor, "before_end", 0, 0);
        break;
     }
   },
