@@ -51,7 +51,6 @@ var rainbowAnalyzer = {
     
     rainbowc.openPanel(panel, "se", 650, 150);
     setTimeout(function() {
-      rainbowc.openPanel(panel, "se", 650, 150); // open it again for bug 641030
       rainbowAnalyzer.getPixels();  // otherwise panel won't show immediately on Win
     }, 200);
   },

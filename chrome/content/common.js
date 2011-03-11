@@ -198,7 +198,6 @@ var rainbowc = {
     var anchor = document.getElementById("addon-bar")
       || document.getElementById("status-bar");
     
-    alert(rainbowc.getPlatform() + "\n");
     var x, y;
     switch(loc) {
       case 'nw':
