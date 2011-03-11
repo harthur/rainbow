@@ -75,6 +75,7 @@ var rainbowAnalyzer = {
       rainbowAnalyzer.showColors(rainbowAnalyzer.colors.slice(0, limit));
       rainbowc.get("rainbow-analyzer-footer").hidden = false;
 
+      rainbowc.openPanel(panel, "se"); // reopen panel for bug 641030
       /* alert("pixels: " + event.data.pixelTime + " clustering : " + event.data.clusterTime 
                + " colors: " + rainbowAnalyzer.colors.length);  */
     };
