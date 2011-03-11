@@ -190,24 +190,44 @@ var rainbowc = {
     return string;
   },
 
-  openPanel : function(panel, loc) {
+  openPanel : function(panel, loc, width, height) {
     var browser = document.getElementById("content");
     var content = browser.mPanelContainer.boxObject;
     panel.style.backgroundColor = "white";
-
+    
+    var anchor = document.getElementById("addon-bar")
+      || document.getElementById("status-bar");
+    
+    alert(rainbowc.getPlatform() + "\n");
+    var x, y;
     switch(loc) {
       case 'nw':
-       panel.openPopupAtScreen(content.screenX, content.screenY, false);
-       break;
+        x = content.screenX;
+        y = content.screenY;
+        panel.openPopupAtScreen(x, y, false);
+        break;
       case 'ne':
-       var x = content.screenX + browser.contentWindow.innerWidth - 126;
-       panel.openPopupAtScreen(x, content.screenY, false);
-       break;
+        x = content.screenX + browser.contentWindow.innerWidth - width;
+        y = content.screenY;
+        panel.openPopupAtScreen(x, y, false);
+        break;
       case 'sw':
-       panel.openPopup(document.getElementById("status-bar"), "before_start", 0, 0);
+       if(rainbowc.getPlatform() == "Linux") {
+         x = content.screenX;
+         y = content.screenY + browser.contentWindow.innerHeight - height;
+         panel.openPopupAtScreen(x, y, false);
+       }
+       else
+         panel.openPopup(anchor, "before_start", 0, 0);
        break;
       case 'se':
-       panel.openPopup(document.getElementById("status-bar"), "before_end", 0, 0);
+       if(rainbowc.getPlatform() == "Linux") {
+         x = content.screenX + browser.contentWindow.innerWidth - width;
+         y = content.screenY + browser.contentWindow.innerHeight - height;
+         panel.openPopupAtScreen(x, y, false);
+       }
+       else
+         panel.openPopup(anchor, "before_end", 0, 0);
        break;
     }
   },
