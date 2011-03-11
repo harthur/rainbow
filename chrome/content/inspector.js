@@ -50,7 +50,7 @@ var rainbowInspector = {
    
     var prefs = rainbowc.prefs;
     var location = prefs.getCharPref("inspector.location");
-    rainbowc.openPanel(rainbowc.get("rainbow-swatch"), location);  
+    rainbowc.openPanel(rainbowc.get("rainbow-swatch"), location, 60, 60);  
 
     rainbowInspector.format = prefs.getCharPref("format");
 

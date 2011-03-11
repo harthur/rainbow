@@ -48,9 +48,11 @@ var rainbowAnalyzer = {
 
     rainbowc.get("rainbow-analyzer-close").tooltipText = rainbowc.getString("rainbow.cancel");
     rainbowc.get("rainbow-analyzer-footer").hidden = true;
-
-    rainbowc.openPanel(panel, "se");
-    setTimeout("rainbowAnalyzer.getPixels()", 200); // otherwise panel won't show immediately
+    
+    rainbowc.openPanel(panel, "se", 650, 150);
+    setTimeout(function() {
+      rainbowAnalyzer.getPixels();  // otherwise panel won't show immediately on Win
+    }, 200);
   },
 
   getPixels : function() {
@@ -74,6 +76,9 @@ var rainbowAnalyzer = {
       rainbowAnalyzer.numShowing = Math.min(limit, rainbowAnalyzer.colors.length);
       rainbowAnalyzer.showColors(rainbowAnalyzer.colors.slice(0, limit));
       rainbowc.get("rainbow-analyzer-footer").hidden = false;
+      
+      var panel = rainbowc.get("rainbow-analyzer-panel");
+      rainbowc.openPanel(panel, "se", 650, 150);
 
       /* alert("pixels: " + event.data.pixelTime + " clustering : " + event.data.clusterTime 
                + " colors: " + rainbowAnalyzer.colors.length);  */
