@@ -333,14 +333,6 @@ var library = {
     }
     treeView.setFiltered(filtered);
   },
- 
-  ascendingSort : function(a, b) {
-    return a[0] - b[0]; 
-  },
-
-  descendingSort : function(a, b) {
-    return b[0] - a[0];
-  },
 
   sortColumn : function(col, filtered, startup) { 
     if(!filtered)
@@ -370,27 +362,30 @@ var library = {
         case 'date':
           metric = rainbowc.storage.dateOf(color);
           break;
+        case 'url':
+          metric = rainbowc.storage.urlOf(color) || "";
+          break;
+        case 'tags':
+          metric = rainbowc.storage.tagsOf(color);
+          break;
         default:
           break;        
       }
       colors.push([metric, color]);
     }
 
+    colors.sort();
     if(startup) {
-      if(col.getAttribute("sortDirection") == "ascending")
-        colors.sort(library.ascendingSort);
-      else
-        colors.sort(library.descendingSort);
+      if(col.getAttribute("sortDirection") == "descending")
+        colors.reverse();
     }
     else if(col.getAttribute("sortActive") == "true") {
       if(col.getAttribute("sortDirection") == "ascending") {
         col.setAttribute("sortDirection", "descending");
-        colors.sort(library.descendingSort);
+        colors.reverse();
       }
-      else {
+      else
         col.setAttribute("sortDirection", "ascending");
-        colors.sort(library.ascendingSort);
-      }
     }
     else {
       var cols = document.getElementsByClassName("sortable");
@@ -400,7 +395,6 @@ var library = {
       }
       col.setAttribute("sortActive", "true");
       col.setAttribute("sortDirection", "ascending");
-      colors.sort(library.ascendingSort);
     }
   
     var sorted = [];

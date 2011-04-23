@@ -251,10 +251,15 @@
       <splitter class="tree-splitter"        resizeafter="farthest"/>
       <treecol id="col-tags" class="sortable" 
          label="&columns.tags.label;" editable="true" flex="5"
+         sortType="tags"
+         onclick="library.sortColumn(this);"
          persist="width hidden ordinal sortActive sortDirection"/>
       <splitter class="tree-splitter"        resizeafter="farthest"/>
       <treecol id="col-url" label="&columns.url.label;" flex="3"
+         class="sortable"
          persist="width hidden ordinal sortActive sortDirection"
+         sortType="url"
+         onclick="library.sortColumn(this);"
          tooltiptext="&columns.url.tooltip;"/>
       <splitter class="tree-splitter"        resizeafter="farthest"/>
       <treecol id="col-date" class="sortable" 
