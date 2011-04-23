@@ -374,7 +374,10 @@ var library = {
       colors.push([metric, color]);
     }
 
-    colors.sort();
+    colors.sort(function(a, b) {
+      return a[0] > b[0]; 
+    });
+
     if(startup) {
       if(col.getAttribute("sortDirection") == "descending")
         colors.reverse();
