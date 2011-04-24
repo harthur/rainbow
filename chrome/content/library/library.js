@@ -54,7 +54,10 @@ var library = {
     var urlHidden = document.getElementById("col-url").hidden;
     if(urlHidden)
       filterBox.emptyText = rainbowc.getString("rainbow.library.bytag");
-    filterBox.focus();
+    if(!colors.length)
+      filterBox.emptyText = rainbowc.getString("rainbow.library.empty");
+    else
+      filterBox.focus();
 
     if(window.arguments && window.arguments[0]) {
       var color = window.arguments[0];
