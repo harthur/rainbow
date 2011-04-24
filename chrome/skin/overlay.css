@@ -2,12 +2,6 @@
   list-style-image: url('chrome://rainbows/skin/favicon.png');
 }
 
-.rainbow-swatch {
-  height : 100px;
-  width : 100px;
-  max-width : 128px;
-}
-
 #rainbow-analyzer-container {
   margin-left: 16px;
   margin-right: 16px;
@@ -98,8 +92,6 @@
 }
 
 #rainbow-swatch {
-  height : 122px;
-  width : 126px;
   max-width : 128px;
   border : 1px solid grey;
   -moz-user-focus: normal;
@@ -124,6 +116,17 @@
  margin-top : 5px;
  max-width: 70px;
  overflow: hidden;
+}
+
+.rainbow-highlight {
+  margin: 3px;
+  padding: 1px;
+  border: 1px solid white;
+  box-shadow: 0 0 1em white,
+    inset 0 0 1em white;
+  -moz-box-shadow: 0 0 1em white,
+    inset 0 0 1em white;
+  border-radius: 3px;
 }
 
 .rainbow-top-button {

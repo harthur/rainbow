@@ -268,7 +268,7 @@
            context="rainbow-swatch-context">
       <vbox id="rainbow-swatch-content">
         <stack id="rainbow-swatch-stack">
-          <hbox flex="1" top="0px" left="0px">
+          <hbox flex="1" top="0px" left="0px" id="rainbow-colorval-box">
             <label id="rainbow-swatch-colorval"
                    ondragstart="rainbowInspector.applyStart(event);" 
                    ondragend="rainbowInspector.applyEnd(event);"

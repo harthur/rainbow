@@ -27,6 +27,8 @@
 <!ENTITY nodename.accesskey "E">
 <!ENTITY coordinates.label "Show coordinates">
 <!ENTITY coordinates.accesskey "C">
+<!ENTITY autocopy.label "Auto copy colour on click">
+<!ENTITY autocopy.accesskey "A">
 <!ENTITY follow.label "Show swatch next to mouse pointer">
 <!ENTITY follow.accesskey "P">
 

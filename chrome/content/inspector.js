@@ -57,8 +57,11 @@ var rainbowInspector = {
     if(rainbowc.getFirefoxVersion() >= 3.6)
       rainbowInspector.canMove = true; // bug 474149
     rainbowInspector.follow = rainbowInspector.canMove && prefs.getBoolPref("inspector.followMouse");
+    rainbowInspector.autoCopy = prefs.getBoolPref("inspector.autoCopy");
+    rainbowInspector.hideStats = rainbowInspector.follow 
+      && !rainbowInspector.autoCopy && !prefs.getBoolPref("inspector.alwaysShow");
 
-    if(rainbowInspector.follow)
+    if(rainbowInspector.hideStats)
       rainbowInspector.shrink();
     else
       rainbowInspector.expand();
@@ -120,7 +123,7 @@ var rainbowInspector = {
     while(enumerator.hasMoreElements()) {
       var win = enumerator.getNext();
       win.addEventListener("mousemove", rainbowInspector.inspectPixel, true);
-      win.addEventListener("click", rainbowInspector.fixPixel, true);
+      win.addEventListener("click", rainbowInspector.pageClick, true);
       rainbowc.preventEvents(win, rainbowInspector.mouseEvents);
     }
   },
@@ -131,7 +134,7 @@ var rainbowInspector = {
       var win = enumerator.getNext(); 
       try {
         win.removeEventListener("mousemove", rainbowInspector.inspectPixel, true);
-        win.removeEventListener("click", rainbowInspector.fixPixel, true);
+        win.removeEventListener("click", rainbowInspector.pageClick, true);
         rainbowc.allowEvents(win, rainbowInspector.mouseEvents);
       } catch(e) { }
     }
@@ -157,9 +160,30 @@ var rainbowInspector = {
     }
   },
 
-  fixPixel : function (event) {
+  pageClick : function (event) {
     rainbowInspector.stopInspecting();
     rainbowInspector.startFix(event);
+
+    if(rainbowInspector.autoCopy) {
+      var notification = rainbowc.get("rainbow-swatch-colorval");
+      if(event.button == 2) {
+        // right click
+        rainbowInspector.autoBookmark();
+        notification.value = "✓ " + rainbowc.getString("rainbow.saved"); 
+      }
+      else {
+        rainbowInspector.copyColor();
+        notification.value = "✓ " + rainbowc.getString("rainbow.copied");
+      }
+      var box = rainbowc.get("rainbow-colorval-box");
+      box.classList.add("rainbow-highlight");
+      
+      // wait till they see 'color copied'
+      window.setTimeout(function() {
+        rainbowInspector.stopInspector();
+        box.classList.remove("rainbow-highlight");
+      }, 600);
+    }
 
     event.preventDefault();
     event.stopPropagation();
@@ -173,8 +197,10 @@ var rainbowInspector = {
     if(event)
       rainbowInspector.inspectPixel(event); // get it started
     
-    if(rainbowInspector.follow)
+    if(rainbowInspector.hideStats)
       rainbowInspector.shrink();
+    else
+      rainbowInspector.expand();
   },
 
   startFix : function (event) {
@@ -329,7 +355,7 @@ var rainbowInspector = {
   switchFormat : function(event) {
     var newFormat;
     switch(rainbowInspector.format) {
-      case 'plain':
+      case 'plain': default:
         newFormat = 'hex';
         break;
       case 'hex':
@@ -344,12 +370,36 @@ var rainbowInspector = {
       case 'hsl':
         newFormat = 'plain';
         break;
-      default:
-        newFormat = 'hex';
-        break;
     }
     rainbowc.prefs.setCharPref("format", newFormat);
     event.stopPropagation();
+    
+    rainbowInspector.resizeSwatch();
+  },
+  
+  resizeSwatch : function() {
+    var swatch = rainbowc.get("rainbow-swatch");
+    var width = 126, height = 122;
+    switch(rainbowInspector.format) {
+      case 'plain':
+        width = 70;
+        height = 70;
+        break;
+      case 'hex': default:
+        width = 76;
+        height = 76;
+        break;
+      case 'rgb':
+        width = 124;
+        height = 118;
+        break;
+      case 'per': case 'hsl':
+        width: 130;
+        height: 124;
+        break;
+    }
+    swatch.style.width = width + "px";
+    swatch.style.height = height + "px";
   },
 
   formatChanged : function() {
@@ -404,12 +454,11 @@ var rainbowInspector = {
 
   expand : function() {
     var swatch = rainbowc.get("rainbow-swatch");
-    swatch.style.width = "126px";
-    swatch.style.height = "122px";
+    rainbowInspector.resizeSwatch();
     rainbowInspector.showDisplay();
   },
 
-  showOnHover : function(event) {
+  showOnHover : function() {
     if(rainbowc.prefs.getBoolPref("inspector.showCoordinates"))
       rainbowc.get("rainbow-swatch-coords").hidden = false;
     else
@@ -420,7 +469,24 @@ var rainbowInspector = {
       rainbowc.get("rainbow-swatch-nodeName").hidden = true;
     rainbowc.get("rainbow-swatch-colorval").hidden = false;
     rainbowc.get("rainbow-swatch-buttons").hidden = false;
-    rainbowc.get("rainbow-swatch-top-buttons").hidden = false;
+    var topButtons = rainbowc.get("rainbow-swatch-top-buttons");
+    topButtons.hidden = false;
+    var left;
+    switch(rainbowInspector.format) {
+      case 'plain':
+        left = 70;
+        break;
+      case 'hex': default:
+        left = 70;
+        break;
+      case 'rgb':
+        left = 85;
+        break;
+      case 'per': case 'hsl':
+        left = 90;
+        break;
+    }
+    topButtons.left = left + "px";
   },
 
   hideOnHover : function(event) {
@@ -561,5 +627,10 @@ var rainbowInspector = {
     window.openDialog("chrome://rainbows/content/editBookmark.xul",
                   "Window:EditColor", "all,dialog=yes,resizable=no,centerscreen",
                   {colors: [swatch.color], url: swatch.url, button: button} );
+  },
+  
+  autoBookmark : function() {
+    var swatch = rainbowc.get("rainbow-swatch");
+    rainbowc.storage.addColor(colorCommon.toHex(swatch.color), "", swatch.url);
   }
 }

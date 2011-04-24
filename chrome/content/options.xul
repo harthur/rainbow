@@ -46,7 +46,7 @@
       <preference id="copydiffpref" name="extensions.rainbows.copyDifferent" type="bool"/>
       <preference id="copypref" name="extensions.rainbows.copyFormat" type="string"/>
       <preference id="wholepref" name="extensions.rainbows.wholeNumbers" type="bool"/>
-      <preference id="statspref" name="extensions.rainbows.inspector.alwaysShow" type="bool" inverted="true"/>
+      <preference id="autopref" name="extensions.rainbows.inspector.autoCopy" type="bool"/>
       <preference id="nodepref" name="extensions.rainbows.inspector.showNodeName" type="bool"/>
       <preference id="coorspref" name="extensions.rainbows.inspector.showCoordinates" type="bool"/>
       <preference id="statuspref" name="extensions.rainbows.statusbar.show" type="bool"/>
@@ -85,6 +85,7 @@
     </groupbox>
     <groupbox>
       <caption label="&inspector.label;"/>
+      <checkbox preference="autopref" label="&autocopy.label;" accesskey="&autocopy.accesskey;"/>
       <checkbox preference="nodepref" label="&nodename.label;" accesskey="&nodename.accesskey;"/>
       <checkbox preference="coorspref" label="&coordinates.label;" accesskey="&coordinates.accesskey;"/>
       <checkbox id="follow-box" preference="followpref" label="&follow.label;" accesskey="&follow.accesskey;"/>
