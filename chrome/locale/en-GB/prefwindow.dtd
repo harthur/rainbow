@@ -32,7 +32,4 @@
 <!ENTITY follow.label "Show swatch next to mouse pointer">
 <!ENTITY follow.accesskey "P">
 
-<!ENTITY analyzer.limit.label "Number of colours to show: ">
-<!ENTITY analyzer.limit.accesskey "N">
-
 
