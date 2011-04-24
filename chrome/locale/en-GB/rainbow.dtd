@@ -11,7 +11,7 @@
 <!ENTITY rainbow.menu.prefs.label "Settings">
 
 <!ENTITY rainbow.inspector.copy.label "Copy">
-<!ENTITY rainbow.inspector.bookmark.label "Bookmark">
+<!ENTITY rainbow.inspector.bookmark.label "Save">
 <!ENTITY rainbow.inspector.close.tooltip "Close inspector">
 <!ENTITY rainbow.inspector.resume.tooltip "Resume inspecting">
 <!ENTITY rainbow.context.open.label "Open in colour picker">
@@ -21,8 +21,8 @@
 
 <!ENTITY rainbow.analyzer.copyall "Copy All">
 <!ENTITY rainbow.analyzer.copy.accesskey "C">
-<!ENTITY rainbow.analyzer.bookmarkall "Bookmark All">
-<!ENTITY rainbow.analyzer.bookmark.accesskey "B">
+<!ENTITY rainbow.analyzer.bookmarkall "Save All">
+<!ENTITY rainbow.analyzer.bookmark.accesskey "S">
 <!ENTITY rainbow.analyzer.limit "Change Limit">
 <!ENTITY rainbow.analyzer.limit.accesskey "L">
 <!ENTITY rainbow.analyzer.progress "Extracting colours from">

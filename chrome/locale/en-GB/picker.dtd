@@ -2,8 +2,8 @@
 
 <!ENTITY picker.copy.label "Copy">
 <!ENTITY picker.copy.accesskey "C">
-<!ENTITY picker.bookmark.label "Bookmark">
-<!ENTITY picker.bookmark.accesskey "B">
+<!ENTITY picker.bookmark.label "Save">
+<!ENTITY picker.bookmark.accesskey "S">
 <!ENTITY picker.select.tooltip "Select element to preview">
 <!ENTITY picker.inspect.tooltip "Inspect pixel on browser">
 
