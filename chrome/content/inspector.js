@@ -162,13 +162,13 @@ var rainbowInspector = {
 
   pageClick : function (event) {
     rainbowInspector.stopInspecting();
-    rainbowInspector.startFix(event);
 
     if(rainbowInspector.autoCopy) {
       var notification = rainbowc.get("rainbow-swatch-colorval");
       if(event.button == 2) {
         // right click
-        rainbowInspector.autoBookmark();
+        var url = event.target.ownerDocument.location.href;
+        rainbowInspector.autoBookmark(url);
         notification.value = "✓ " + rainbowc.getString("rainbow.saved"); 
       }
       else {
@@ -184,6 +184,8 @@ var rainbowInspector = {
         box.classList.remove("rainbow-highlight");
       }, 600);
     }
+    else
+      rainbowInspector.startFix(event);
 
     event.preventDefault();
     event.stopPropagation();
@@ -629,8 +631,8 @@ var rainbowInspector = {
                   {colors: [swatch.color], url: swatch.url, button: button} );
   },
   
-  autoBookmark : function() {
+  autoBookmark : function(url) {
     var swatch = rainbowc.get("rainbow-swatch");
-    rainbowc.storage.addColor(colorCommon.toHex(swatch.color), "", swatch.url);
+    rainbowc.storage.addColor(colorCommon.toHex(swatch.color), "", url);
   }
 }

@@ -146,6 +146,12 @@
   height: 2.4em;
 }
 
+.rainbow-swatch {
+  height : 100px;
+  width : 100px;
+  max-width : 128px;
+}
+
 #rainbow-swatch [rainbow-platform="Mac"] #rainbow-swatch-stats{
   height: 3em;
 }

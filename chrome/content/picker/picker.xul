@@ -123,6 +123,7 @@
     <toolbarbutton id="bookmark-button" label="&picker.bookmark.label;"
                    accesskey="&picker.bookmark.accesskey;"
                    oncommand="picker.bookmark();"/>
+    <spacer flex="1"/>
     <toolbarbutton id="selector-button" tooltiptext="&picker.select.tooltip;"
                    type="checkbox"
                    oncommand="selector.start();">
