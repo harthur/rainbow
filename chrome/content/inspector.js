@@ -50,7 +50,7 @@ var rainbowInspector = {
    
     var prefs = rainbowc.prefs;
     var location = prefs.getCharPref("inspector.location");
-    rainbowc.openPanel(rainbowc.get("rainbow-swatch"), location, 60, 60);  
+    rainbowc.openPanel(rainbowc.get("rainbow-swatch"), location, 100, 100);  
 
     rainbowInspector.format = prefs.getCharPref("format");
 
@@ -84,28 +84,7 @@ var rainbowInspector = {
   },
 
   getSwatchLocation : function() {
-    var browser = rainbowc.get("content");
-    var content = browser.mPanelContainer;
-    var bleft = content.boxObject.screenX; 
-    var btop = content.boxObject.screenY;
-    var bright = bleft + browser.contentWindow.innerWidth;
-    var bbottom = btop + browser.contentWindow.innerHeight;
-
-    var swatch = rainbowc.get("rainbow-swatch");
-    var sleft = swatch.boxObject.screenX;
-    var stop = swatch.boxObject.screenY;
-    var sright = sleft + swatch.boxObject.width;
-    var sbottom = stop + swatch.boxObject.height;
-
-    if(Math.abs(sleft - bleft) < 200 && Math.abs(stop - btop) < 200)
-      return "nw";
-    if(Math.abs(sleft - bleft) < 200 && Math.abs(sbottom - bbottom) < 200)
-      return "sw";
-    if(Math.abs(sright - bright) < 200 && Math.abs(stop - btop) < 200)
-      return "ne";
-    if(Math.abs(sright - bright) < 200 && Math.abs(sbottom - bbottom) < 200)
-      return "se";
-    return "se";
+    return "ne";
   },
 
   startInspecting : function() {
