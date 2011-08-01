@@ -62,13 +62,10 @@ var rainbowAnalyzer = {
     var msg = rainbowc.getString("rainbow.analyzer.analyzing");
     rainbowc.get("rainbow-analyzer-progress-msg").value = msg;
 
-    if(rainbowAnalyzer.worker)
-      rainbowAnalyzer.worker.terminate(); // cancel any previous worker
-
     // put time-consuming clustering on a worker thread
     rainbowAnalyzer.worker = new Worker("chrome://rainbows/content/analyzer/analyzer-worker.js");
     
-    rainbowAnalyzer.worker.onmessage = function(event){
+    rainbowAnalyzer.worker.onmessage = function(event) {
       rainbowAnalyzer.colors = event.data.colors;
       rainbowAnalyzer.resetExpander();
       rainbowc.get("rainbow-analyzer-progress").hidden = true;
@@ -84,7 +81,9 @@ var rainbowAnalyzer = {
                + " colors: " + rainbowAnalyzer.colors.length);  */
     };
 
-    rainbowAnalyzer.worker.onerror = function() {
+    rainbowAnalyzer.worker.onerror = function(event) {
+      if (!event.data)
+        return;
       var error = rainbowc.getString("rainbow.analyzer.error");
       rainbowc.get("rainbow-analyzer-progress-msg").value = error;
     };
