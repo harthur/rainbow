@@ -56,6 +56,31 @@ var colorPlay = {
     document.getElementById("rainbow-context-separator").setAttribute("hidden", show);
 
     colorPlay.addDragListeners();
+    colorPlay.addToolbarButton();
+  },
+
+  addToolbarButton : function() {
+    // automatically add toolbar button to toolbar on first install - from Firebug
+    if (rainbowc.prefs.getBoolPref("toolbar.added"))
+      return;
+
+    rainbowc.prefs.setBoolPref("toolbar.added", true);
+
+    // Get the current navigation bar button set and append id
+    var navBar = document.getElementById("nav-bar"),
+        currentSet = navBar.currentSet,
+        buttonId = "rainbow-toolbarbutton",
+        toolButton = document.getElementById(buttonId);
+
+    // Append only if the button is not already there.
+    var curSet = currentSet.split(",");
+    if (curSet.indexOf("rainbow-toolbarbutton") == -1) {
+      navBar.insertItem("rainbow-toolbarbutton");
+      navBar.setAttribute("currentset", navBar.currentSet);
+      document.persist("nav-bar", "currentset");
+       
+      top.BrowserToolboxCustomizeDone(true);
+    }
   },
 
   onUnLoad : function() {

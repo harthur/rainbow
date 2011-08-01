@@ -150,7 +150,41 @@
       class="toolbarbutton-1 chromeclass-toolbar-additional"
       tooltiptext="&rainbow.label;"
       oncommand="colorPlay.statusBarClicked();"
-      image="chrome://rainbows/skin/favicon.png"/>
+      image="chrome://rainbows/skin/favicon.png"
+      type="menu-button">
+        <menupopup>
+          <menuitem id="rainbow-toolbar-inspector"
+                    label="&rainbow.menu.inspector.label;"
+                    accesskey="&rainbow.menu.inspector.accesskey;"
+                    key="rainbow-inspector-key"
+                    oncommand="rainbowInspector.startInspector();
+                      event.stopPropagation();
+                      event.preventDefault();"/>
+          <menuitem id="rainbow-toolbar-picker"
+                    label="&rainbow.menu.picker.label;"
+                    accesskey="&rainbow.menu.picker.accesskey;"
+                    oncommand="rainbowc.openPicker();
+                      event.stopPropagation();
+                      event.preventDefault();"/>
+          <menuitem id="rainbow-toolbar-library"
+                    label="&rainbow.menu.library.label;"
+                    accesskey="&rainbow.menu.library.accesskey;"
+                    oncommand="rainbowc.openLibrary();
+                      event.stopPropagation();
+                      event.preventDefault();"/>
+          <menuitem id="rainbow-toolbar-analyzer"
+                    label="&rainbow.menu.analyzer.label;"
+                    accesskey="&rainbow.menu.analyzer.accesskey;"
+                    oncommand="rainbowAnalyzer.analyzePage();
+                      event.stopPropagation();
+                      event.preventDefault();"/>
+          <menuseparator/>
+          <menuitem label="&rainbow.menu.prefs.label;"
+                    oncommand="rainbowc.openPrefs();
+                      event.stopPropagation();
+                      event.preventDefault();"/>
+       </menupopup>
+     </toolbarbutton>
   </toolbarpalette>
 
   <window id="main-window" xmlns:html="http://www.w3.org/1999/xhtml">
