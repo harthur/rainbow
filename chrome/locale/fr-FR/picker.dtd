@@ -1,0 +1,31 @@
+<!ENTITY picker.title "Gestionnaire des couleurs">
+
+<!ENTITY picker.copy.label "Copier">
+<!ENTITY picker.copy.accesskey "C">
+<!ENTITY picker.bookmark.label "Sauvegarder">
+<!ENTITY picker.bookmark.accesskey "S">
+<!ENTITY picker.select.tooltip "Sélectionner l'élément à prévisualiser">
+<!ENTITY picker.inspect.tooltip "Analyser les pixels du navigateur">
+
+<!ENTITY picker.contrast.wcag "Ratio du contraste WCAG (compris entre 1 et 21)">
+<!ENTITY picker.contrast.minimum "minimum recommandé:">
+<!ENTITY picker.contrast.small "texte de petite taille:">
+<!ENTITY picker.contrast.large "texte de grande taille:">
+
+<!ENTITY picker.context.format "Format">
+<!ENTITY picker.context.format.accesskey "f">
+<!ENTITY picker.context.format.hex "Hex">
+<!ENTITY picker.context.format.hex.accesskey "H">
+<!ENTITY picker.context.format.rgb "Rvb">
+<!ENTITY picker.context.format.rgb.accesskey "R">
+<!ENTITY picker.context.format.per.accesskey "g">
+<!ENTITY picker.context.format.hsl "Tsl">
+<!ENTITY picker.context.format.hsl.accesskey "l">
+
+<!ENTITY picker.hue "Teinte">
+<!ENTITY picker.val "Valeur">
+<!ENTITY picker.sat  "Saturation">
+<!ENTITY picker.light "Luminosité">
+<!ENTITY picker.red "Rouge">
+<!ENTITY picker.green "Vert">
+<!ENTITY picker.blue "Bleu">

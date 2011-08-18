@@ -1,0 +1,10 @@
+<!ENTITY editcolor.title "Sauvegarder la couleur">
+
+<!ENTITY color.label "Couleur:">
+<!ENTITY value.label "Valeur:">
+<!ENTITY url.label "Url:">
+<!ENTITY tags.label "Tags:">
+
+<!ENTITY save.label "Sauvegarder">
+<!ENTITY cancel.label "Annuler">
+

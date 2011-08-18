@@ -1,0 +1,51 @@
+<!ENTITY library.title "Bibliothèque des couleurs">
+
+<!ENTITY filter.emptytext "Rechercher par tag ou url">
+
+<!ENTITY columns.color.label "Couleur">
+<!ENTITY columns.hex.label "Hex">
+<!ENTITY columns.red.label "Rouge">
+<!ENTITY columns.green.label "Vert">
+<!ENTITY columns.blue.label "Bleu">
+<!ENTITY columns.hue.label "Teinte">
+<!ENTITY columns.hue.tooltip "Teinte (tsl et tsv)">
+<!ENTITY columns.satv.label "Saturation (tsv)">
+<!ENTITY columns.satv.tooltip "Saturation (tsv)">
+<!ENTITY columns.val.label "Valeur">
+<!ENTITY columns.val.tooltip "Valeur (tsv)">
+<!ENTITY columns.sat.label "Saturation (tsl)">
+<!ENTITY columns.sat.tooltip "Saturation (tsl)">
+<!ENTITY columns.light.label "Lumière">
+<!ENTITY columns.light.tooltip "Luminosité (tsl)">
+<!ENTITY columns.white.label "Blanc (WCAG)">
+<!ENTITY columns.white.tooltip "Contraste avec le blanc, 7 étant le minimum recommandé pour le texte">
+<!ENTITY columns.black.label "Noir (WCAG)">
+<!ENTITY columns.black.tooltip "Contraste avec le noir, 7 étant le minimum recommandé pour le texte">
+<!ENTITY columns.lum.label "Luminosité (WCAG)">
+<!ENTITY columns.lum.tooltip "Luminosité - 1: blanc, 0: noir">
+<!ENTITY columns.tags.label "Tags">
+<!ENTITY columns.url.label "Url">
+<!ENTITY columns.url.tooltip "Adresse du site web">
+<!ENTITY columns.date.label "Date">
+<!ENTITY columns.date.tooltip "Date de la dernière modification">
+
+<!ENTITY context.edit.label "Editer">
+<!ENTITY context.edit.accesskey "E">
+<!ENTITY context.delete.label "Supprimer">
+<!ENTITY context.delete.accesskey "D">
+<!ENTITY context.open.label "Afficher dans le gestionnaire des Couleurs">
+<!ENTITY context.open.accesskey "V">
+<!ENTITY context.url.label "Ouvrir url">
+<!ENTITY context.url.accesskey "O">
+<!ENTITY context.tags.label "Taggé avec">
+<!ENTITY context.tags.accesskey "T">
+<!ENTITY context.copy.label "Copier">
+<!ENTITY context.copy.accesskey "C">
+<!ENTITY context.add.label "Ajouter nouveau">
+<!ENTITY context.add.accesskey "A">
+<!ENTITY context.merge.label "Créer hybride">
+<!ENTITY context.merge.accesskey "H">
+<!ENTITY context.copy.hex "#Hex">
+<!ENTITY context.copy.plain "Hex">
+<!ENTITY context.copy.rgb "Rvb">
+<!ENTITY context.copy.hsl "Tsl">

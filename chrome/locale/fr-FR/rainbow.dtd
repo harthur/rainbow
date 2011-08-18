@@ -1,0 +1,34 @@
+<!ENTITY rainbow.label "Rainbow">
+
+<!ENTITY rainbow.menu.picker.label "Gestionnaire des couleurs">
+<!ENTITY rainbow.menu.picker.accesskey "P">
+<!ENTITY rainbow.menu.inspector.label "Examiner les couleurs">
+<!ENTITY rainbow.menu.inspector.accesskey "I">
+<!ENTITY rainbow.menu.library.label "Bibliothèque des couleurs">
+<!ENTITY rainbow.menu.library.accesskey "L">
+<!ENTITY rainbow.menu.analyzer.label "Analyse du site web">
+<!ENTITY rainbow.menu.analyzer.accesskey "A">
+<!ENTITY rainbow.menu.recent.label "View Last Color">
+<!ENTITY rainbow.menu.recent.accesskey "C">
+<!ENTITY rainbow.menu.prefs.label "Préférences">
+
+<!ENTITY rainbow.menu.preview.label "Preview Element Color">
+
+<!ENTITY rainbow.inspector.copy.label "Copier">
+<!ENTITY rainbow.inspector.bookmark.label "Sauvegarder">
+<!ENTITY rainbow.inspector.close.tooltip "Fermer l'examen des couleurs">
+<!ENTITY rainbow.inspector.resume.tooltip "Reprendre l'examen des couleurs">
+<!ENTITY rainbow.context.open.label "Ouvrir dans le gestionnaire des couleurs">
+<!ENTITY rainbow.context.open.accesskey "O">
+<!ENTITY rainbow.context.copy.label "Copier">
+<!ENTITY rainbow.context.copy.accesskey "C">
+
+<!ENTITY rainbow.analyzer.copyall "Copier tous">
+<!ENTITY rainbow.analyzer.copy.accesskey "C">
+<!ENTITY rainbow.analyzer.bookmarkall "Sauvegarder tous">
+<!ENTITY rainbow.analyzer.bookmark.accesskey "S">
+<!ENTITY rainbow.analyzer.limit "Modifier le nombre d'échantillon">
+<!ENTITY rainbow.analyzer.limit.accesskey "L">
+<!ENTITY rainbow.analyzer.progress "Extraction des couleurs à partir de">
+<!ENTITY rainbow.analyzer.analyze "Extraire">
+

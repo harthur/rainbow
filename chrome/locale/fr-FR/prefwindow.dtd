@@ -1,0 +1,35 @@
+<!ENTITY prefwindow.title "Préférences">
+<!ENTITY pane1.title "Préférences">
+
+<!ENTITY general.label "Général">
+<!ENTITY mode.label "Afficher la valeur de la couleur sous le format:">
+<!ENTITY mode.accesskey "D">
+<!ENTITY copy.label "Copier dans un format différent:">
+<!ENTITY copy.accesskey "C">
+<!ENTITY hex.label "Hex">
+<!ENTITY rgb.label "Rvb">
+<!ENTITY hsl.label "Tsl">
+<!ENTITY whole.label "Round to whole numbers in color values">
+<!ENTITY whole.accesskey "R">
+<!ENTITY context.label "Ajouter au menu contextuel">
+<!ENTITY context.accesskey "M">
+<!ENTITY shortcut.label "Ajouter un raccourci dans la barre de statut pour:">
+<!ENTITY shortcut.accesskey "S">
+<!ENTITY inspector.label "Examiner les couleurs">
+<!ENTITY picker.label "Gestionnaire des couleurs">
+<!ENTITY library.label "Bibliothèque des couleurs">
+<!ENTITY analyzer.label "Analyse du site web">
+
+<!ENTITY stats.label "Only show display when hovering over swatch">
+<!ENTITY stats.accesskey "O">
+<!ENTITY nodename.accesskey "E">
+<!ENTITY nodename.label "Afficher les informations de l'élément">
+<!ENTITY nodename.accesskey "E">
+<!ENTITY coordinates.label "Afficher les coordonnées">
+<!ENTITY coordinates.accesskey "C">
+<!ENTITY autocopy.label "Copier automatiquement la couleur à l'aide du clic gauche">
+<!ENTITY autocopy.accesskey "A">
+<!ENTITY follow.label "Afficher l'échantillon de couleur suivant le déplacement de la souris">
+<!ENTITY follow.accesskey "P">
+
+
