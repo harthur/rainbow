@@ -43,9 +43,11 @@ var picker = {
   init : function() {
     picker.wholeNumbers = rainbowc.prefs.getBoolPref("wholeNumbers");
     var mode = rainbowc.prefs.getCharPref("picker.mode");
-    var color;
-    if(window.arguments)
-      color = window.arguments[0];
+    var color, element;
+    if(window.arguments) {
+       color = window.arguments[0];
+       element = window.arguments[1];       
+    }
     if(!color || !colorCommon.isValid(color)) // otherwise get their last-viewed color
       color = rainbowc.prefs.getCharPref("picker.color");
     picker.format = rainbowc.prefs.getCharPref("format");
@@ -59,6 +61,10 @@ var picker = {
 
     picker.selectColor(color, true);
     picker.changeMode(mode);
+    
+    if (element) {
+       selector.selectElement(element);
+    }
  
     /* for platform-specific styles */
     var platform = rainbowc.getPlatform();

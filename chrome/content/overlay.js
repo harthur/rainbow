@@ -54,6 +54,9 @@ var colorPlay = {
 
     colorPlay.addDragListeners();
     colorPlay.addToolbarButton();
+    
+    // for picker selector
+    rainbowc.registerSheet("chrome://rainbows/skin/selector.css", null, null);
   },
 
   addToolbarButton : function() {

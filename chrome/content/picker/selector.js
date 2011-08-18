@@ -39,7 +39,6 @@ var selector = {
     rainbowc.mapWindows(selector.addSelectionListeners);
     
     // for drop indicator styling of webpage content
-    rainbowc.registerSheet("chrome://rainbows/skin/selector.css", null, null);
     var button = document.getElementById("selector-button");
     button.oncommand = selector.stop;
 
@@ -87,11 +86,26 @@ var selector = {
     event.stopPropagation();
   },
 
-  selectElement : function(event) {
+  clickElement : function(event) {
     selector.pause();
 
     var element = event.target;
-    var bg = rainbowc.getBgColor(event);
+    selector.selectElement(element);
+
+    window.focus(); // for Windows
+    event.preventDefault();
+    event.stopPropagation();
+  },
+  
+  selectElement : function(element) {
+    if(element.setAttribute)
+      element.setAttribute("rainbowselector", "true");
+    else
+      element.parentNode.setAttribute("rainbowselector", "true");
+      
+    rainbowc.get("selector-element").value = rainbowc.elementString(element);
+     
+    var bg = rainbowc.getBgColor(element);
 
     if(rainbowc.textColorAffects(element)) {
       var win = element.ownerDocument.defaultView;
@@ -102,24 +116,20 @@ var selector = {
     picker.elementDisplay(bg, txt, font);
 
     picker.url = element.ownerDocument.location.href;
-    selector.selectedElement = element;
-
-    window.focus(); // for Windows
-    event.preventDefault();
-    event.stopPropagation();
+    selector.selectedElement = element;    
   },
 
   addSelectionListeners : function(win) {
     win.addEventListener('mouseover', selector.mouseoverElement, true);
     win.addEventListener('mouseout', selector.mouseoutElement, true);
-    win.addEventListener('click', selector.selectElement, true);
+    win.addEventListener('click', selector.clickElement, true);
   },
 
   removeSelectionListeners : function(win) {
     try {
       win.removeEventListener('mouseover', selector.mouseoverElement, true);
       win.removeEventListener('mouseout', selector.mouseoutElement, true);
-      win.removeEventListener('click', selector.selectElement, true);
+      win.removeEventListener('click', selector.clickElement, true);
     } catch(e) {}
   }
 };

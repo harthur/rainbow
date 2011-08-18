@@ -133,17 +133,16 @@ var rainbowc = {
     return "rgb(" + data[0] + "," + data[1] + "," + data[2] + ")";
   },
 
-  getBgColor : function(event) {
-    var element = event.target;
+  getBgColor : function(element) {
     var win = element.ownerDocument.defaultView;
     do {
       var style = win.getComputedStyle(element, null);
-      if(style.backgroundColor != "transparent") {
-        return style.backgroundColor; }
-      if(style.position != "static")// can't get bg color of positioned elements
+      if(style.backgroundColor != "transparent")
+        return style.backgroundColor;
+      if(style.position != "static") // can't get bg color of positioned elements
         return rainbowc.getBg(event);
       element = element.parentNode;
-    } while(element.parentNode != element
+    } while (element.parentNode != element
            && element.nodeType == Node.ELEMENT_NODE)
     return "#FFFFFF";
   },
@@ -290,10 +289,10 @@ var rainbowc = {
     library.focus();
   },
 
-  openPicker : function(color) {
+  openPicker : function(color, element) {
      var color = colorCommon.isValid(color) ? colorCommon.toHex(color) : '';
      window.openDialog("chrome://rainbows/content/picker/picker.xul",
-                      "", "chrome,all,dialog=yes", color);
+                      "", "chrome,all,dialog=yes", color, element);
   },
 
   openPrefs : function() {

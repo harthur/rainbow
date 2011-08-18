@@ -12,6 +12,8 @@
 <!ENTITY rainbow.menu.recent.accesskey "C">
 <!ENTITY rainbow.menu.prefs.label "Settings">
 
+<!ENTITY rainbow.menu.preview.label "Preview Element Color">
+
 <!ENTITY rainbow.inspector.copy.label "Copy">
 <!ENTITY rainbow.inspector.bookmark.label "Save">
 <!ENTITY rainbow.inspector.close.tooltip "Close inspector">
