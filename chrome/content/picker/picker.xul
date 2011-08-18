@@ -185,7 +185,8 @@
               ondblclick="picker.comparisonDisplay()"
               ondrop="picker.cloneDisplay(event)"
               ondragover="return false;"
-              class="highlight" align="center">
+              class="highlight" align="center"
+              tooltiptext="&picker.split;">
           <label id="display-element" hidden="true">
           </label>
           <vbox flex="1" pack="end">

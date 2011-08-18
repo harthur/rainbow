@@ -12,6 +12,8 @@
 <!ENTITY picker.contrast.small "texte de petite taille:">
 <!ENTITY picker.contrast.large "texte de grande taille:">
 
+<!ENTITY picker.split "Double click to compare color">
+
 <!ENTITY picker.context.format "Format">
 <!ENTITY picker.context.format.accesskey "f">
 <!ENTITY picker.context.format.hex "Hex">
