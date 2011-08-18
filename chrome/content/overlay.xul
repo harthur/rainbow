@@ -75,6 +75,9 @@
                   accesskey="&rainbow.menu.analyzer.accesskey;"
                   oncommand="rainbowAnalyzer.analyzePage();"/>
         <menuseparator/>
+        <menuitem label="&rainbow.menu.recent.label;"
+                  oncommand="rainbowc.openLastColor();"/>
+        <menuseparator/>
         <menuitem label="&rainbow.menu.prefs.label;"
                   oncommand="rainbowc.openPrefs();"/>
       </menupopup>
@@ -102,6 +105,9 @@
                 label="&rainbow.menu.analyzer.label;"
                 accesskey="&rainbow.menu.analyzer.accesskey;"
                 oncommand="rainbowAnalyzer.analyzePage();"/>
+      <menuseparator/>
+      <menuitem label="&rainbow.menu.recent.label;"
+                oncommand="rainbowc.openLastColor();"/>
       <menuseparator/>
       <menuitem label="&rainbow.menu.prefs.label;"
                 oncommand="rainbowc.openPrefs();"/>
@@ -169,6 +175,11 @@
                     oncommand="rainbowAnalyzer.analyzePage();
                       event.stopPropagation();
                       event.preventDefault();"/>
+          <menuseparator/>
+          <menuitem label="&rainbow.menu.recent.label;"
+                    oncommand="rainbowc.openLastColor();
+                      event.stopPropagation();
+                      event.preventDefault();"/>           
           <menuseparator/>
           <menuitem label="&rainbow.menu.prefs.label;"
                     oncommand="rainbowc.openPrefs();

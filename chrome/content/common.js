@@ -301,6 +301,14 @@ var rainbowc = {
                       "", "chrome,all,dialog=yes");
   },
   
+  openLastColor : function() {
+     rainbowc.openPicker(rainbowc.prefs.getCharPref("lastcolor"));
+  },
+  
+  selectElement : function(element) {
+     rainbowc.openPicker(null, element);
+  },
+  
   mapWindows : function(callback) {
     var enumerator =  rainbowc.wm.getEnumerator("navigator:browser");
     while(enumerator.hasMoreElements()) {

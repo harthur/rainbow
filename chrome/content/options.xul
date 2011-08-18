@@ -43,8 +43,6 @@
   <prefpane id="pane1" label="&pane1.title;">
     <preferences>
       <preference id="formatpref" name="extensions.rainbows.format" type="string"/>
-      <preference id="copydiffpref" name="extensions.rainbows.copyDifferent" type="bool"/>
-      <preference id="copypref" name="extensions.rainbows.copyFormat" type="string"/>
       <preference id="wholepref" name="extensions.rainbows.wholeNumbers" type="bool"/>
       <preference id="autopref" name="extensions.rainbows.inspector.autoCopy" type="bool"/>
       <preference id="nodepref" name="extensions.rainbows.inspector.showNodeName" type="bool"/>

@@ -141,19 +141,25 @@ var rainbowInspector = {
 
   pageClick : function (event) {
     rainbowInspector.stopInspecting();
+    
+    var display = rainbowc.get("rainbow-swatch-colorval"),
+        color = display.value;
 
     if(rainbowInspector.autoCopy) {
-      var notification = rainbowc.get("rainbow-swatch-colorval");
       if(event.button == 2) {
         // right click
         var url = event.target.ownerDocument.location.href;
         rainbowInspector.autoBookmark(url);
-        notification.value = "✓ " + rainbowc.getString("rainbow.saved"); 
+        display.value = "✓ " + rainbowc.getString("rainbow.saved"); 
       }
       else {
         rainbowInspector.copyColor();
-        notification.value = "✓ " + rainbowc.getString("rainbow.copied");
+        display.value = "✓ " + rainbowc.getString("rainbow.copied");
       }
+      
+      // save for "Open Last Color"
+      rainbowc.prefs.setCharPref("lastcolor", color);
+      
       var box = rainbowc.get("rainbow-colorval-box");
       box.classList.add("rainbow-highlight");
       
@@ -200,6 +206,7 @@ var rainbowInspector = {
 
     var button = rainbowc.get("rainbow-swatch-bookmark");
     var color = colorCommon.toHex(swatch.style.backgroundColor);
+
     if(rainbowc.storage.isSaved(color)) {
       button.label = rainbowc.getString("rainbow.view");
       button.removeAttribute('oncommand');
