@@ -136,20 +136,11 @@
     </menu>
   </menupopup>
 
-
-  <statusbar id="status-bar">
-   <statusbarpanel id="rainbow-statusbar"
-                   class="statusbarpanel-iconic"
-                   onclick="colorPlay.statusBarClicked(event);"
-                   hidden="true"
-                   context="rainbow-status-context"/>
-  </statusbar>
-  
   <toolbarpalette id="BrowserToolbarPalette">
     <toolbarbutton id="rainbow-toolbarbutton"
       class="toolbarbutton-1 chromeclass-toolbar-additional"
       tooltiptext="&rainbow.label;"
-      oncommand="colorPlay.statusBarClicked();"
+      oncommand="colorPlay.shortcutEngaged();"
       image="chrome://rainbows/skin/favicon.png"
       type="menu-button">
         <menupopup>
@@ -237,20 +228,6 @@
                  oncommand="rainbowAnalyzer.setLimit(20)"/>
        </menupopup>
       </menu>
-    </menupopup>
-
-    <menupopup id="rainbow-status-context">
-      <menuitem label="&rainbow.menu.inspector.label;"
-                oncommand="rainbowInspector.toggleInspector();"/>
-      <menuitem label="&rainbow.menu.picker.label;"
-                oncommand="rainbowc.openPicker();"/>
-      <menuitem label="&rainbow.menu.library.label;"
-                oncommand="rainbowc.openLibrary();"/>
-      <menuitem label="&rainbow.menu.analyzer.label;"
-                oncommand="rainbowAnalyzer.analyzePage();"/>
-      <menuseparator/>
-      <menuitem label="&rainbow.menu.prefs.label;"
-                oncommand="rainbowc.openPrefs();"/>
     </menupopup>
 
     <html:canvas id="rainbow-inspector" style="display:none;" width="1px" height="1px"/>

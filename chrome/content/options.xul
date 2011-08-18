@@ -49,9 +49,8 @@
       <preference id="autopref" name="extensions.rainbows.inspector.autoCopy" type="bool"/>
       <preference id="nodepref" name="extensions.rainbows.inspector.showNodeName" type="bool"/>
       <preference id="coorspref" name="extensions.rainbows.inspector.showCoordinates" type="bool"/>
-      <preference id="statuspref" name="extensions.rainbows.statusbar.show" type="bool"/>
       <preference id="contextpref" name="extensions.rainbows.context" type="bool"/>
-      <preference id="actionpref" name="extensions.rainbows.statusbar.action" type="string"/>
+      <preference id="actionpref" name="extensions.rainbows.shortcut.action" type="string"/>
       <preference id="followpref" name="extensions.rainbows.inspector.followMouse" type="bool"/>
       <preference id="limitpref" name="extensions.rainbows.analyzer.limit" type="int"/>
     </preferences>
@@ -70,9 +69,8 @@
           </menupopup>
         </menulist>
       </hbox>
-      <checkbox preference="contextpref" label="&context.label;" accesskey="&context.accesskey;"/>
       <hbox align="center">
-        <checkbox preference="statuspref" label="&status.label;" accesskey="&status.accesskey;"/>
+        <label value="&shortcut.label;" accesskey="&shortcut.accesskey;"/>
         <menulist preference="actionpref" sizetopopup="pref">
           <menupopup>
              <menuitem label="&inspector.label;" value="inspector"/>
@@ -82,6 +80,7 @@
           </menupopup>
         </menulist>
       </hbox>
+      <checkbox preference="contextpref" label="&context.label;" accesskey="&context.accesskey;"/>
     </groupbox>
     <groupbox>
       <caption label="&inspector.label;"/>

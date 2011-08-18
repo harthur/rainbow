@@ -48,9 +48,6 @@ var colorPlay = {
     var analyzer = document.getElementById("rainbow-analyzer-panel");
     analyzer.setAttribute("rainbow-platform", platform);
 
-    var icon = document.getElementById("rainbow-statusbar");
-    icon.setAttribute("hidden", !rainbowc.prefs.getBoolPref("statusbar.show"));
-
     var show = !rainbowc.prefs.getBoolPref("context");
     document.getElementById("rainbow-context-menu").setAttribute("hidden", show);
     document.getElementById("rainbow-context-separator").setAttribute("hidden", show);
@@ -91,10 +88,6 @@ var colorPlay = {
   observe : function(subject, topic, data) {
     if (topic == "nsPref:changed") {
       switch(data) {
-        case "statusbar.show":
-          var icon = document.getElementById("rainbow-statusbar");
-          icon.setAttribute("hidden", !rainbowc.prefs.getBoolPref("statusbar.show"));
-          break;
         case "context":
           var show = !rainbowc.prefs.getBoolPref("context");
           document.getElementById("rainbow-context-menu").setAttribute("hidden", show);
@@ -112,11 +105,11 @@ var colorPlay = {
     }
   },
 
-  statusBarClicked : function(event) {
+  shortcutEngaged : function(event) {
     if(event && event.button != 0)
       return;
 
-    switch(rainbowc.prefs.getCharPref("statusbar.action")) {
+    switch(rainbowc.prefs.getCharPref("shortcut.action")) {
       case 'inspector':
         rainbowInspector.toggleInspector();
         break;

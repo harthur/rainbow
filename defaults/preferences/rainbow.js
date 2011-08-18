@@ -13,8 +13,7 @@ pref("extensions.rainbows.inspector.location", "se");
 pref("extensions.rainbows.picker.color", "#11EEEE");
 pref("extensions.rainbows.picker.mode", "hue");
 pref("extensions.rainbows.picker.hsl", false);
-pref("extensions.rainbows.statusbar.show", true);
-pref("extensions.rainbows.statusbar.action", "inspector");
+pref("extensions.rainbows.shortcut.action", "inspector");
 pref("extensions.rainbows.toolbar.added", false);
 pref("extensions.rainbows.analyzer.limit", 6);
 

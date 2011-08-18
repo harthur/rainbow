@@ -13,8 +13,8 @@
 <!ENTITY whole.accesskey "R">
 <!ENTITY context.label "Add to context menu">
 <!ENTITY context.accesskey "M">
-<!ENTITY status.label "Add icon to status bar as shortcut to:">
-<!ENTITY status.accesskey "S">
+<!ENTITY shortcut.label "Make toolbar button a shortcut to:">
+<!ENTITY shortcut.accesskey "S">
 <!ENTITY inspector.label "Inspector">
 <!ENTITY picker.label "Picker">
 <!ENTITY library.label "Library">
