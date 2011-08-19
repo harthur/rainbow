@@ -294,25 +294,23 @@
            ondblclick="rainbowc.openPicker(this.color);"
            context="rainbow-swatch-context">
       <vbox id="rainbow-swatch-content">
-        <stack id="rainbow-swatch-stack">
-          <hbox flex="1" top="0px" left="0px" id="rainbow-colorval-box">
-            <label id="rainbow-swatch-colorval"
-                   ondragstart="rainbowInspector.applyStart(event);" 
-                   ondragend="rainbowInspector.applyEnd(event);"
-                   onclick="rainbowInspector.switchFormat(event);"
-                   hidden="true"/>
-          </hbox>
-          <hbox id="rainbow-swatch-top-buttons" top="2px" left="85px" hidden="true">
+        <hbox flex="1" top="0px" left="0px" id="rainbow-colorval-box">
+          <label id="rainbow-swatch-colorval"
+                ondragstart="rainbowInspector.applyStart(event);" 
+                ondragend="rainbowInspector.applyEnd(event);"
+                onclick="rainbowInspector.switchFormat(event);"
+                hidden="true"/>
+          <hbox id="rainbow-swatch-top-buttons" hidden="true">
             <image id="rainbow-swatch-unfix" class="rainbow-top-button"
-                   src="chrome://rainbows/skin/search-glass.png"
-                   onclick="rainbowInspector.resumeInspect();"
-                   tooltiptext="&rainbow.inspector.resume.tooltip;"/>
+                src="chrome://rainbows/skin/search-glass.png"
+                onclick="rainbowInspector.resumeInspect();"
+                tooltiptext="&rainbow.inspector.resume.tooltip;"/>
             <image id="rainbow-swatch-close" class="rainbow-top-button"
-                   src="chrome://rainbows/skin/close.png"
-                   onclick="rainbowInspector.stopInspector();"
-                   tooltiptext="&rainbow.inspector.close.tooltip;"/>
+                src="chrome://rainbows/skin/close.png"
+                onclick="rainbowInspector.stopInspector();"
+                tooltiptext="&rainbow.inspector.close.tooltip;"/>
           </hbox>
-        </stack>
+        </hbox>
         <vbox id="rainbow-swatch-stats"  onclick="rainbowInspector.swatchClick(event);">
           <label id="rainbow-swatch-nodeName" hidden="true"/>
           <label id="rainbow-swatch-coords" hidden="true"/>

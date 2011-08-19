@@ -366,6 +366,9 @@ var rainbowInspector = {
   },
   
   resizeSwatch : function() {
+    if (!rainbowc.prefs.getBoolPref("inspector.autoCopy"))
+      return; // don't want buttons to be cropped out
+
     var swatch = rainbowc.get("rainbow-swatch");
     var width = 126, height = 122;
     switch(rainbowInspector.format) {
@@ -379,11 +382,11 @@ var rainbowInspector = {
         break;
       case 'rgb':
         width = 124;
-        height = 118;
+        height = 96;
         break;
       case 'per': case 'hsl':
         width: 130;
-        height: 124;
+        height: 100;
         break;
     }
     swatch.style.width = width + "px";

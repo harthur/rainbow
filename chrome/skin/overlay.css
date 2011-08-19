@@ -88,7 +88,6 @@
 }
 
 #rainbow-swatch {
-  max-width : 128px;
   border : 1px solid grey;
   -moz-user-focus: normal;
   -moz-appearance : none;
@@ -125,9 +124,13 @@
   border-radius: 3px;
 }
 
+#rainbow-swatch-top-buttons {
+  margin: 2px;
+}
+
 .rainbow-top-button {
   opacity: .86;
-  margin: 2px;
+  padding: 2px;
 }
 
 .rainbow-top-button:hover {
