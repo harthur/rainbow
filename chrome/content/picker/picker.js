@@ -48,7 +48,7 @@ var picker = {
        color = window.arguments[0];
        element = window.arguments[1];       
     }
-    if(!color || !colorCommon.isValid(color)) // otherwise get their last-viewed color
+    if(!color || !rainbowColor.isValid(color)) // otherwise get their last-viewed color
       color = rainbowc.prefs.getCharPref("picker.color");
     picker.format = rainbowc.prefs.getCharPref("format");
 
@@ -98,7 +98,7 @@ var picker = {
     var container = rainbowc.get("container");
     var bg = rainbowc.getWindowPixel(window, container.boxObject.x, container.boxObject.y);
    
-    if(colorCommon.luminosity(bg) > .5)
+    if(rainbowColor.luminosity(bg) > .5)
       return; // it's light enough
 
     /* for the dark themes */
@@ -211,11 +211,11 @@ var picker = {
   },
 
   inspectColor : function(color) {
-    if(!colorCommon.isValid(color))
+    if(!rainbowColor.isValid(color))
       return;
 
     /* just update the position on the gradient and sidebar */
-    var vals = colorCommon.hsvValues(color);
+    var vals = rainbowColor.hsvValues(color);
     var hue = Math.round(vals['hue'] / 360 * 255);
     var sat = Math.round(vals['satv'] / 100 * 255);
     var val = Math.round(vals['val'] / 100 * 255);
@@ -239,16 +239,16 @@ var picker = {
   },
 
   selectColor : function(color, changeString, fromInput) {
-    if(!colorCommon.isValid(color))
+    if(!rainbowColor.isValid(color))
       return;
 
     /* just update the displayed color values */
     var wholeNumbers = picker.wholeNumbers && !fromInput;
-    var hexVal = colorCommon.toHex(color);
-    var rgbVals = colorCommon.rgbValues(color);
-    var hslVals = colorCommon.hslValues(color, wholeNumbers);
-    var hsvVals = colorCommon.hsvValues(color, wholeNumbers);
-    var alpha = colorCommon.alphaValue(color);
+    var hexVal = rainbowColor.toHex(color);
+    var rgbVals = rainbowColor.rgbValues(color);
+    var hslVals = rainbowColor.hslValues(color, wholeNumbers);
+    var hsvVals = rainbowColor.hsvValues(color, wholeNumbers);
+    var alpha = rainbowColor.alphaValue(color);
     
     if(picker.displayElem.id == "display-text")
       picker.displayElem.style.color = hexVal;
@@ -271,7 +271,7 @@ var picker = {
     picker.color = hexVal;
 
     var button = rainbowc.get("bookmark-button");
-    if(rainbowc.storage.isSaved(colorCommon.toHex(color))) {
+    if(rainbowc.storage.isSaved(rainbowColor.toHex(color))) {
       button.label = rainbowc.getString("rainbow.view");
       button.removeAttribute("oncommand"); // firefox bug
       button.setAttribute("oncommand", "rainbowc.openLibrary('" + picker.color + "');");
@@ -293,12 +293,12 @@ var picker = {
 
   displayContrast : function() {
     var c1 = rainbowc.get("display-text").style.color;
-    if(!colorCommon.isValid(c1)) {
+    if(!rainbowColor.isValid(c1)) {
       rainbowc.get("contrast").value = "   ";
       return;
     }
     var c2 = rainbowc.get("display-color-1").style.backgroundColor;
-    var contrast = Math.round(colorCommon.contrast(c1, c2));
+    var contrast = Math.round(rainbowColor.contrast(c1, c2));
     cstring = rainbowc.getString("rainbow.picker.contrast", contrast);
     rainbowc.get("contrast").value = cstring;
   },
@@ -327,19 +327,19 @@ var picker = {
         var r = rainbowc.get("r").value;
         var g = rainbowc.get("g").value;
         var b = rainbowc.get("b").value;
-        color = colorCommon.rgbString(r, g, b);
+        color = rainbowColor.rgbString(r, g, b);
         break;
       case 'h': case 's': case 'l':
         var h = rainbowc.get("h").value;
         var s = rainbowc.get("s").value;
         var l = rainbowc.get("l").value;
-        color = colorCommon.hslString(h, s, l);
+        color = rainbowColor.hslString(h, s, l);
         break;
       case 'hv': case 'sv': case 'v':
         var h = rainbowc.get("hv").value;
         var s = rainbowc.get("sv").value;
         var v = rainbowc.get("v").value;
-        color = colorCommon.hsvString(h, s, v);
+        color = rainbowColor.hsvString(h, s, v);
         break;
       default:
         break;
@@ -423,20 +423,20 @@ var picker = {
     pixsel.style.top = y - pixsel.width / 2 + 1 + "px";
 
     var color = picker.getInspectedColor();
-    pixsel.src = colorCommon.blackText(color) ? "chrome://rainbows/skin/box_thin.png"
+    pixsel.src = rainbowColor.blackText(color) ? "chrome://rainbows/skin/box_thin.png"
                                               : "chrome://rainbows/skin/box_thin_white.png"; 
 
-    var vals = colorCommon.hsvValues(color);
+    var vals = rainbowColor.hsvValues(color);
     switch(picker.mode) {
       case 'sat':
-        var barColor = colorCommon.hsvString(vals['hue'], '100', vals['val']);
+        var barColor = rainbowColor.hsvString(vals['hue'], '100', vals['val']);
         rainbowc.get("bar").style.backgroundColor = 
-                colorCommon.toHex(colorCommon.hsvString(vals['hue'], '100', '100'));
+                rainbowColor.toHex(rainbowColor.hsvString(vals['hue'], '100', '100'));
         rainbowc.get("top-bar").style.opacity = 1 - vals['val'] / 100;
         break;
       case 'val':
-        var barColor = colorCommon.hsvString(vals['hue'], vals['satv'], '100');
-        rainbowc.get("bar").style.backgroundColor = colorCommon.toHex(barColor);
+        var barColor = rainbowColor.hsvString(vals['hue'], vals['satv'], '100');
+        rainbowc.get("bar").style.backgroundColor = rainbowColor.toHex(barColor);
         break;
       default:
         break;
@@ -459,7 +459,7 @@ var picker = {
       case 'hue':
         var hue = Math.round((255 - z) / 255 * 360);
         rainbowc.get("bottom-gradient").style.backgroundColor 
-                  = colorCommon.hslString(hue,100,50);
+                  = rainbowColor.hslString(hue,100,50);
         picker.hue = hue;
         break;
       case 'sat':
@@ -514,7 +514,7 @@ var picker = {
     var h = Math.min(360, Math.max(0, h));
     var s = Math.min(100, Math.max(0, s));
     var v = Math.min(100, Math.max(0, v));
-    return colorCommon.hsvString(h, s, v);
+    return rainbowColor.hsvString(h, s, v);
   },
 
   selectDisplay : function(display, event) {
@@ -525,7 +525,7 @@ var picker = {
     if(picker.displayElem.id == "display-text") {
       var color = display.style.color;
       var bg = rainbowc.get("display-color-1").style.backgroundColor;
-      if(!colorCommon.blackText(bg))
+      if(!rainbowColor.blackText(bg))
         display.className = "highlight-light";
       else
         display.className = "highlight";
@@ -609,7 +609,7 @@ var picker = {
   cloneDisplay : function(event) {
     var display = event.target;
     var color = event.dataTransfer.getData("text/rainbow-color");
-    if(colorCommon.isValid(color)) {
+    if(rainbowColor.isValid(color)) {
       display.style.backgroundColor = color;
       if(picker.displayElem == display) {
         picker.visitColor(color, true, false);

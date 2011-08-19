@@ -104,35 +104,35 @@ var treeView =
       case this.COL_COLOR:
         return;
       case this.COL_RED:
-        return colorCommon.rgbValues(color)['red'];
+        return rainbowColor.rgbValues(color)['red'];
       case this.COL_GREEN:
-        return colorCommon.rgbValues(color)['green'];
+        return rainbowColor.rgbValues(color)['green'];
       case this.COL_BLUE:
-        return colorCommon.rgbValues(color)['blue'];
+        return rainbowColor.rgbValues(color)['blue'];
       case this.COL_HUE:
-        return colorCommon.hslValues(color)['hue'];
+        return rainbowColor.hslValues(color)['hue'];
       case this.COL_SAT:
-        return colorCommon.hslValues(color, this._wholeNumbers)['sat'];
+        return rainbowColor.hslValues(color, this._wholeNumbers)['sat'];
       case this.COL_LIGHT:
-        return colorCommon.hslValues(color, this._wholeNumbers)['light'];
+        return rainbowColor.hslValues(color, this._wholeNumbers)['light'];
       case this.COL_SATV:
-        return colorCommon.hsvValues(color, this._wholeNumbers)['satv'];
+        return rainbowColor.hsvValues(color, this._wholeNumbers)['satv'];
       case this.COL_VAL:
-        return colorCommon.hsvValues(color, this._wholeNumbers)['val'];
+        return rainbowColor.hsvValues(color, this._wholeNumbers)['val'];
       case this.COL_HEX: 
         return color;
       case this.COL_WCONTRAST:
         if(this._wholeNumbers)
-          return Math.round(colorCommon.contrast(color, '#FFFFFF'));
-        return Math.round(colorCommon.contrast(color, '#FFFFFF') * 10) / 10;
+          return Math.round(rainbowColor.contrast(color, '#FFFFFF'));
+        return Math.round(rainbowColor.contrast(color, '#FFFFFF') * 10) / 10;
       case this.COL_BCONTRAST:
          if(this._wholeNumbers)
-          return Math.round(colorCommon.contrast(color, '#000000'));
-        return Math.round(colorCommon.contrast(color, '#000000') * 10) / 10;
+          return Math.round(rainbowColor.contrast(color, '#000000'));
+        return Math.round(rainbowColor.contrast(color, '#000000') * 10) / 10;
       case this.COL_LUM:
          if(this._wholeNumbers)
-          return Math.round(colorCommon.luminosity(color) * 10) / 10;
-         return Math.round(colorCommon.luminosity(color) * 100) / 100;
+          return Math.round(rainbowColor.luminosity(color) * 10) / 10;
+         return Math.round(rainbowColor.luminosity(color) * 100) / 100;
       case this.COL_TAGS:
         return rainbowc.storage.tagsOf(color);
       case this.COL_URL:

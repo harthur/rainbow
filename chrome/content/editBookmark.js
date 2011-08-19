@@ -53,10 +53,10 @@ var editColor = {
     if(colors.length == 1) {
       var color = colors[0];
       if(!url)
-        url = rainbowc.storage.urlOf(colorCommon.toHex(color));
+        url = rainbowc.storage.urlOf(rainbowColor.toHex(color));
       var textColor = document.getElementById("text-color");
       textColor.style.backgroundColor = colors;
-      textTags.value = rainbowc.storage.tagsOf(colorCommon.toHex(color));
+      textTags.value = rainbowc.storage.tagsOf(rainbowColor.toHex(color));
     }
     else {
       document.getElementById("color-row").hidden = true;
@@ -75,7 +75,7 @@ var editColor = {
   changeColor : function() {
     var textHex = document.getElementById("text-value");
     var newColor = textHex.value;
-    if(newColor && colorCommon.isValid(newColor))
+    if(newColor && rainbowColor.isValid(newColor))
       editColor.loadColor(newColor, false);
   },
 
@@ -86,7 +86,7 @@ var editColor = {
     var colors = editColor.colors;
 
     for(var i = 0; i < colors.length; i++)
-      rainbowc.storage.addColor(colorCommon.toHex(colors[i]), tags, url);
+      rainbowc.storage.addColor(rainbowColor.toHex(colors[i]), tags, url);
     
     if(button) {
       var command = "rainbowc.openLibrary('" + colors[0] + "')";

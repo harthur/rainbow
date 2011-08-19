@@ -33,7 +33,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  * 
  * ***** END LICENSE BLOCK ***** */
-var colorCommon = {
+var rainbowColor = {
   abbRegex : /^#?([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/,
   hexRegex : /^#?([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/,
   rgbRegex : /^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*([10]?\.?\d*)\s*)?\)/,

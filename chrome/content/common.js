@@ -42,7 +42,7 @@ var rainbowc = {
 
     var formatted = [];
     for(var i = 0; i < colors.length; i++)
-      formatted.push(colorCommon.formatColor(colors[i], format, whole));
+      formatted.push(rainbowColor.formatColor(colors[i], format, whole));
     return formatted;
   },
 
@@ -50,7 +50,7 @@ var rainbowc = {
     if(!format)     
       format = rainbowc.prefs.getCharPref("format");
     var whole = rainbowc.prefs.getBoolPref("wholeNumbers");
-    return colorCommon.formatColor(color, format, whole);
+    return rainbowColor.formatColor(color, format, whole);
   },
 
   copyColor : function(color, format) {
@@ -61,7 +61,7 @@ var rainbowc = {
         format = rainbowc.prefs.getCharPref("format");
     }
     var whole = false;
-    rainbowc.copy(colorCommon.formatColor(color, format, whole));
+    rainbowc.copy(rainbowColor.formatColor(color, format, whole));
   },
 
   copyColors : function(colors, format) { 
@@ -74,7 +74,7 @@ var rainbowc = {
     var whole = false;
     var formatted = [];
     for(var i = 0; i < colors.length; i++)
-      formatted.push(colorCommon.formatColor(colors[i], format, whole));
+      formatted.push(rainbowColor.formatColor(colors[i], format, whole));
     rainbowc.copy(formatted.join(", "));
   },
 
@@ -283,7 +283,7 @@ var rainbowc = {
   },
 
   openPicker : function(color, element) {
-     var color = colorCommon.isValid(color) ? colorCommon.toHex(color) : '';
+     var color = rainbowColor.isValid(color) ? rainbowColor.toHex(color) : '';
      window.openDialog("chrome://rainbows/content/picker/picker.xul",
                       "", "chrome,all,dialog=yes", color, element);
   },

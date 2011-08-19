@@ -198,15 +198,15 @@ var library = {
         urlopen.hidden = false;
       
       var copyRgb = document.getElementById("context-copy-rgb");
-      copyRgb.label = colorCommon.toRgb(color);
+      copyRgb.label = rainbowColor.toRgb(color);
       var copyHex = document.getElementById("context-copy-hex");
-      copyHex.label = colorCommon.toHex(color);
+      copyHex.label = rainbowColor.toHex(color);
       var copyPlain = document.getElementById("context-copy-plain");
-      copyPlain.label = colorCommon.toPlain(color);
+      copyPlain.label = rainbowColor.toPlain(color);
       var copyPer = document.getElementById("context-copy-per");
-      copyPer.label = colorCommon.toPercent(color);
+      copyPer.label = rainbowColor.toPercent(color);
       var copyHsl = document.getElementById("context-copy-hsl");
-      copyHsl.label = colorCommon.toHsl(color);
+      copyHsl.label = rainbowColor.toHsl(color);
     }
   
   },
@@ -232,7 +232,7 @@ var library = {
     treeView.selection.selectionEventsSuppressed = true;
     var colors = library.getSelection();
     for(let i = 0; i < colors.length; i++) {
-      rainbowc.storage.addTags(colorCommon.toHex(colors[i]), tag);
+      rainbowc.storage.addTags(rainbowColor.toHex(colors[i]), tag);
     }
     treeView.selection.selectionEventsSuppressed = false;
   },
@@ -247,7 +247,7 @@ var library = {
 
     var colors = library.getSelection();
     for(let i = 0; i < colors.length; i++)
-      rainbowc.storage.removeColor(colorCommon.toHex(colors[i]));
+      rainbowc.storage.removeColor(rainbowColor.toHex(colors[i]));
 
     library.loadColors();
     treeView.selection.selectionEventsSuppressed = false;
@@ -260,7 +260,7 @@ var library = {
     var editWindow =  window.openDialog(
                   "chrome://rainbows/content/editBookmark.xul",
                   "", "all,dialog=yes,resizable=no, centerscreen", 
-                  {colors: [colorCommon.toHex(color)]});
+                  {colors: [rainbowColor.toHex(color)]});
   },
 
   openSelection : function() {
@@ -285,24 +285,24 @@ var library = {
   contrastSelection : function() {
     var colors = library.getSelection();
     if(rainbowc.prefs.getBoolPref("wholeNumbers"))
-      return Math.round(colorCommon.contrast(colors[0], colors[1]));
+      return Math.round(rainbowColor.contrast(colors[0], colors[1]));
     else
-      return Math.round(colorCommon.contrast(colors[0], colors[1]) * 10)/10;
+      return Math.round(rainbowColor.contrast(colors[0], colors[1]) * 10)/10;
   },
 
   distanceSelection : function() {
     var colors = library.getSelection();
-    return Math.round(colorCommon.distanceLAB(colors[0], colors[1]) * 10)/10;
+    return Math.round(rainbowColor.distanceLAB(colors[0], colors[1]) * 10)/10;
   },
 
   distance94Selection : function() {
     var colors = library.getSelection();
-    return Math.round(colorCommon.distanceLCH(colors[0], colors[1]) * 10)/10;
+    return Math.round(rainbowColor.distanceLCH(colors[0], colors[1]) * 10)/10;
   },
 
   mergeSelection : function() {
     var colors = library.getSelection();
-    var hybrid = colorCommon.merge(colors[0], colors[1]);
+    var hybrid = rainbowColor.merge(colors[0], colors[1]);
     rainbowc.openPicker(hybrid);
   },
 
@@ -348,19 +348,19 @@ var library = {
       let metric;
       switch(col.getAttribute('sortType')) {
         case 'rgb':
-          metric = colorCommon.rgbValues(color)[col.getAttribute('sortMetric')];
+          metric = rainbowColor.rgbValues(color)[col.getAttribute('sortMetric')];
           break;
         case 'hsl':
-          metric = colorCommon.hslValues(color)[col.getAttribute('sortMetric')];
+          metric = rainbowColor.hslValues(color)[col.getAttribute('sortMetric')];
           break;
         case 'hsv':
-          metric = colorCommon.hsvValues(color)[col.getAttribute('sortMetric')];
+          metric = rainbowColor.hsvValues(color)[col.getAttribute('sortMetric')];
           break;
         case 'contrast':
-          metric = colorCommon.contrast(color, col.getAttribute('sortMetric'));
+          metric = rainbowColor.contrast(color, col.getAttribute('sortMetric'));
           break;
         case 'luminosity':
-          metric = colorCommon.luminosity(color);
+          metric = rainbowColor.luminosity(color);
           break;
         case 'date':
           metric = rainbowc.storage.dateOf(color);
@@ -411,7 +411,7 @@ var library = {
   },
 
   rowForColor : function(color) {
-    var color = colorCommon.toHex(color);
+    var color = rainbowColor.toHex(color);
     var filtered = treeView.getFiltered();
     for(var i = 0; i < filtered.length; i++)
       if(filtered[i] == color)
@@ -447,14 +447,14 @@ var library = {
       treeView.setFiltered(filtered);
     }
     else if(dragSource == 'picker' || dragSource == 'inspector'
-       || colorCommon.isValid(dragText)) {
+       || rainbowColor.isValid(dragText)) {
       // if its from another source, bookmark the color
       var color = event.dataTransfer.getData("text/rainbow-color");
       if(!color)
         color = dragText;
       var url = event.dataTransfer.getData("text/rainbow-url");
-      if(colorCommon.isValid(color)) {
-        rainbowc.storage.addColor(colorCommon.toHex(color), "", url);
+      if(rainbowColor.isValid(color)) {
+        rainbowc.storage.addColor(rainbowColor.toHex(color), "", url);
         library.selectColor(color);
         library.scrollToColor(color);
       }

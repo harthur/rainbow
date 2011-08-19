@@ -164,14 +164,14 @@ var rainbowAnalyzer = {
         container.appendChild(row);
       }
      
-      var color = colorCommon.fromBits(colors[i].color);
+      var color = rainbowColor.fromBits(colors[i].color);
       var freq = colors[i].freq;
       var proportion = Math.round(colors[i].ratio  * 1000) / 10;
 
       var swatch = document.createElement("vbox");
       swatch.className = "rainbow-swatch";
       swatch.style.backgroundColor = color;
-      if(colorCommon.luminosity(color) > 0.94) {
+      if(rainbowColor.luminosity(color) > 0.94) {
         if(!outline)
           swatch.style.borderLeft = "1px solid #CCCCCC";
         swatch.style.borderRight = "1px solid #CCCCCC";
@@ -195,7 +195,7 @@ var rainbowAnalyzer = {
       var propLabel = document.createElement("label");
       propLabel.className = "rainbow-analyzer-prop";
 
-      if(colorCommon.blackText(color)) {
+      if(rainbowColor.blackText(color)) {
         propLabel.style.color = "black";
         label.style.color = "black";
       }
@@ -217,7 +217,7 @@ var rainbowAnalyzer = {
       copyButton.setAttribute("oncommand", "rainbowc.copyColor('" + color + "')");
 
       var bookmarkButton = document.createElement("button");
-      if(rainbowc.storage.isSaved(colorCommon.toHex(color))) {
+      if(rainbowc.storage.isSaved(rainbowColor.toHex(color))) {
         bookmarkButton.setAttribute("label", rainbowc.getString("rainbow.library"));
         bookmarkButton.setAttribute("oncommand", "rainbowc.openLibrary('" + color + "');");
       }
@@ -419,7 +419,7 @@ var rainbowAnalyzer = {
     var colors = rainbowAnalyzer.colors.slice(0, rainbowAnalyzer.numShowing);
     var colorStrings = [];
     for(var i = 0; i < colors.length; i++)
-      colorStrings.push(colorCommon.fromBits(colors[i].color));
+      colorStrings.push(rainbowColor.fromBits(colors[i].color));
     return colorStrings;
   },
 

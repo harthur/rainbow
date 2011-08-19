@@ -34,9 +34,9 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-var colorPlay = {
+var rainbow = {
   onLoad : function() {
-    rainbowc.prefs.addObserver("", colorPlay, false);
+    rainbowc.prefs.addObserver("", rainbow, false);
 
     if(rainbowc.getFirefoxVersion() < 3.5)
       document.getElementById("rainbow-menu-analyzer").hidden = true;
@@ -61,8 +61,8 @@ var colorPlay = {
       rainbowc.get("rainbow-context-preview").hidden = !isImg;
     }
 
-    colorPlay.addDragListeners();
-    colorPlay.addToolbarButton();
+    rainbow.addDragListeners();
+    rainbow.addToolbarButton();
     
     // for picker selector
     rainbowc.registerSheet("chrome://rainbows/skin/selector.css", null, null);
@@ -93,8 +93,8 @@ var colorPlay = {
   },
 
   onUnLoad : function() {
-    rainbowc.prefs.removeObserver("", colorPlay);
-    colorPlay.removeDragListeners();
+    rainbowc.prefs.removeObserver("", rainbow);
+    rainbow.removeDragListeners();
   },
 
   observe : function(subject, topic, data) {
@@ -142,7 +142,7 @@ var colorPlay = {
 
   applyDrop : function(event) {
     var color = event.dataTransfer.getData("text/rainbow-color");
-    if(colorCommon.isValid(color)) { // make sure this is our drag
+    if(rainbowColor.isValid(color)) { // make sure this is our drag
       event.target.style.background = color;
       if(event.target.removeAttribute)
         event.target.removeAttribute("rainbowfirefox");
@@ -155,7 +155,7 @@ var colorPlay = {
 
   applyDragEnter : function(event) {
     var color = event.dataTransfer.getData("text/rainbow-color");
-    if(colorCommon.isValid(color)) {
+    if(rainbowColor.isValid(color)) {
       if(event.target.setAttribute)
         event.target.setAttribute("rainbowfirefox", "true");
       else if(event.target.parentNode.removeAttribute)
@@ -167,7 +167,7 @@ var colorPlay = {
 
   applyDragOver : function(event) {
     var color = event.dataTransfer.getData("text/rainbow-color");
-    if(colorCommon.isValid(color)) {
+    if(rainbowColor.isValid(color)) {
       event.stopPropagation();
       event.preventDefault();
     }
@@ -192,26 +192,26 @@ var colorPlay = {
   },
 
   addDragListeners : function() {
-    window.removeEventListener("load", colorPlay.addDragListeners, false);
+    window.removeEventListener("load", rainbow.addDragListeners, false);
     var container = document.getElementById("content").mPanelContainer;
-    container.addEventListener("drop", colorPlay.applyDrop, true);
-    container.addEventListener("dragenter", colorPlay.applyDragEnter, true);
-    container.addEventListener("dragleave", colorPlay.applyDragLeave, true);
-    container.addEventListener("dragover", colorPlay.applyDragOver, true);
+    container.addEventListener("drop", rainbow.applyDrop, true);
+    container.addEventListener("dragenter", rainbow.applyDragEnter, true);
+    container.addEventListener("dragleave", rainbow.applyDragLeave, true);
+    container.addEventListener("dragover", rainbow.applyDragOver, true);
 
     // for drop indicator styling of webpage content
     rainbowc.registerSheet("chrome://rainbows/skin/drag.css", null, null);
   },
 
   removeDragListeners : function() {
-    window.removeEventListener("unload", colorPlay.removeDragListeners, false);
+    window.removeEventListener("unload", rainbow.removeDragListeners, false);
     var container = document.getElementById("content").mPanelContainer;
-    container.removeEventListener("drop", colorPlay.applyDrop, true);
-    container.removeEventListener("dragenter", colorPlay.applyDragEnter, true);
-    container.removeEventListener("dragleave", colorPlay.applyDragLeave, true);
-    container.removeEventListener("dragover", colorPlay.applyDragOver, true);
+    container.removeEventListener("drop", rainbow.applyDrop, true);
+    container.removeEventListener("dragenter", rainbow.applyDragEnter, true);
+    container.removeEventListener("dragleave", rainbow.applyDragLeave, true);
+    container.removeEventListener("dragover", rainbow.applyDragOver, true);
   }
 }
 
-window.addEventListener("load", colorPlay.onLoad, false);
-window.addEventListener("unload", colorPlay.onUnLoad, false);
+window.addEventListener("load", rainbow.onLoad, false);
+window.addEventListener("unload", rainbow.onUnLoad, false);

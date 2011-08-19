@@ -51,7 +51,7 @@
         height="450"
         persist="width height screenX screenY">
 
-  <script type="application/x-javascript" src="chrome://rainbows/content/colorCommon.js"/>
+  <script type="application/x-javascript" src="chrome://rainbows/content/rainbowColor.js"/>
   <script type="application/x-javascript" src="chrome://rainbows/content/common.js"/>
   <script type="application/x-javascript" src="chrome://rainbows/content/rgb.js" />
   <script type="application/x-javascript" src="chrome://rainbows/content/library/treeview.js"/>

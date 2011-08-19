@@ -205,7 +205,7 @@ var rainbowInspector = {
       rainbowInspector.expand();
 
     var button = rainbowc.get("rainbow-swatch-bookmark");
-    var color = colorCommon.toHex(swatch.style.backgroundColor);
+    var color = rainbowColor.toHex(swatch.style.backgroundColor);
 
     if(rainbowc.storage.isSaved(color)) {
       button.label = rainbowc.getString("rainbow.view");
@@ -266,9 +266,9 @@ var rainbowInspector = {
   changeColor : function(color, show) {
     var swatch = rainbowc.get("rainbow-swatch");
     swatch.style.backgroundColor = color;
-    swatch.color = colorCommon.toHex(color);
+    swatch.color = rainbowColor.toHex(color);
     
-    var blackText = colorCommon.blackText(color);
+    var blackText = rainbowColor.blackText(color);
     var colorval = rainbowc.get("rainbow-swatch-colorval");
     colorval.value = rainbowc.getFormattedColor(color, rainbowInspector.format);
     colorval.style.color = blackText ? 'black' : 'white';
@@ -278,7 +278,7 @@ var rainbowInspector = {
   },
 
   getPixel : function(win, x, y) {
-    context = rainbowc.get("rainbow-inspector").getContext("2d");
+    var context = rainbowc.get("rainbow-inspector").getContext("2d");
     context.drawWindow(win, x, y, 1, 1, "white");
     var data = context.getImageData(0, 0, 1, 1).data;
     return "rgb(" + data[0] + "," + data[1] + "," + data[2] + ")";
@@ -324,7 +324,7 @@ var rainbowInspector = {
 
     var button = rainbowc.get("rainbow-swatch-bookmark");
 
-    color = colorCommon.toHex(color);
+    color = rainbowColor.toHex(color);
     if(rainbowc.storage.isSaved(color)) {
       // change because mouse could be over the swatch when keying down or up
       button.label = "View Library";
@@ -587,19 +587,19 @@ var rainbowInspector = {
   onContextShowing : function() {
     var color = rainbowc.get("rainbow-swatch").color;
     var copyPlain = rainbowc.get("rainbow-context-plain");
-    copyPlain.value = colorCommon.toPlain(color);
+    copyPlain.value = rainbowColor.toPlain(color);
     copyPlain.label = copyPlain.value;
     var copyRgb = rainbowc.get("rainbow-context-rgb");
-    copyRgb.value = colorCommon.toRgb(color);
+    copyRgb.value = rainbowColor.toRgb(color);
     copyRgb.label = copyRgb.value;
     var copyHex = rainbowc.get("rainbow-context-hex");
-    copyHex.value = colorCommon.toHex(color);
+    copyHex.value = rainbowColor.toHex(color);
     copyHex.label = copyHex.value;
     var copyPer = rainbowc.get("rainbow-context-per");
-    copyPer.value = colorCommon.toPercent(color);
+    copyPer.value = rainbowColor.toPercent(color);
     copyPer.label = copyPer.value;
     var copyHsl = rainbowc.get("rainbow-context-hsl");
-    copyHsl.value = colorCommon.toHsl(color);
+    copyHsl.value = rainbowColor.toHsl(color);
     copyHsl.label = copyHsl.value;
   },
 
@@ -622,6 +622,6 @@ var rainbowInspector = {
   
   autoBookmark : function(url) {
     var swatch = rainbowc.get("rainbow-swatch");
-    rainbowc.storage.addColor(colorCommon.toHex(swatch.color), "", url);
+    rainbowc.storage.addColor(rainbowColor.toHex(swatch.color), "", url);
   }
 }

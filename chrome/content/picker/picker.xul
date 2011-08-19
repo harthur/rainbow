@@ -47,7 +47,7 @@
         onload="picker.init();"
         onunload="picker.unload();">
 
- <script type="application/x-javascript" src="chrome://rainbows/content/colorCommon.js"/>
+ <script type="application/x-javascript" src="chrome://rainbows/content/rainbowColor.js"/>
  <script type="application/x-javascript" src="chrome://rainbows/content/common.js"/>
  <script type="application/x-javascript" src="chrome://rainbows/content/picker/picker.js"/>
  <script type="application/x-javascript" src="chrome://rainbows/content/picker/selector.js"/>
