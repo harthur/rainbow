@@ -48,7 +48,11 @@
   <script type="application/x-javascript" src="chrome://rainbows/content/editBookmark.js"/>
   <script type="application/x-javascript" src="chrome://rainbows/content/rainbowColor.js"/>
   <script type="application/x-javascript" src="chrome://rainbows/content/common.js"/>
-
+  
+  <keyset>
+    <key id="key_close" key="W" oncommand="window.close();" modifiers="accel"/>
+    <key id="key_close2" keycode="VK_ESCAPE" oncommand="window.close();"/>
+  </keyset>
   
   <stringbundleset id="stringbundleset">
     <stringbundle id="rainbow-strings" src="chrome://rainbows/locale/rainbow.properties"/>
