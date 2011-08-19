@@ -50,7 +50,16 @@ var colorPlay = {
 
     var show = !rainbowc.prefs.getBoolPref("context");
     document.getElementById("rainbow-context-menu").setAttribute("hidden", show);
-    document.getElementById("rainbow-context-separator").setAttribute("hidden", show);
+    
+    var contextMenu = rainbowc.get("contentAreaContextMenu");
+    if(contextMenu)
+      contextMenu.addEventListener("popupshowing", showAnalyzer, false);
+
+    function showAnalyzer(event) {
+      var isImg = (document.popupNode.localName.toLowerCase() != "img");
+      rainbowc.get("rainbow-context-extract").hidden = isImg;
+      rainbowc.get("rainbow-context-preview").hidden = !isImg;
+    }
 
     colorPlay.addDragListeners();
     colorPlay.addToolbarButton();

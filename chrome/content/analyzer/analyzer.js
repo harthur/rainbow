@@ -33,15 +33,24 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  * 
  * ***** END LICENSE BLOCK ***** */
-var rainbowAnalyzer = {
-  analyzePage : function(merge) {
+var rainbowAnalyzer = {   
+  analyzeImage : function(img) {
+     rainbowAnalyzer.url = img.src;
+     rainbowAnalyzer.analyze(img)
+  },
+  
+  analyzePage : function() {
+     rainbowAnalyzer.url = rainbowc.get("content").contentDocument.location.href;
+     rainbowAnalyzer.analyze();
+  },
+
+  analyze : function(img) {
     rainbowAnalyzer.clearPanel();
 
     var panel = rainbowc.get("rainbow-analyzer-panel");
-    panel.url = rainbowc.get("content").contentDocument.location.href;
 
     rainbowc.get("rainbow-analyzer-progress").hidden = false;
-    var urlString = rainbowc.getString("rainbow.analyzer.progress", panel.url);
+    var urlString = rainbowc.getString("rainbow.analyzer.progress", rainbowAnalyzer.url);
     rainbowc.get("rainbow-analyzer-progress-url").value = urlString;
     var progressMsg = rainbowc.getString("rainbow.analyzer.extracting");
     rainbowc.get("rainbow-analyzer-progress-msg").value = progressMsg;
@@ -49,17 +58,35 @@ var rainbowAnalyzer = {
     rainbowc.get("rainbow-analyzer-close").tooltipText = rainbowc.getString("rainbow.cancel");
     rainbowc.get("rainbow-analyzer-footer").hidden = true;
     
-    rainbowc.openPanel(panel, "se", 650, 150);
+    if (img) {
+      panel.openPopup(img, "after_start", -100, 60);
+    }
+    else {
+      rainbowc.openPanel(panel, "se", 650, 150);
+    }
+
     setTimeout(function() {
-      rainbowAnalyzer.getPixels();  // otherwise panel won't show immediately on Win
+      rainbowAnalyzer.getPixels(img);  // otherwise panel won't show immediately on Win
     }, 200);
   },
 
-  getPixels : function() {
-    var limit = rainbowc.prefs.getIntPref("analyzer.limit");
-    var win = rainbowc.get("content").contentWindow;
-    var pixels = rainbowAnalyzer.getPixelArray(win);
-    var msg = rainbowc.getString("rainbow.analyzer.analyzing");
+  getPixels : function(img) {
+    var pixels, width, height;
+    if (img) {
+       pixels = rainbowAnalyzer.getImagePixels(img);
+       width = img.naturalWidth;
+       height = img.naturalHeight;
+    }
+    else {
+       var win = rainbowc.get("content").contentWindow,
+       pixels = rainbowAnalyzer.getWindowPixels(win);
+       width = win.innerWidth,
+       height = win.innerHeight;
+    }
+
+    var limit = rainbowc.prefs.getIntPref("analyzer.limit"),
+        msg = rainbowc.getString("rainbow.analyzer.analyzing");
+
     rainbowc.get("rainbow-analyzer-progress-msg").value = msg;
 
     // put time-consuming clustering on a worker thread
@@ -88,10 +115,23 @@ var rainbowAnalyzer = {
       rainbowc.get("rainbow-analyzer-progress-msg").value = error;
     };
 
-    rainbowAnalyzer.worker.postMessage({pixels: pixels, width: win.innerWidth, height: win.innerHeight});
+    rainbowAnalyzer.worker.postMessage({pixels: pixels, width: width, height: height});
+  },
+  
+  getImagePixels : function(img) {
+     var canvas = document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas'),
+         width = img.naturalWidth,
+         height = img.naturalHeight;
+     canvas.width = width;
+     canvas.height = height;
+
+     var context = canvas.getContext("2d"); 
+     context.drawImage(img, 0, 0);
+
+     return context.getImageData(0, 0, width, height).data;
   },
 
-  getPixelArray : function(win) {
+  getWindowPixels : function(win) {
     var contentWidth = win.innerWidth;
     var contentHeight = win.innerHeight;
 
@@ -372,7 +412,7 @@ var rainbowAnalyzer = {
     var button = rainbowc.get("rainbow-bookmark-" + color);
     window.openDialog("chrome://rainbows/content/editBookmark.xul",
                   "", "all,dialog=yes,resizable=no,centerscreen",
-                  {colors: [color], url: panel.url, button: button} );
+                  {colors: [color], url: rainbowAnalyzer.url, button: button} );
   },
 
   getDisplayedColors : function() {
@@ -393,6 +433,6 @@ var rainbowAnalyzer = {
 
     window.openDialog("chrome://rainbows/content/editBookmark.xul",
                "", "all,dialog=yes,resizable=no,centerscreen",
-              {colors: rainbowAnalyzer.getDisplayedColors(), url: panel.url, button: button});
+              {colors: rainbowAnalyzer.getDisplayedColors(), url: rainbowAnalyzer.url, button: button});
   }
 }

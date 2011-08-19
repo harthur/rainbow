@@ -12,6 +12,7 @@
 <!ENTITY rainbow.menu.recent.accesskey "C">
 <!ENTITY rainbow.menu.prefs.label "Settings">
 
+<!ENTITY rainbow.menu.extract.label "Extract Colour Scheme">
 <!ENTITY rainbow.menu.preview.label "Preview Element Colour">
 
 <!ENTITY rainbow.inspector.copy.label "Copy">
@@ -30,5 +31,4 @@
 <!ENTITY rainbow.analyzer.limit "Change Limit">
 <!ENTITY rainbow.analyzer.limit.accesskey "L">
 <!ENTITY rainbow.analyzer.progress "Extracting colours from">
-<!ENTITY rainbow.analyzer.analyze "Extract">
 
