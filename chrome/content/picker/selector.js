@@ -98,6 +98,8 @@ var selector = {
   },
   
   selectElement : function(element) {
+    selector.selectedElement = element;    
+
     if(element.setAttribute)
       element.setAttribute("rainbowselector", "true");
     else
@@ -116,7 +118,6 @@ var selector = {
     picker.elementDisplay(bg, txt, font);
 
     picker.url = element.ownerDocument.location.href;
-    selector.selectedElement = element;    
   },
 
   addSelectionListeners : function(win) {

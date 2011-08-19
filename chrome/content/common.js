@@ -139,17 +139,10 @@ var rainbowc = {
       var style = win.getComputedStyle(element, null);
       if(style.backgroundColor != "transparent")
         return style.backgroundColor;
-      if(style.position != "static") // can't get bg color of positioned elements
-        return rainbowc.getBg(event);
       element = element.parentNode;
     } while (element.parentNode != element
            && element.nodeType == Node.ELEMENT_NODE)
     return "#FFFFFF";
-  },
-
-  getBg : function(event) {
-     // should really use canvas to compute background color
-     return rainbowc.getPixel(event);
   },
 
   textColorAffects : function(element) {
