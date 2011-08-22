@@ -59,7 +59,7 @@ var rainbowAnalyzer = {
     rainbowc.get("rainbow-analyzer-footer").hidden = true;
     
     if (img) {
-      panel.openPopup(img, "after_start", -100, 60);
+      panel.openPopup(img, "after_start", -80, 10);
     }
     else {
       rainbowc.openPanel(panel, "se", 650, 150);

@@ -55,7 +55,7 @@
 
   <menupopup id="menu_ToolsPopup">
     <menu id="rainbow-menu" label="&rainbow.label;" class="menu-iconic"
-          image="chrome://rainbows/skin/favicon.png">
+          image="chrome://rainbows/skin/rainbow16.png">
       <menupopup id="rainbow-popup">
         <menuitem id="rainbow-menu-inspector"
                   label="&rainbow.menu.inspector.label;"
@@ -86,7 +86,7 @@
   
   <vbox id="appmenuPrimaryPane">
   <menu id="rainbow-menu" label="&rainbow.label;" class="menu-iconic"
-        image="chrome://rainbows/skin/favicon.png" insertafter="appmenu_webDeveloper">
+        image="chrome://rainbows/skin/rainbow16.png" insertafter="appmenu_webDeveloper">
     <menupopup>
       <menuitem id="rainbow-menu-inspector"
                 label="&rainbow.menu.inspector.label;"
@@ -119,16 +119,16 @@
     <menuseparator id="rainbow-context-separator" hidden="true"/>
     <menuitem id="rainbow-context-extract"
               class="menuitem-iconic"
-              image="chrome://rainbows/skin/favicon.png"
+              image="chrome://rainbows/skin/rainbow16.png"
               label="&rainbow.menu.extract.label;"
               oncommand="rainbowAnalyzer.analyzeImage(document.popupNode);"/>              
     <menuitem id="rainbow-context-preview"
               class="menuitem-iconic"
-              image="chrome://rainbows/skin/favicon.png"
+              image="chrome://rainbows/skin/rainbow16.png"
               label="&rainbow.menu.preview.label;"
               oncommand="rainbowc.selectElement(document.popupNode);"/>
     <menu id="rainbow-context-menu" label="&rainbow.label;" class="menu-iconic"
-          image="chrome://rainbows/skin/favicon.png" hidden="true">
+          image="chrome://rainbows/skin/rainbow16.png" hidden="true">
       <menupopup>
         <menuitem id="rainbow-context-inspector"
                   label="&rainbow.menu.inspector.label;"
@@ -157,7 +157,7 @@
       class="toolbarbutton-1 chromeclass-toolbar-additional"
       tooltiptext="&rainbow.label;"
       oncommand="rainbow.shortcutEngaged();"
-      image="chrome://rainbows/skin/favicon.png"
+      image="chrome://rainbows/skin/rainbow16.png"
       type="menu-button">
         <menupopup>
           <menuitem id="rainbow-toolbar-inspector"
