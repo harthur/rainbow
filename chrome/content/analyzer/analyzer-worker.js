@@ -68,6 +68,10 @@ function getColors(data, width, height) {
            continue; }
 
      var offs = x*4 + y*4*width;
+     
+     if (data[offs + 3] == 0) // transparent
+       continue;
+     
      var color = data[offs + 0] << 16 | data[offs + 1] << 8 | data[offs + 2];
 
      if (color in colorFrequency)
