@@ -8,12 +8,12 @@
 <!ENTITY rainbow.menu.library.accesskey "L">
 <!ENTITY rainbow.menu.analyzer.label "Analyse du site web">
 <!ENTITY rainbow.menu.analyzer.accesskey "A">
-<!ENTITY rainbow.menu.recent.label "View Last Color">
+<!ENTITY rainbow.menu.recent.label "Afficher la dernière couleur">
 <!ENTITY rainbow.menu.recent.accesskey "C">
 <!ENTITY rainbow.menu.prefs.label "Préférences">
 
-<!ENTITY rainbow.menu.extract.label "Extract Color Scheme">
-<!ENTITY rainbow.menu.preview.label "Preview Element Color">
+<!ENTITY rainbow.menu.extract.label "Extraire le jeu de couleurs">
+<!ENTITY rainbow.menu.preview.label "Prévisualiser une couleur">
 
 <!ENTITY rainbow.inspector.copy.label "Copier">
 <!ENTITY rainbow.inspector.bookmark.label "Sauvegarder">

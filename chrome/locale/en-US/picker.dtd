@@ -12,7 +12,7 @@
 <!ENTITY picker.contrast.small "small text:">
 <!ENTITY picker.contrast.large "large text:">
 
-<!ENTITY picker.split "Double click to compare color">
+<!ENTITY picker.split "Double click to compare colors">
 
 <!ENTITY picker.context.format "Format">
 <!ENTITY picker.context.format.accesskey "f">

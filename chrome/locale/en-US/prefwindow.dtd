@@ -9,8 +9,6 @@
 <!ENTITY hex.label "Hex">
 <!ENTITY rgb.label "Rgb">
 <!ENTITY hsl.label "Hsl">
-<!ENTITY whole.label "Round to whole numbers in color values">
-<!ENTITY whole.accesskey "R">
 <!ENTITY context.label "Add to context menu">
 <!ENTITY context.accesskey "M">
 <!ENTITY shortcut.label "Make toolbar button a shortcut to:">
@@ -20,7 +18,6 @@
 <!ENTITY library.label "Library">
 <!ENTITY analyzer.label "Analyzer">
 
-<!ENTITY stats.label "Only show display when hovering over swatch">
 <!ENTITY stats.accesskey "O">
 <!ENTITY nodename.accesskey "E">
 <!ENTITY nodename.label "Show element info">

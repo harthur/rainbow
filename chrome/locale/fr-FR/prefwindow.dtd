@@ -9,8 +9,6 @@
 <!ENTITY hex.label "Hex">
 <!ENTITY rgb.label "Rvb">
 <!ENTITY hsl.label "Tsl">
-<!ENTITY whole.label "Round to whole numbers in color values">
-<!ENTITY whole.accesskey "R">
 <!ENTITY context.label "Ajouter au menu contextuel">
 <!ENTITY context.accesskey "M">
 <!ENTITY shortcut.label "Ajouter un raccourci dans la barre de statut pour:">
@@ -20,8 +18,6 @@
 <!ENTITY library.label "Bibliothèque des couleurs">
 <!ENTITY analyzer.label "Analyse du site web">
 
-<!ENTITY stats.label "Only show display when hovering over swatch">
-<!ENTITY stats.accesskey "O">
 <!ENTITY nodename.accesskey "E">
 <!ENTITY nodename.label "Afficher les informations de l'élément">
 <!ENTITY nodename.accesskey "E">
