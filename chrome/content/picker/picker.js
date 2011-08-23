@@ -530,8 +530,10 @@ var picker = {
       else
         display.className = "highlight";
     }
-    else
+    else {
+      rainbowc.get("display-text").className = "";
       var color = display.style.backgroundColor;
+    }
     picker.visitColor(color, true, false);
     picker.inspectColor(color);
 
