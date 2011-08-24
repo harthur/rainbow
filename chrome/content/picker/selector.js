@@ -36,11 +36,12 @@
 
 var selector = {
   start: function() {
+    selector.clearContent();
     rainbowc.mapWindows(selector.addSelectionListeners);
     
-    // for drop indicator styling of webpage content
     var button = document.getElementById("selector-button");
-    button.oncommand = selector.stop;
+    button.removeAttribute("oncommand");
+    button.setAttribute("oncommand", "selector.stop()");
 
     if(rainbowc.getPlatform() == "Mac")
       rainbowc.wm.getMostRecentWindow("navigator:browser").focus();
@@ -48,17 +49,24 @@ var selector = {
 
   stop : function() {
     selector.pause();
+    selector.clearContent();
+
+    selector.selectedElement = "";
+
+    var button = document.getElementById("selector-button");
+    button.removeAttribute("oncommand");
+    button.setAttribute("oncommand", "selector.start()");
+    
+    picker.singleDisplay();
+  }, 
+ 
+  clearContent : function() {
     var sel = selector.selectedElement;
     if(sel && sel.removeAttribute)
       sel.removeAttribute("rainbowselector");
     else if (sel && sel.parentNode.removeAttribute)
-      sel.parentNode.removeAttribute("rainbowselector");
-    selector.selectedElement = "";
-    var button = document.getElementById("selector-button");
-    button.oncommand = selector.start;
-    
-    picker.singleDisplay();
-  }, 
+      sel.parentNode.removeAttribute("rainbowselector"); 
+  },
 
   pause : function() {
     rainbowc.mapWindows(selector.removeSelectionListeners);
