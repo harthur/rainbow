@@ -103,7 +103,6 @@ var rainbow = {
         case "context":
           var show = !rainbowc.prefs.getBoolPref("context");
           document.getElementById("rainbow-context-menu").setAttribute("hidden", show);
-          document.getElementById("rainbow-context-separator").setAttribute("hidden", show);
           break;
         case "format":
           rainbowInspector.formatChanged();

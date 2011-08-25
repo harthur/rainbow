@@ -116,7 +116,7 @@
   </vbox>
 
   <menupopup id="contentAreaContextMenu">
-    <menuseparator id="rainbow-context-separator" hidden="true"/>
+    <menuseparator id="rainbow-context-separator"/>
     <menuitem id="rainbow-context-extract"
               class="menuitem-iconic"
               image="chrome://rainbows/skin/rainbow16.png"
