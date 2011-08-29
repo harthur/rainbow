@@ -9,13 +9,13 @@
 <!ENTITY columns.blue.label "Blue">
 <!ENTITY columns.hue.label "Hue">
 <!ENTITY columns.hue.tooltip "Hue (hsl and hsv)">
-<!ENTITY columns.satv.label "Sat">
+<!ENTITY columns.satv.label "Saturation (hsv)">
 <!ENTITY columns.satv.tooltip "Saturation (hsv)">
 <!ENTITY columns.val.label "Val">
 <!ENTITY columns.val.tooltip "Value (hsv)">
-<!ENTITY columns.sat.label "Satl">
+<!ENTITY columns.sat.label "Saturation">
 <!ENTITY columns.sat.tooltip "Saturation (hsl)">
-<!ENTITY columns.light.label "Light">
+<!ENTITY columns.light.label "Lightness">
 <!ENTITY columns.light.tooltip "Lightness (hsl)">
 <!ENTITY columns.white.label "White Cont">
 <!ENTITY columns.white.tooltip "WCAG contrast with white, 7 is recommended minimum for text">

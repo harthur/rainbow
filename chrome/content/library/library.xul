@@ -205,30 +205,30 @@
          persist="width hidden ordinal sortActive sortDirection"
          sortType="hsv" sortMetric="satv"
          onclick="library.sortColumn(this);"
-         tooltiptext="&columns.satv.tooltip;"/>
+         tooltiptext="&columns.satv.tooltip;"
+         hidden="true"/>
       <splitter class="tree-splitter"        resizeafter="farthest"/>
       <treecol id="col-val" class="sortable"
          label="&columns.val.label;" flex="1"
          sortType="hsv" sortMetric="val"
-	     persist="width hidden ordinal sortActive sortDirection"
+	      persist="width hidden ordinal sortActive sortDirection"
          onclick="library.sortColumn(this);"
-         tooltiptext="&columns.val.tooltip;"/>
+         tooltiptext="&columns.val.tooltip;"
+         hidden="true"/>
       <splitter class="tree-splitter"        resizeafter="farthest"/>
       <treecol id="col-sat" class="sortable"
          label="&columns.sat.label;" flex="1"
 	     persist="width hidden ordinal sortActive sortDirection"
          sortType="hsl" sortMetric="sat"
          onclick="library.sortColumn(this);"
-         tooltiptext="&columns.sat.tooltip;"
-         hidden="true"/>
+         tooltiptext="&columns.sat.tooltip;"/>
       <splitter class="tree-splitter"        resizeafter="farthest"/>
       <treecol id="col-light" class="sortable"
          label="&columns.light.label;" flex="1"
 	     persist="width hidden ordinal sortActive sortDirection"
          sortType="hsl" sortMetric="light"
          onclick="library.sortColumn(this);"
-         tooltiptext="&columns.light.tooltip;"
-         hidden="true"/>
+         tooltiptext="&columns.light.tooltip;"/>
       <splitter class="tree-splitter"        resizeafter="farthest"/>
       <treecol id="col-white" class="sortable"
          label="&columns.white.label;" flex="1"
