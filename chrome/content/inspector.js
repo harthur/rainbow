@@ -210,7 +210,8 @@ var rainbowInspector = {
     if(rainbowc.storage.isSaved(color)) {
       button.label = rainbowc.getString("rainbow.view");
       button.removeAttribute('oncommand');
-      button.setAttribute("oncommand", "rainbowc.openLibrary('" + color + "');");
+      button.setAttribute('color', color);
+      button.setAttribute("oncommand", "rainbowc.openLibrary(this.getAttribute('color'));");
     }
     else {
       button.label = rainbowc.getString("rainbow.bookmark");
@@ -329,7 +330,8 @@ var rainbowInspector = {
       // change because mouse could be over the swatch when keying down or up
       button.label = "View Library";
       button.removeAttribute('oncommand');
-      button.setAttribute("oncommand", "rainbowc.openLibrary('" + color + "');");
+      button.setAttribute('color', color);
+      button.setAttribute("oncommand", "rainbowc.openLibrary(this.getAttribute('color'));");
     }
     else {
       button.label = "Bookmark";

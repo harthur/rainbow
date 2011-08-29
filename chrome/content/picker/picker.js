@@ -273,13 +273,15 @@ var picker = {
     var button = rainbowc.get("bookmark-button");
     if(rainbowc.storage.isSaved(rainbowColor.toHex(color))) {
       button.label = rainbowc.getString("rainbow.view");
-      button.removeAttribute("oncommand"); // firefox bug
-      button.setAttribute("oncommand", "rainbowc.openLibrary('" + picker.color + "');");
+      button.setAttribute("color", picker.color);
+      button.removeAttribute("oncommand");
+      button.addEventListener("command", function() {
+        rainbowc.openLibrary(picker.color)
+      }, false)
     }
     else {
       button.label = rainbowc.getString("rainbow.bookmark");
-      button.removeAttribute("oncommand");
-      button.setAttribute("oncommand", "picker.bookmark();");
+      button.setAttribute("oncommand", "picker.bookmark()")
     }
 
     if(selector.selectedElement) {

@@ -214,16 +214,18 @@ var rainbowAnalyzer = {
       copyButton.setAttribute("label", rainbowc.getString("rainbow.copy"));
       copyButton.className = "rainbow-analyzer-button";
       copyButton.hidden = true;
-      copyButton.setAttribute("oncommand", "rainbowc.copyColor('" + color + "')");
+      copyButton.setAttribute("color", color);
+      copyButton.setAttribute("oncommand", "rainbowc.copyColor(this.getAttribute('color'))");
 
       var bookmarkButton = document.createElement("button");
+      bookmarkButton.setAttribute("color", color);
       if(rainbowc.storage.isSaved(rainbowColor.toHex(color))) {
         bookmarkButton.setAttribute("label", rainbowc.getString("rainbow.library"));
-        bookmarkButton.setAttribute("oncommand", "rainbowc.openLibrary('" + color + "');");
+        bookmarkButton.setAttribute("oncommand", "rainbowc.openLibrary(this.getAttribute('color'));");
       }
       else {
         bookmarkButton.setAttribute("label", rainbowc.getString("rainbow.bookmark"));
-        bookmarkButton.setAttribute("oncommand", "rainbowAnalyzer.bookmarkColor('" + color + "')");
+        bookmarkButton.setAttribute("oncommand", "rainbowAnalyzer.bookmarkColor(this.getAttribute('color'))");
       }
  
       bookmarkButton.className = "rainbow-analyzer-button";
