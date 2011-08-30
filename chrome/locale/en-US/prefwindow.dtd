@@ -18,7 +18,6 @@
 <!ENTITY library.label "Library">
 <!ENTITY analyzer.label "Analyzer">
 
-<!ENTITY stats.accesskey "O">
 <!ENTITY nodename.accesskey "E">
 <!ENTITY nodename.label "Show element info">
 <!ENTITY nodename.accesskey "E">
