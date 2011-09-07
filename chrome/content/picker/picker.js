@@ -271,10 +271,11 @@ var picker = {
     picker.color = hexVal;
 
     var button = rainbowc.get("bookmark-button");
+    button.removeAttribute("oncommand");
+
     if(rainbowc.storage.isSaved(rainbowColor.toHex(color))) {
       button.label = rainbowc.getString("rainbow.view");
       button.setAttribute("color", picker.color);
-      button.removeAttribute("oncommand");
       button.addEventListener("command", function() {
         rainbowc.openLibrary(picker.color)
       }, false)
