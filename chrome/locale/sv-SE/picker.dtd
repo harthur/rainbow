@@ -1,0 +1,33 @@
+<!ENTITY picker.title "Färgblandaren">
+
+<!ENTITY picker.copy.label "Kopiera">
+<!ENTITY picker.copy.accesskey "K">
+<!ENTITY picker.bookmark.label "Spara">
+<!ENTITY picker.bookmark.accesskey "S">
+<!ENTITY picker.select.tooltip "Välj element att förhandsgranska">
+<!ENTITY picker.inspect.tooltip "Granska pixel i webbläsaren">
+
+<!ENTITY picker.contrast.wcag "WCAG-kontrastförhållande (skala från 1 till 21)">
+<!ENTITY picker.contrast.minimum "rekommenderat minimivärde:">
+<!ENTITY picker.contrast.small "liten text:">
+<!ENTITY picker.contrast.large "stor text:">
+
+<!ENTITY picker.split "Dubbelklicka för att jämföra färger">
+
+<!ENTITY picker.context.format "Format">
+<!ENTITY picker.context.format.accesskey "F">
+<!ENTITY picker.context.format.hex "Hex">
+<!ENTITY picker.context.format.hex.accesskey "H">
+<!ENTITY picker.context.format.rgb "RGB">
+<!ENTITY picker.context.format.rgb.accesskey "R">
+<!ENTITY picker.context.format.per.accesskey "G">
+<!ENTITY picker.context.format.hsl "HSL">
+<!ENTITY picker.context.format.hsl.accesskey "L">
+
+<!ENTITY picker.hue "nyans">
+<!ENTITY picker.val "värde">
+<!ENTITY picker.sat  "mättnad">
+<!ENTITY picker.light "ljusstyrka">
+<!ENTITY picker.red "röd">
+<!ENTITY picker.green "grön">
+<!ENTITY picker.blue "blå">

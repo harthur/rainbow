@@ -4,12 +4,23 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>rainbow@colors.org</em:id>
     <em:name>Rainbow</em:name>
-    <em:version>1.4</em:version>
+    <em:version>1.5</em:version>
     <em:type>2</em:type>
     <em:creator>Heather Arthur</em:creator>
     <em:description>Color tools for web development</em:description>
     <em:optionsURL>chrome://rainbows/content/options.xul</em:optionsURL>
     <em:iconURL>chrome://rainbows/skin/rainbow32.png</em:iconURL>
+	
+	<em:localized>
+		<Description>
+			<em:locale>sv-SE</em:locale>
+			<em:name>Rainbow Color Tools</em:name>
+			<em:creator>Heather Arthur</em:creator>
+			<em:description>Färgverktyg för webbutvecklare</em:description>
+			<em:translator>Mikael Hiort af Ornäs</em:translator>
+		</Description>
+	</em:localized>
+	
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->

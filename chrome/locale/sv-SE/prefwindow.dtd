@@ -1,0 +1,31 @@
+<!ENTITY prefwindow.title "Inställningar för Rainbow">
+<!ENTITY pane1.title "Inställningar för Rainbow">
+
+<!ENTITY general.label "Allmänt">
+<!ENTITY mode.label "Visa färgvärden som: ">
+<!ENTITY mode.accesskey "V">
+<!ENTITY copy.label "Kopiera i ett annat format: ">
+<!ENTITY copy.accesskey "K">
+<!ENTITY hex.label "Hex">
+<!ENTITY rgb.label "RGB">
+<!ENTITY hsl.label "HSL">
+<!ENTITY context.label "Lägg till i snabbmenyn">
+<!ENTITY context.accesskey "m">
+<!ENTITY shortcut.label "Gör verktygsfältsknappen till en genväg till:">
+<!ENTITY shortcut.accesskey "G">
+<!ENTITY inspector.label "Färggranskaren">
+<!ENTITY picker.label "Färgblandaren">
+<!ENTITY library.label "Färgbiblioteket">
+<!ENTITY analyzer.label "Färganalyseraren">
+
+<!ENTITY nodename.accesskey "e">
+<!ENTITY nodename.label "Visa elementinfo">
+<!ENTITY nodename.accesskey "e">
+<!ENTITY coordinates.label "Visa koordinater">
+<!ENTITY coordinates.accesskey "o">
+<!ENTITY autocopy.label "Kopiera färg automatiskt vid klickning">
+<!ENTITY autocopy.accesskey "a">
+<!ENTITY follow.label "Visa färgkartan bredvid muspekaren">
+<!ENTITY follow.accesskey "p">
+
+

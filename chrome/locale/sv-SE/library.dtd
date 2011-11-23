@@ -1,0 +1,51 @@
+<!ENTITY library.title "Färgbiblioteket">
+
+<!ENTITY filter.emptytext "Sök på tagg eller URL">
+
+<!ENTITY columns.color.label "Färg">
+<!ENTITY columns.hex.label "Hex">
+<!ENTITY columns.red.label "Röd">
+<!ENTITY columns.green.label "Grön">
+<!ENTITY columns.blue.label "Blå">
+<!ENTITY columns.hue.label "Nyans">
+<!ENTITY columns.hue.tooltip "Nyans (HSL och HSV)">
+<!ENTITY columns.satv.label "MättV">
+<!ENTITY columns.satv.tooltip "Mättnad (HSV)">
+<!ENTITY columns.val.label "Värde">
+<!ENTITY columns.val.tooltip "Värde (HSV)">
+<!ENTITY columns.sat.label "MättL">
+<!ENTITY columns.sat.tooltip "Mättnad (HSL)">
+<!ENTITY columns.light.label "Ljus">
+<!ENTITY columns.light.tooltip "Ljusstyrka (HSL)">
+<!ENTITY columns.white.label "Vitkontrast">
+<!ENTITY columns.white.tooltip "WCAG-kontrast mot vit; 7 är rekommenderat minimivärde för text">
+<!ENTITY columns.black.label "Svartkontrast">
+<!ENTITY columns.black.tooltip "WCAG-kontrast mot svart; 7 är rekommenderat minimivärde för text">
+<!ENTITY columns.lum.label "Ljusstyrka">
+<!ENTITY columns.lum.tooltip "WCAG-ljusstyrka; 1 är vit, 0 är svart">
+<!ENTITY columns.tags.label "Taggar">
+<!ENTITY columns.url.label "URL">
+<!ENTITY columns.url.tooltip "Webbplatsen den hittades på">
+<!ENTITY columns.date.label "Datum">
+<!ENTITY columns.date.tooltip "Senast ändrad">
+
+<!ENTITY context.edit.label "Redigera">
+<!ENTITY context.edit.accesskey "e">
+<!ENTITY context.delete.label "Ta bort">
+<!ENTITY context.delete.accesskey "b">
+<!ENTITY context.open.label "Visa i färgblandaren">
+<!ENTITY context.open.accesskey "V">
+<!ENTITY context.url.label "Öppna URL">
+<!ENTITY context.url.accesskey "p">
+<!ENTITY context.tags.label "Tagga med">
+<!ENTITY context.tags.accesskey "T">
+<!ENTITY context.copy.label "Kopiera">
+<!ENTITY context.copy.accesskey "K">
+<!ENTITY context.add.label "Lägg till ny">
+<!ENTITY context.add.accesskey "L">
+<!ENTITY context.merge.label "Skapa hybrid">
+<!ENTITY context.merge.accesskey "h">
+<!ENTITY context.copy.hex "#Hex">
+<!ENTITY context.copy.plain "Hex">
+<!ENTITY context.copy.rgb "RGB">
+<!ENTITY context.copy.hsl "HSL">

@@ -1,0 +1,34 @@
+<!ENTITY rainbow.label "Rainbow">
+
+<!ENTITY rainbow.menu.picker.label "Färgblandaren">
+<!ENTITY rainbow.menu.picker.accesskey "b">
+<!ENTITY rainbow.menu.inspector.label "Färggranskaren">
+<!ENTITY rainbow.menu.inspector.accesskey "g">
+<!ENTITY rainbow.menu.library.label "Färgbiblioteket">
+<!ENTITY rainbow.menu.library.accesskey "l">
+<!ENTITY rainbow.menu.analyzer.label "Webbplatsfärganalyseraren">
+<!ENTITY rainbow.menu.analyzer.accesskey "a">
+<!ENTITY rainbow.menu.recent.label "Visa den senast granskade färgen">
+<!ENTITY rainbow.menu.recent.accesskey "V">
+<!ENTITY rainbow.menu.prefs.label "Inställningar">
+
+<!ENTITY rainbow.menu.extract.label "Extrahera färgschema">
+<!ENTITY rainbow.menu.preview.label "Förhandsgranska elementfärg">
+
+<!ENTITY rainbow.inspector.copy.label "Kopiera">
+<!ENTITY rainbow.inspector.bookmark.label "Spara">
+<!ENTITY rainbow.inspector.close.tooltip "Stäng färggranskaren">
+<!ENTITY rainbow.inspector.resume.tooltip "Återuppta granskningen">
+<!ENTITY rainbow.context.open.label "Öppna i färgblandaren">
+<!ENTITY rainbow.context.open.accesskey "Ö">
+<!ENTITY rainbow.context.copy.label "Kopiera">
+<!ENTITY rainbow.context.copy.accesskey "K">
+
+<!ENTITY rainbow.analyzer.copyall "Kopiera alla">
+<!ENTITY rainbow.analyzer.copy.accesskey "a">
+<!ENTITY rainbow.analyzer.bookmarkall "Spara alla">
+<!ENTITY rainbow.analyzer.bookmark.accesskey "S">
+<!ENTITY rainbow.analyzer.limit "Ändra gräns">
+<!ENTITY rainbow.analyzer.limit.accesskey "ä">
+<!ENTITY rainbow.analyzer.progress "Extraherar färger från">
+

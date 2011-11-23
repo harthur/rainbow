@@ -1,0 +1,9 @@
+<!ENTITY editcolor.title "Spara färg">
+
+<!ENTITY color.label "Färg:">
+<!ENTITY value.label "Värde:">
+<!ENTITY url.label "URL:">
+<!ENTITY tags.label "Taggar:">
+
+<!ENTITY save.label "Spara">
+<!ENTITY cancel.label "Avbryt">
