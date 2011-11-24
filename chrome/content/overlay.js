@@ -33,14 +33,12 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  * 
  * ***** END LICENSE BLOCK ***** */
-
 var rainbow = {
   onLoad : function() {
     rainbowc.prefs.addObserver("", rainbow, false);
 
     if(rainbowc.getFirefoxVersion() < 3.5)
       document.getElementById("rainbow-menu-analyzer").hidden = true;
-
     /* set attributes for applying platform-specific styling */
     var platform = rainbowc.getPlatform();
     var swatch = document.getElementById("rainbow-swatch");
@@ -48,17 +46,24 @@ var rainbow = {
     var analyzer = document.getElementById("rainbow-analyzer-panel");
     analyzer.setAttribute("rainbow-platform", platform);
 
-    var show = !rainbowc.prefs.getBoolPref("context");
-    document.getElementById("rainbow-context-menu").setAttribute("hidden", show);
+    var show = rainbowc.prefs.getBoolPref("context");
+    rainbowc.get("rainbow-context-menu").setAttribute("hidden", !show);
+    var showPreview = rainbowc.prefs.getBoolPref("context.preview");
+    rainbowc.get("rainbow-context-preview").setAttribute("hidden", !showPreview);
     
     var contextMenu = rainbowc.get("contentAreaContextMenu");
     if(contextMenu)
       contextMenu.addEventListener("popupshowing", showAnalyzer, false);
 
     function showAnalyzer(event) {
-      var isImg = (document.popupNode.localName.toLowerCase() != "img");
-      rainbowc.get("rainbow-context-extract").hidden = isImg;
-      rainbowc.get("rainbow-context-preview").hidden = !isImg;
+      var isImg = (document.popupNode.localName.toLowerCase() == "img");
+      rainbowc.get("rainbow-context-extract").hidden = !isImg;
+
+      var showPreview = rainbowc.prefs.getBoolPref("context.preview");
+      rainbowc.get("rainbow-context-preview").hidden = !showPreview || isImg;
+
+      var hideBoth = !isImg && (isImg || !showPreview);
+      rainbowc.get("rainbow-context-separator").hidden = hideBoth;
     }
 
     rainbow.addDragListeners();
@@ -102,7 +107,11 @@ var rainbow = {
       switch(data) {
         case "context":
           var show = !rainbowc.prefs.getBoolPref("context");
-          document.getElementById("rainbow-context-menu").setAttribute("hidden", show);
+          rainbowc.get("rainbow-context-menu").setAttribute("hidden", show);
+          break;        
+        case "context.preview":
+          var show = !rainbowc.prefs.getBoolPref("context.preview");
+          rainbowc.get("rainbow-context-preview").setAttribute("hidden", show);
           break;
         case "format":
           rainbowInspector.formatChanged();

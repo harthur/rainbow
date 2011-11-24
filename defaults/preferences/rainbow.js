@@ -4,6 +4,7 @@ pref("extensions.rainbows.copyDifferent", false);
 pref("extensions.rainbows.wholeNumbers", true);
 pref("extensions.rainbows.lastcolor", "#11EEEE");
 pref("extensions.rainbows.context", false);
+pref("extensions.rainbows.context.preview", true);
 pref("extensions.rainbows.inspector.alwaysShow", true);
 pref("extensions.rainbows.inspector.autoCopy", true);
 pref("extensions.rainbows.inspector.showNodeName", false);

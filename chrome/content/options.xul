@@ -52,7 +52,7 @@
       <preference id="autopref" name="extensions.rainbows.inspector.autoCopy" type="bool"/>
       <preference id="nodepref" name="extensions.rainbows.inspector.showNodeName" type="bool"/>
       <preference id="coorspref" name="extensions.rainbows.inspector.showCoordinates" type="bool"/>
-      <preference id="contextpref" name="extensions.rainbows.context" type="bool"/>
+      <preference id="contextpref" name="extensions.rainbows.context.preview" type="bool"/>
       <preference id="actionpref" name="extensions.rainbows.shortcut.action" type="string"/>
       <preference id="followpref" name="extensions.rainbows.inspector.followMouse" type="bool"/>
       <preference id="limitpref" name="extensions.rainbows.analyzer.limit" type="int"/>
