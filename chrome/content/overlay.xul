@@ -49,7 +49,7 @@
   </stringbundleset>
 
   <keyset>
-    <key id="rainbow-inspector-key" modifiers="accel, alt" key="I" 
+    <key id="rainbow-inspector-key" modifiers="accel, alt" key="C"
          oncommand="rainbowInspector.toggleInspector();"/>
   </keyset>
 
