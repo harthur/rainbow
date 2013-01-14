@@ -4,7 +4,8 @@ content	rainbows chrome/content/
 
 locale	rainbows	en-US	chrome/locale/en-US/
 locale	rainbows	en-GB	chrome/locale/en-GB/
-locale   rainbows fr-FR chrome/locale/fr-FR/
+locale  rainbows  	fr-FR 	chrome/locale/fr-FR/
+locale  rainbows  	sv-SE 	chrome/locale/sv-SE/
 
 skin	rainbows	classic/1.0	chrome/skin/
 
