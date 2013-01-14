@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
  xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
     <em:id>rainbow@colors.org</em:id>
     <em:name>Rainbow</em:name>
-    <em:version>1.5.1</em:version>
+    <em:version>1.5.2</em:version>
     <em:type>2</em:type>
     <em:creator>Heather Arthur</em:creator>
     <em:description>Color tools for web development</em:description>
     <em:optionsURL>chrome://rainbows/content/options.xul</em:optionsURL>
     <em:iconURL>chrome://rainbows/skin/rainbow32.png</em:iconURL>
-	
+
 	<em:localized>
 		<Description>
 			<em:locale>sv-SE</em:locale>
@@ -20,7 +20,7 @@
 			<em:translator>Mikael Hiort af Ornäs</em:translator>
 		</Description>
 	</em:localized>
-	
+
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
