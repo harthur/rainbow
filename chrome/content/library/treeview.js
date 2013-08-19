@@ -5,7 +5,7 @@
  * 1.1 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS" basis,
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
  * for the specific language governing rights and limitations under the
@@ -18,7 +18,7 @@
  * Portions created by the Initial Developer are Copyright (C) 2009
  * the Initial Developer. All Rights Reserved.
  *
- * Contributor(s): 
+ * Contributor(s):
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -31,7 +31,7 @@
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
 var treeView =
@@ -92,7 +92,7 @@ var treeView =
   },
 
   /* nsITreeView */
-  setTree: function(aTree) { 
+  setTree: function(aTree) {
    this._treebox = aTree;
   },
 
@@ -119,7 +119,7 @@ var treeView =
         return rainbowColor.hsvValues(color, this._wholeNumbers)['satv'];
       case this.COL_VAL:
         return rainbowColor.hsvValues(color, this._wholeNumbers)['val'];
-      case this.COL_HEX: 
+      case this.COL_HEX:
         return color;
       case this.COL_WCONTRAST:
         if(this._wholeNumbers)
@@ -137,7 +137,7 @@ var treeView =
         return rainbowc.storage.tagsOf(color);
       case this.COL_URL:
         return rainbowc.storage.urlOf(color);
-      case this.COL_DATE: 
+      case this.COL_DATE:
         return rainbowc.toDate(rainbowc.storage.dateOf(color));
     }
   },
@@ -145,14 +145,23 @@ var treeView =
   getRowProperties: function(aRow, aProperties) {},
 
   getCellProperties: function(aRow, aCol, aProperties) {
-    if(aCol.index == this.COL_COLOR) {
-      var color = this._filterColors[aRow];
-      var aserv=Components.classes["@mozilla.org/atom-service;1"]
-                            .getService(Components.interfaces.nsIAtomService);
-      aProperties.AppendElement(aserv.getAtom("color" + color.slice(1)));
-      aProperties.AppendElement(aserv.getAtom("swatch"));
+    if (aCol.index != this.COL_COLOR) {
+      return;
     }
-  },
+
+    var color = this._filterColors[aRow];
+    var str = "color" + color.slice(1);
+
+    if (!aProperties) {
+      // new API as of Firefox 22
+      return str;
+    }
+
+    var aserv=Components.classes["@mozilla.org/atom-service;1"]
+                          .getService(Components.interfaces.nsIAtomService);
+    aProperties.AppendElement(aserv.getAtom(str));
+    aProperties.AppendElement(aserv.getAtom("swatch"));
+},
 
   getColumnProperties: function(aCol, aProperties) {},
   getParentIndex: function(aRowIndex) {return -1;},
