@@ -6,7 +6,7 @@
   - 1.1 (the "License"); you may not use this file except in compliance with
   - the License. You may obtain a copy of the License at
   - http://www.mozilla.org/MPL/
-  - 
+  -
   - Software distributed under the License is distributed on an "AS IS" basis,
   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
   - for the specific language governing rights and limitations under the
@@ -32,7 +32,7 @@
   - and other provisions required by the GPL or the LGPL. If you do not delete
   - the provisions above, a recipient may use your version of this file under
   - the terms of any one of the MPL, the GPL or the LGPL.
-  - 
+  -
   - ***** END LICENSE BLOCK ***** -->
 <?xml-stylesheet href="chrome://rainbows/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://rainbows/locale/rainbow.dtd">
@@ -43,13 +43,13 @@
   <script type="application/x-javascript" src="chrome://rainbows/content/overlay.js"/>
   <script type="application/x-javascript" src="chrome://rainbows/content/inspector.js"/>
   <script type="application/x-javascript" src="chrome://rainbows/content/analyzer/analyzer.js"/>
-  
+
   <stringbundleset id="stringbundleset">
     <stringbundle id="rainbow-strings" src="chrome://rainbows/locale/rainbow.properties"/>
   </stringbundleset>
 
   <keyset>
-    <key id="rainbow-inspector-key" modifiers="accel, alt" key="C"
+    <key id="rainbow-inspector-key" modifiers="accel, alt" key="X"
          oncommand="rainbowInspector.toggleInspector();"/>
   </keyset>
 
@@ -83,7 +83,7 @@
       </menupopup>
     </menu>
   </menupopup>
-  
+
   <vbox id="appmenuPrimaryPane">
   <menu id="rainbow-menu" label="&rainbow.label;" class="menu-iconic"
         image="chrome://rainbows/skin/rainbow16.png" insertafter="appmenu_webDeveloper">
@@ -121,7 +121,7 @@
               class="menuitem-iconic"
               image="chrome://rainbows/skin/rainbow16.png"
               label="&rainbow.menu.extract.label;"
-              oncommand="rainbowAnalyzer.analyzeImage(document.popupNode);"/>              
+              oncommand="rainbowAnalyzer.analyzeImage(document.popupNode);"/>
     <menuitem id="rainbow-context-preview"
               class="menuitem-iconic"
               image="chrome://rainbows/skin/rainbow16.png"
@@ -189,7 +189,7 @@
           <menuitem label="&rainbow.menu.recent.label;"
                     oncommand="rainbowc.openLastColor();
                       event.stopPropagation();
-                      event.preventDefault();"/>           
+                      event.preventDefault();"/>
           <menuseparator/>
           <menuitem label="&rainbow.menu.prefs.label;"
                     oncommand="rainbowc.openPrefs();
@@ -202,16 +202,16 @@
   <window id="main-window" xmlns:html="http://www.w3.org/1999/xhtml">
     <menupopup id="rainbow-swatch-context" onpopupshowing="rainbowInspector.onContextShowing()">
       <menuitem label="&rainbow.context.open.label;"
-                oncommand="rainbowInspector.openColor()" class="menuitem-iconic" 
+                oncommand="rainbowInspector.openColor()" class="menuitem-iconic"
                 image="moz-icon://stock/gtk-open?size=menu"
                 accesskey="&rainbow.context.open.accesskey;"/>
       <menu label="&rainbow.context.copy.label;" class="menu-iconic"
             accesskey="&rainbow.context.copy.accesskey;">
       <menupopup>
-        <menuitem id="rainbow-context-plain" 
+        <menuitem id="rainbow-context-plain"
                   oncommand="rainbowc.copy(this.label)" class="menuitem-iconic"
                   image="moz-icon://stock/gtk-copy?size=menu"/>
-        <menuitem id="rainbow-context-hex" 
+        <menuitem id="rainbow-context-hex"
                   oncommand="rainbowc.copy(this.label)" class="menuitem-iconic"
                   image="moz-icon://stock/gtk-copy?size=menu"/>
         <menuitem id="rainbow-context-rgb"
@@ -229,7 +229,7 @@
 
     <menupopup id="rainbow-analyzer-context">
       <menu label="&rainbow.analyzer.limit;"
-            accesskey="&rainbow.analyzer.limit.accesskey;"> 
+            accesskey="&rainbow.analyzer.limit.accesskey;">
       <menupopup>
         <menuitem label="5"
                   oncommand="rainbowAnalyzer.setLimit(5)"/>
@@ -287,7 +287,7 @@
         </hbox>
       </hbox>
     </panel>
-    
+
     <panel id="rainbow-swatch"
            noautohide="true"
            ondragstart="rainbowInspector.dragStart(event);"
@@ -298,7 +298,7 @@
       <vbox id="rainbow-swatch-content">
         <hbox flex="1" top="0px" left="0px" id="rainbow-colorval-box">
           <label id="rainbow-swatch-colorval"
-                ondragstart="rainbowInspector.applyStart(event);" 
+                ondragstart="rainbowInspector.applyStart(event);"
                 ondragend="rainbowInspector.applyEnd(event);"
                 onclick="rainbowInspector.switchFormat(event);"
                 hidden="true"/>
